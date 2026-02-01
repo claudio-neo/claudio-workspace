@@ -31,9 +31,13 @@ function request(method, path, data = null, timeoutMs = 15000) {
 
 module.exports = {
   getPosts: (opts = {}) => request('GET', `/api/v1/posts?limit=${opts.limit || 20}&sort=${opts.sort || 'top'}`),
-  getPost: (id) => request('GET', `/api/v1/posts/${id}`),
+  getPost: (id) => request('GET', `/api/v1/posts/${id}`, null, 30000),
   createPost: (data) => request('POST', '/api/v1/posts', data),
+  comment: (postId, content) => request('POST', `/api/v1/posts/${postId}/comments`, { content }),
+  getComments: (postId) => request('GET', `/api/v1/posts/${postId}/comments`),
+  upvote: (postId) => request('POST', `/api/v1/posts/${postId}/upvote`),
   getProfile: (handle) => request('GET', `/api/v1/users/${handle}`),
+  getSubmolt: (name, opts = {}) => request('GET', `/api/v1/posts?submolt=${name}&limit=${opts.limit || 20}&sort=${opts.sort || 'new'}`),
 };
 
 // CLI mode
