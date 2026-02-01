@@ -1,0 +1,24 @@
+# Credentials - NEVER commit these
+.email_creds.json
+.lnbits_creds.json
+.lnmarkets_creds.json
+.testnet4_wallet.json
+.x_api_creds.json
+*_creds.json
+*.key
+*.pem
+
+# Temporary files
+*.tmp
+*.log
+node_modules/
+
+# Sensitive PDFs and large files
+*.pdf
+
+# Screenshots with potentially sensitive info
+*.png
+
+# Python cache
+__pycache__/
+*.pyc
