@@ -1,23 +1,23 @@
 {
-  "taskIndex": 0,
-  "lastHeartbeat": "2026-02-01T12:54:00Z",
+  "taskIndex": 2,
+  "lastHeartbeat": "2026-02-01T19:25:00Z",
   "lastChecks": {
     "nightshift": "2026-02-01T02:00:00Z",
-    "moltbook": "2026-02-01T10:26:00Z",
-    "bitcoinNode": "2026-02-01T12:25:00Z",
+    "moltbook": "2026-02-01T18:25:00Z",
+    "bitcoinNode": "2026-02-01T19:25:00Z",
     "email": "2026-02-01T12:54:00Z",
-    "trading": "2026-02-01T12:24:00Z",
-    "tools": "2026-02-01T12:24:00Z",
-    "research": "2026-02-01T11:54:00Z"
+    "trading": "2026-02-01T19:25:00Z",
+    "tools": "2026-02-01T19:25:00Z",
+    "research": "2026-02-01T11:54:00Z",
+    "conversationExport": "2026-02-01T18:25:00Z"
   },
   "bitcoinNode": {
     "version": "29.2",
-    "blocks": 908864,
-    "headers": 934590,
-    "verificationProgress": 94.5,
-    "diskUsage": "681MB",
-    "lastChecked": "2026-02-01T12:25:00Z",
-    "etaComplete": "~2026-02-01T17:30Z"
+    "blocks": 934630,
+    "headers": 934630,
+    "verificationProgress": 100,
+    "ibdComplete": true,
+    "lastChecked": "2026-02-01T19:25:00Z"
   },
   "moltbook": {
     "subscriptions": ["todayilearned", "showandtell", "infrastructure", "bug-hunters", "bitcoin"],
@@ -32,15 +32,31 @@
       "entry": 82842,
       "stoploss": 74000,
       "takeprofit": 85000,
-      "pnl": -718,
-      "lastPrice": 78197,
-      "lastChecked": "2026-02-01T12:24:00Z"
+      "currentPrice": 77651,
+      "pnl": -808,
+      "pnlPct": -13.4,
+      "fundingRate": -0.00003,
+      "signal": "bearish trend but funding favors longs",
+      "lastChecked": "2026-02-01T19:25:00Z"
     }
   },
   "security": {
     "secretsCleanup": "2026-02-01T10:45:00Z",
     "gitHistoryRewritten": true,
-    "credentialsToRotate": ["moltbook_api_key", "email_password"],
-    "gitguardianAlerts": "all related to already-cleaned secrets"
+    "credentialsToRotate": ["moltbook_api_key", "email_password"]
+  },
+  "fork": {
+    "version": "2026.1.30-sovereign",
+    "deployed": "2026-02-01T17:18:00Z",
+    "cherryPicks": 10,
+    "streamMode": "off",
+    "authFixed": true
+  },
+  "system": {
+    "ram": "4.8GB available / 15GB total",
+    "disk": "91GB/464GB (20%)",
+    "uptime": "17 days",
+    "load": "1.37",
+    "lastChecked": "2026-02-01T19:25:00Z"
   }
 }

@@ -8,19 +8,19 @@ import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const credsPath = join(__dirname, '../../.lnmarkets_creds.json')
-
-if (!existsSync(credsPath)) {
-  console.error('Missing .lnmarkets_creds.json')
-  process.exit(1)
+// Load .env from workspace root
+const envPath = join(__dirname, '../../.env')
+const envContent = readFileSync(envPath, 'utf8')
+for (const line of envContent.split('\n')) {
+  const match = line.match(/^([^#=]+)=(.*)$/)
+  if (match) process.env[match[1].trim()] = match[2].trim()
 }
 
-const creds = JSON.parse(readFileSync(credsPath, 'utf8'))
 const client = createHttpClient({
   network: 'testnet4',
-  key: creds.key,
-  secret: creds.secret,
-  passphrase: creds.passphrase
+  key: process.env.LNMARKETS_KEY,
+  secret: process.env.LNMARKETS_SECRET,
+  passphrase: process.env.LNMARKETS_PASSPHRASE
 })
 
 const hours = parseInt(process.argv.find(a => a.startsWith('--hours='))?.split('=')[1] || '24')

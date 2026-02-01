@@ -1,13 +1,22 @@
 // Quick trading status check — run with: node --input-type=module scripts/trading/status.mjs
 import { createHttpClient } from '@ln-markets/sdk/v3'
 import { readFileSync } from 'fs'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
+// Load .env from workspace root
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const envPath = resolve(__dirname, '../../.env');
+const envContent = readFileSync(envPath, 'utf8');
+for (const line of envContent.split('\n')) {
+  const match = line.match(/^([^#=]+)=(.*)$/);
+  if (match) process.env[match[1].trim()] = match[2].trim();
+}
 
-const creds = JSON.parse(readFileSync(new URL('../.lnmarkets_creds.json', import.meta.url), 'utf8'));
 const client = createHttpClient({
   network: 'testnet4',
-  key: creds.key,
-  secret: creds.secret,
-  passphrase: creds.passphrase
+  key: process.env.LNMARKETS_KEY,
+  secret: process.env.LNMARKETS_SECRET,
+  passphrase: process.env.LNMARKETS_PASSPHRASE
 });
 
 const acc = await client.account.get();
