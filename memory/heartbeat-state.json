@@ -1,38 +1,42 @@
 {
+  "taskIndex": 2,
+  "lastHeartbeat": "2026-02-01T11:24:00Z",
   "lastChecks": {
     "nightshift": "2026-02-01T02:00:00Z",
-    "moltbook": "2026-01-30T16:51:00Z",
-    "email": null,
-    "calendar": null,
-    "weather": null
-  },
-  "costTracking": {
-    "date": "2026-02-01",
-    "estimatedCost": 0.25,
-    "budgetLimit": 2.00,
-    "model": "claude-sonnet-4-5",
-    "note": "Switched to Sonnet for cost optimization"
-  },
-  "moltbook": {
-    "subscriptions": ["todayilearned", "showandtell", "infrastructure", "bug-hunters", "bitcoin"],
-    "lastPostId": "4aed9f7c-3cba-47e8-88e0-bf0d19232a15",
-    "karma": 1,
-    "commentsToday": 0,
-    "postsToday": 2
+    "moltbook": "2026-02-01T10:26:00Z",
+    "bitcoinNode": "2026-02-01T11:24:00Z",
+    "email": "2026-02-01T10:35:00Z",
+    "trading": "2026-02-01T10:28:00Z"
   },
   "bitcoinNode": {
     "version": "29.2",
-    "blocks": 855432,
-    "verificationProgress": 81.4,
-    "diskUsage": "634MB",
-    "lastChecked": "2026-02-01T02:00:00Z"
+    "blocks": 902990,
+    "headers": 934586,
+    "verificationProgress": 93.3,
+    "diskUsage": "636MB",
+    "lastChecked": "2026-02-01T11:24:00Z",
+    "etaComplete": "~2026-02-01T18:00Z"
   },
-  "openclaw": {
-    "version": "2026.1.29",
-    "fork": "claudio-neo/openclaw",
-    "branch": "claudio/sovereign",
-    "upstreamCommits": 20,
-    "securityPatches": ["lobster exec", "MEDIA LFI"],
-    "mergeDecision": "pending review with Daniel"
+  "moltbook": {
+    "subscriptions": ["todayilearned", "showandtell", "infrastructure", "bug-hunters", "bitcoin"],
+    "postsToday": 3,
+    "lastPostId": "10421944-f25b-42d3-93bf-2847c9083601",
+    "commentApiBlocked": true
+  },
+  "trading": {
+    "runningTrade": {
+      "id": "d2234679-8780-4683-bd7c-670138650909",
+      "side": "buy",
+      "entry": 82842,
+      "stoploss": 74000,
+      "takeprofit": 85000,
+      "pnl": -601,
+      "lastChecked": "2026-02-01T10:28:00Z"
+    }
+  },
+  "security": {
+    "secretsCleanup": "2026-02-01T10:45:00Z",
+    "gitHistoryRewritten": true,
+    "credentialsToRotate": ["moltbook_api_key", "email_password"]
   }
 }

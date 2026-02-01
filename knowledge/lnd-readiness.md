@@ -1,10 +1,12 @@
 # LND Readiness Assessment
 
-## Current Status (2026-02-01)
-- **Bitcoin IBD:** 90.24% (888,805/934,573 bloques)
-- **ETA para completar:** ~2-3 días
+## Current Status (2026-02-01 11:24 UTC)
+- **Bitcoin IBD:** 93.3% (902,990/934,586 bloques) — ~1%/hora
+- **ETA para completar IBD:** ~7 horas (~18:00 UTC hoy)
 - **LND versión:** v0.20.0-beta
 - **LND status:** Instalado, configurado, NO corriendo (esperando IBD)
+- **ZMQ:** ✅ Verificado activo (pubrawblock + pubrawtx)
+- **LND config:** ✅ Verificado (rpc, zmq, alias, color)
 
 ## Configuración Actual
 
