@@ -1,9 +1,10 @@
+require("../lib/env");
 const Imap = require('imap');
 const { PassThrough } = require('stream');
 
 const imap = new Imap({
   user: 'claudio@neofreight.net',
-  password: 'REDACTED_PASSWORD',
+  password: process.env.EMAIL_PASSWORD,
   host: 'imap.ionos.es',
   port: 993,
   tls: true,

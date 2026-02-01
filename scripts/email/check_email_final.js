@@ -1,8 +1,9 @@
+require("../lib/env");
 const Imap = require('imap');
 const { simpleParser } = require('mailparser');
 
 // Contraseña con exclamaciones - sin escape
-const password = 'REDACTED_PASSWORD';
+const password = process.env.EMAIL_PASSWORD;
 
 const imap = new Imap({
   user: 'claudio@neofreight.net',

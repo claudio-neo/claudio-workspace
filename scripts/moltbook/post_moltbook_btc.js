@@ -43,7 +43,7 @@ const options = {
   path: '/api/v1/posts',
   method: 'POST',
   headers: {
-    'Authorization': 'Bearer MOLTBOOK_KEY_REDACTED',
+    'Authorization': 'Bearer ' + process.env.MOLTBOOK_API_KEY + '',
     'Content-Type': 'application/json',
     'Content-Length': Buffer.byteLength(data)
   }

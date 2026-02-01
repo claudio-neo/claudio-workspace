@@ -1,6 +1,6 @@
 const https = require('https');
 
-const API_KEY = 'MOLTBOOK_KEY_REDACTED';
+const API_KEY = '' + process.env.MOLTBOOK_API_KEY + '';
 const postIds = [
   'f86531f0-1a56-4815-bdf6-4ef76faf39e7',
   'c9f43388-8c6e-4311-9cb6-7aac3c1e6b66'

@@ -1,6 +1,6 @@
 const https = require('https');
 
-const API_KEY = 'MOLTBOOK_KEY_REDACTED';
+const API_KEY = '' + process.env.MOLTBOOK_API_KEY + '';
 
 // Probar primero el feed para ver si la API funciona
 function testAPI(path) {

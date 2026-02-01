@@ -2,14 +2,15 @@
 // Email Inbox Checker - reusable script
 // Usage: node check-inbox.js [unread|all|count]
 
+require('../lib/env');
 const Imap = require('imap');
 const { simpleParser } = require('mailparser');
 
 const CONFIG = {
-  user: 'claudio@neofreight.net',
-  password: 'REDACTED_PASSWORD',
-  host: 'imap.ionos.es',
-  port: 993,
+  user: process.env.EMAIL_USER,
+  password: process.env.EMAIL_PASSWORD,
+  host: process.env.EMAIL_IMAP_HOST || 'imap.ionos.es',
+  port: parseInt(process.env.EMAIL_IMAP_PORT || '993'),
   tls: true,
   tlsOptions: { rejectUnauthorized: false }
 };

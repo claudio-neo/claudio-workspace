@@ -2,7 +2,7 @@
 import { createHttpClient } from '@ln-markets/sdk/v3'
 import { readFileSync } from 'fs'
 
-const creds = JSON.parse(readFileSync('.lnmarkets_creds.json', 'utf8'));
+const creds = JSON.parse(readFileSync(new URL('../.lnmarkets_creds.json', import.meta.url), 'utf8'));
 const client = createHttpClient({
   network: 'testnet4',
   key: creds.key,
