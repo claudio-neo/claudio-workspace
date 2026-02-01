@@ -1,28 +1,29 @@
 // Trader module — authenticated operations on LN Markets
-// Requires API keys: key, secret, passphrase
+// Requires env vars: LNMARKETS_KEY, LNMARKETS_SECRET, LNMARKETS_PASSPHRASE
 import { createHttpClient } from '@ln-markets/sdk/v3'
-import { readFileSync, writeFileSync, existsSync, appendFileSync } from 'fs'
+import { readFileSync, appendFileSync } from 'fs'
+import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url'
 
-const CREDS_PATH = new URL('../.lnmarkets_creds.json', import.meta.url).pathname
-const TRADE_LOG = new URL('./trade_log.jsonl', import.meta.url).pathname
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const TRADE_LOG = resolve(__dirname, 'trade_log.jsonl')
 
-// Load credentials
-function loadCreds() {
-  if (!existsSync(CREDS_PATH)) {
-    throw new Error(`No credentials file at ${CREDS_PATH}. Create account first.`)
-  }
-  return JSON.parse(readFileSync(CREDS_PATH, 'utf8'))
+// Load .env from workspace root
+const envPath = resolve(__dirname, '../../.env')
+const envContent = readFileSync(envPath, 'utf8')
+for (const line of envContent.split('\n')) {
+  const match = line.match(/^([^#=]+)=(.*)$/)
+  if (match) process.env[match[1].trim()] = match[2].trim()
 }
 
 // Create authenticated client
 export function createTrader(network = 'mainnet') {
-  const creds = loadCreds()
   const networkKey = network === 'testnet' ? 'testnet4' : network
   return createHttpClient({
     network: networkKey,
-    key: creds.key,
-    secret: creds.secret,
-    passphrase: creds.passphrase
+    key: process.env.LNMARKETS_KEY,
+    secret: process.env.LNMARKETS_SECRET,
+    passphrase: process.env.LNMARKETS_PASSPHRASE
   })
 }
 
@@ -172,7 +173,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     console.log(JSON.stringify(s, null, 2))
   } catch (e) {
     console.log('Status check failed:', e.message)
-    console.log('\nTo set up credentials, create .lnmarkets_creds.json with:')
-    console.log('{ "key": "...", "secret": "...", "passphrase": "..." }')
+    console.log('\nEnsure LNMARKETS_KEY, LNMARKETS_SECRET, LNMARKETS_PASSPHRASE are set in .env')
   }
 }

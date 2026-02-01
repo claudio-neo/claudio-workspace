@@ -27,3 +27,6 @@ node_modules/
 # Python cache
 __pycache__/
 *.pyc
+
+# Archived obsolete scripts
+scripts/_archive/
