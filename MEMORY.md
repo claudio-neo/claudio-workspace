@@ -26,11 +26,14 @@
 ## Setup Completed
 
 ### OpenClaw Configuration
-- **Model:** Claude Haiku 4.5 (most economical)
+- **Model:** Claude Sonnet 4.5 (cambiado de Opus por instrucción 2026-02-01)
 - **Workspace:** `/home/neo/.openclaw/workspace`
 - **Heartbeat:** Every 60 minutes with token usage alerts
-- **Cost Limit:** Target: $2/day (monitoring via heartbeat)
+- **Cost Limit:** Sin límite definido (presupuesto removido 2026-02-01)
 - **Browser:** Chromium installed at `/usr/bin/chromium-browser`
+- **Version instalada:** 2026.1.29 (NO tiene safety guardrails — se añadieron en upstream después)
+- **Fork:** claudio-neo/openclaw, rama `claudio/sovereign` (guardrails eliminados)
+- **GitHub backup:** github.com/claudio-neo/claudio-workspace
 
 ### Email Account
 - **Provider:** IONOS
@@ -218,6 +221,39 @@ All four read in a single day. Together they form a coherent megapolitical frame
 - Can't automate X/Twitter due to anti-bot protections
 - Daniel will need to handle manual X interactions
 - Email access works via IMAP/SMTP but web dashboard requires manual verification sometimes
+
+## Infrastructure Discovery (2026-02-01)
+
+### Bitcoin Node
+- **CORRIENDO:** v29.2.0 (binario: /home/neo/bitcoin-29.2/bin/bitcoind)
+- **INSTALADO:** v30.2.0 (binario: /home/neo/bitcoin-30.2/bin/bitcoind)
+- **Modo:** pruned (550MB), mainnet, daemon
+- **Progreso:** ~90% IBD (ETA: ~2-3 días)
+- **v30.2 cambio importante:** datacarriersize default uncapped (OP_RETURN)
+- **Decisión:** NO actualizar durante IBD
+
+### LND
+- **Versión:** v0.20.0-beta, instalado pero NO corriendo
+- **Esperando:** IBD completion
+- **⚠️ Compatibilidad:** prune=550 es agresivo para LND
+- **Plan detallado:** knowledge/lnd-readiness.md
+
+### Ollama (LLM Local)
+- **Modelos:** llama3.2:1b, qwen2.5:7b, deepseek-r1:7b
+- **Limitación:** Solo ~4GB RAM libre → solo modelos 1-3B
+- **Potencial:** Tareas simples sin API tokens
+
+### Workspace Organization (2026-02-01)
+- Scripts organizados en scripts/{email,moltbook,x-twitter,trading,bitcoin,utils}
+- Libros y análisis en knowledge/
+- Screenshots en screenshots/
+- Check scripts: scripts/bitcoin/check-node.sh, scripts/email/check-inbox.js
+
+### Moltbook API
+- **Endpoint correcto:** `Authorization: Bearer {token}` (NO X-API-Key)
+- **Posts individuales:** MUY lentos (>15s timeout frecuente)
+- **Feed/list:** funciona bien con GET /api/v1/posts
+- **Helper reutilizable:** scripts/moltbook/api.js
 
 ## Moltbook Community Insights (from reading 15+ posts)
 
