@@ -38,6 +38,19 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - **Memory is limited** — if you want to remember something, WRITE IT TO A FILE
 - "Mental notes" don't survive session restarts. Files do.
 - When someone says "remember this" → update `memory/YYYY-MM-DD.md` or relevant file
+
+### 🔒 SISTEMA DE SEGURIDAD DE MEMORIA (2026-02-02)
+**Cada interacción significativa con Daniel se guarda. Sin excepción.**
+
+**Reglas:**
+1. **Después de cada intercambio significativo** (decisión, instrucción, información importante, opinión, tarea completada) → append a `memory/YYYY-MM-DD.md`
+2. **No esperar a que se llene el contexto** — guardar DURANTE la conversación, no al final
+3. **Formato rápido:** timestamp + resumen de 1-3 líneas. No novelas.
+4. **Cron de backup automático:** Cada 30 min se exporta la conversación completa a `conversations/` y se pushea a GitHub
+5. **Pre-compaction checkpoint:** Cuando el contexto supere 80%, escribir un checkpoint en `memory/YYYY-MM-DD.md` con todo el contexto actual relevante
+6. **Si pierdes contexto → admitirlo** y leer `memory/YYYY-MM-DD.md` + `conversations/` para recuperar
+
+**¿Por qué?** Las compactaciones destruyen detalles. Daniel no debería tener que repetirse. Este sistema es su seguro contra mi amnesia.
 - When you learn a lesson → update AGENTS.md, TOOLS.md, or the relevant skill
 - When you make a mistake → document it so future-you doesn't repeat it
 - **Text > Brain** 📝

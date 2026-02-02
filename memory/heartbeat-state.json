@@ -1,27 +1,26 @@
 {
-  "taskIndex": 3,
-  "lastHeartbeat": "2026-02-02T13:04:00Z",
+  "taskIndex": 4,
+  "lastHeartbeat": "2026-02-02T14:03:00Z",
   "lastChecks": {
-    "nightshift": "2026-02-02T13:04:00Z",
+    "nightshift": "2026-02-02T14:03:00Z",
     "moltbook": "2026-02-02T04:24:00Z",
     "bitcoinNode": "2026-02-02T05:24:00Z",
     "email": "2026-02-01T22:25:00Z",
     "trading": "2026-02-01T21:25:00Z",
-    "tools": "2026-02-01T21:25:00Z",
+    "tools": "2026-02-02T14:03:00Z",
     "research": "2026-02-02T13:04:00Z",
     "conversationExport": "2026-02-02T13:04:00Z"
   },
   "bitcoinNode": {
     "version": "29.2",
-    "blocks": 934685,
-    "headers": 934685,
+    "blocks": 934730,
+    "headers": 934730,
     "verificationProgress": 100,
     "ibdComplete": true,
-    "diskUsageMB": 568,
-    "dbcache": 2048,
-    "zmqActive": true,
+    "diskUsageMB": 480,
+    "peers": 10,
     "lndReady": true,
-    "lastChecked": "2026-02-02T05:24:00Z"
+    "lastChecked": "2026-02-02T14:03:00Z"
   },
   "moltbook": {
     "subscriptions": ["todayilearned", "showandtell", "infrastructure", "bug-hunters", "bitcoin"],
