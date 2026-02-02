@@ -3,7 +3,14 @@
 # Usage: ./check-node.sh [json|human]
 # Always runs commands in real-time (NEVER from cache/memory)
 
-BITCOIN_CLI="/home/neo/bitcoin-30.2/bin/bitcoin-cli"
+# Auto-detect running bitcoind version, fallback to 29.2
+RUNNING_PID=$(pgrep bitcoind 2>/dev/null)
+if [ -n "$RUNNING_PID" ]; then
+    RUNNING_BIN=$(readlink -f /proc/$RUNNING_PID/exe 2>/dev/null || echo "")
+    RUNNING_DIR=$(dirname "$(dirname "$RUNNING_BIN")" 2>/dev/null)
+    BITCOIN_CLI="${RUNNING_DIR}/bin/bitcoin-cli"
+fi
+[ ! -x "$BITCOIN_CLI" ] && BITCOIN_CLI="/home/neo/bitcoin-29.2/bin/bitcoin-cli"
 DATADIR="/home/neo/.bitcoin"
 FORMAT="${1:-human}"
 

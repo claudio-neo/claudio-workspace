@@ -1,0 +1,103 @@
+/* ---- Default Styles ---- */
+@page {
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+body {
+	margin-right: 30px;
+	margin-left: 30px;
+	padding: 0;
+}
+p {
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: 1.2em;
+	text-align: justify;
+	text-indent: 2em;
+}
+blockquote {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+blockquote p {
+	text-indent:0;
+}
+.indent {
+	text-indent:2em;
+}
+.poem1, .toc1 {
+	text-indent: -30px;
+	margin-left: 30px;
+}
+.poem2, .toc2 {
+	text-indent: -30px;
+	margin-left: 60px;
+}
+.poem3, .toc3 {
+	text-indent: -30px;
+	margin-left: 90px;
+}
+.poem4, .toc4 {
+	text-indent: -30px;
+	margin-left: 120px;
+}
+.poem5, .toc5 {
+	text-indent: -30px;
+	margin-left: 150px;
+}
+.poem6, .toc6 {
+	text-indent: -30px;
+	margin-left: 180px;
+}
+.dropcap {
+	font-size: 3em;
+	font-weight: bold;
+}
+.underline {text-decoration: underline;}
+
+/* ---- Document Styles ---- */
+h1 {
+	text-align: center;
+	text-indent: 0;
+}
+h2 {
+	text-align: center;
+	text-indent: 0;
+}
+h3 {
+	text-align: center;
+	text-indent: 0;
+}
+h4 {
+	text-align: center;
+	text-indent: 0;
+}
+h5 {
+	text-indent: 0;
+}
+.center {
+	text-align: center;
+	text-indent: 0;
+}
+.noindent {
+	text-indent: 0;
+}
+.notes {
+	text-indent: 0;
+}
+.right {
+	text-indent: 0;
+	text-align: right;
+}
+.left {
+	text-align: left;
+}
+span.dropcap
+{
+	float: left;
+	font-family: Sabon, arial, Times New Roman, verdana, serif;
+	font-size: 47pt;
+	font-weight: normal;
+	line-height: 0.93em;
+	padding-right: 0.03em;
+}

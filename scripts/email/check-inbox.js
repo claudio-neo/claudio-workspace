@@ -41,7 +41,7 @@ imap.once('ready', () => {
       }
       
       const limit = mode === 'all' ? results.slice(-10) : results;
-      const f = imap.fetch(limit, { bodies: '', markSeen: true });
+      const f = imap.fetch(limit, { bodies: '', markSeen: false });
       const emails = [];
       
       f.on('message', (msg) => {

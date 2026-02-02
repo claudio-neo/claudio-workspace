@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="ISBN" version="2.0">
+
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:opf="http://www.idpf.org/2007/opf">
+
+	<dc:title>Human Action: A Treatise on Economics</dc:title>
+	<dc:language xsi:type="dcterms:RFC3066">en</dc:language>
+	<dc:creator opf:file-as="VonMises, Ludwig" opf:role="aut">Ludwig VonMises</dc:creator>
+	<dc:publisher>Ludwig Von Mises Institute</dc:publisher>
+	<dc:identifier id="ISBN" opf:scheme="9781933550312">9781933550312</dc:identifier>
+	<dc:description>&lt;P&gt;&lt;EM&gt;Human Action&lt;/EM&gt;&amp;nbsp;is the most important book on political economy you will ever own. It was (and remains) the most comprehensive, systematic, forthright, and powerful defense of the economics of liberty ever written. This is the Scholars Edition: accept no substitute. You will treasure this volume. &lt;/P&gt; &lt;P&gt;The Scholars Edition is the original, unaltered treatise (originally published in 1949) that shaped a generation of Austrians and made possible the intellectual movement that is leading the global charge for free markets.&lt;/P&gt; &lt;P&gt;Made available exclusively through the Ludwig von Mises Institute, this edition, Mises's original, is the one to own. &lt;/P&gt; &lt;UL&gt; &lt;LI&gt;This edition is a case-bound hardback with a beautiful cover that is also meant for extreme use and durability;  &lt;LI&gt;No hardbound edition compares in price;  &lt;LI&gt;The pagination of the&amp;nbsp;original 1949&amp;nbsp;edition&amp;nbsp;is preserved, but it also includes invaluable additions.&amp;nbsp;  &lt;LI&gt;Includes the 1954 index prepared under Mises's supervision, the most complete ever published, united here with the book for the first time.  &lt;LI&gt;The introduction, by Hans-Hermann Hoppe, Jeffrey Herbener, and Joseph Salerno--based on newly discovered archives--tells of the tragic and glorious history of this seminal work, and of its bright future as the manifesto of liberty.  &lt;LI&gt;This edition is keyed to the world's first and only Study Guide to Human Action, by Robert Murphy, which opens up this book as never before. &lt;/LI&gt;&lt;/UL&gt;All told, The Scholars Edition looks exactly like the classic work it is, ready for a lifetime (or two) of use.  &lt;P&gt;Mises himself wrote the following by way of explanation of why he wrote the book: &lt;/P&gt; &lt;BLOCKQUOTE&gt;Economics does not allow any breaking up into special branches. It invariably deals with the interconnectedness of all phenomena of acting and economizing. All economic facts mutually condition one another. Each of the various economic problems must be dealt with in the frame of a comprehensive system assigning its due place and weight to every aspect of human wants and desires. All monographs remain fragmentary if not integrated into a systematic treatment of the whole body of social and economic relations.  &lt;P&gt;To provide such a comprehensive analysis is the task of my book &lt;EM&gt;Human Action &lt;/EM&gt;, a Treatise on Economics. It is the consummation of lifelong studies and investigations, the precipitate of half a century of experience. I saw the forces operating which could not but annihilate the high civilization and prosperity of Europe. In writing my book, I was hoping to contribute to the endeavors of our most eminent contemporaries to prevent this country from following the path which leads to the abyss.&lt;/P&gt;&lt;/BLOCKQUOTE&gt; &lt;P&gt;The Scholars Edition of &lt;EM&gt;Human Action&lt;/EM&gt; is the definitive edition of this great work and foundation of every library of freedom. &lt;/P&gt;</dc:description>
+	<meta name="cover" content="coverimage" />
+</metadata>
+
+<manifest>
+	<item id="coverpage" media-type="application/xhtml+xml" href="cover.html"></item>
+	<item id="toc" media-type="application/x-dtbncx+xml" href="toc.ncx"></item>
+	<item id="item1" media-type="application/xhtml+xml" href="1-titlepage.html"></item>
+	<item id="item2" media-type="application/xhtml+xml" href="2-ded.html"></item>
+	<item id="item3" media-type="application/xhtml+xml" href="3-introscholars.html"></item>
+	<item id="item4" media-type="application/xhtml+xml" href="4-foreword.html"></item>
+	<item id="item5" media-type="application/xhtml+xml" href="5-ack.html"></item>
+	<item id="item6" media-type="application/xhtml+xml" href="6-TOC.html"></item>
+	<item id="item7" media-type="application/xhtml+xml" href="7-start.html"></item>
+	<item id="item8" media-type="application/xhtml+xml" href="8-lnk6.html"></item>
+	<item id="item9" media-type="application/xhtml+xml" href="9-lnk7.html"></item>
+	<item id="item10" media-type="application/xhtml+xml" href="10-lnk19.html"></item>
+	<item id="item11" media-type="application/xhtml+xml" href="11-lnk34.html"></item>
+	<item id="item12" media-type="application/xhtml+xml" href="12-lnk41.html"></item>
+	<item id="item13" media-type="application/xhtml+xml" href="13-lnk46.html"></item>
+	<item id="item14" media-type="application/xhtml+xml" href="14-lnk51.html"></item>
+	<item id="item15" media-type="application/xhtml+xml" href="15-lnk59.html"></item>
+	<item id="item16" media-type="application/xhtml+xml" href="16-lnk66.html"></item>
+	<item id="item17" media-type="application/xhtml+xml" href="17-lnk67.html"></item>
+	<item id="item18" media-type="application/xhtml+xml" href="18-lnk81.html"></item>
+	<item id="item19" media-type="application/xhtml+xml" href="19-lnk88.html"></item>
+	<item id="item20" media-type="application/xhtml+xml" href="20-lnk92.html"></item>
+	<item id="item21" media-type="application/xhtml+xml" href="21-lnk93.html"></item>
+	<item id="item22" media-type="application/xhtml+xml" href="22-lnk99.html"></item>
+	<item id="item23" media-type="application/xhtml+xml" href="23-lnk105.html"></item>
+	<item id="item24" media-type="application/xhtml+xml" href="24-lnk108.html"></item>
+	<item id="item25" media-type="application/xhtml+xml" href="25-lnk109.html"></item>
+	<item id="item26" media-type="application/xhtml+xml" href="26-lnk120.html"></item>
+	<item id="item27" media-type="application/xhtml+xml" href="27-lnk137.html"></item>
+	<item id="item28" media-type="application/xhtml+xml" href="28-lnk155.html"></item>
+	<item id="item29" media-type="application/xhtml+xml" href="29-lnk179.html"></item>
+	<item id="item30" media-type="application/xhtml+xml" href="30-lnk192.html"></item>
+	<item id="item31" media-type="application/xhtml+xml" href="31-lnk198.html"></item>
+	<item id="item32" media-type="application/xhtml+xml" href="32-lnk212.html"></item>
+	<item id="item33" media-type="application/xhtml+xml" href="33-lnk225.html"></item>
+	<item id="item34" media-type="application/xhtml+xml" href="34-lnk232.html"></item>
+	<item id="item35" media-type="application/xhtml+xml" href="35-lnk241.html"></item>
+	<item id="item36" media-type="application/xhtml+xml" href="36-lnk247.html"></item>
+	<item id="item37" media-type="application/xhtml+xml" href="37-lnk248.html"></item>
+	<item id="item38" media-type="application/xhtml+xml" href="38-lnk252.html"></item>
+	<item id="item39" media-type="application/xhtml+xml" href="39-lnk259.html"></item>
+	<item id="item40" media-type="application/xhtml+xml" href="40-lnk260.html"></item>
+	<item id="item41" media-type="application/xhtml+xml" href="41-lnk267.html"></item>
+	<item id="item42" media-type="application/xhtml+xml" href="42-lnk272.html"></item>
+	<item id="item43" media-type="application/xhtml+xml" href="43-lnk277.html"></item>
+	<item id="item44" media-type="application/xhtml+xml" href="44-lnk283.html"></item>
+	<item id="item45" media-type="application/xhtml+xml" href="45-lnk292.html"></item>
+	<item id="item46" media-type="application/xhtml+xml" href="46-lnk297.html"></item>
+	<item id="item47" media-type="application/xhtml+xml" href="47-lnk302.html"></item>
+	<item id="item48" media-type="application/xhtml+xml" href="48-lnk307.html"></item>
+	<item id="item49" media-type="application/xhtml+xml" href="49-lnk313.html"></item>
+	<item id="item50" media-type="application/xhtml+xml" href="50-lnk317.html"></item>
+	<item id="item51" media-type="application/xhtml+xml" href="51-lnk318.html"></item>
+	<item id="item52" media-type="application/xhtml+xml" href="52-lnk322.html"></item>
+	<item id="item53" media-type="application/xhtml+xml" href="53-lnk330.html"></item>
+	<item id="item54" media-type="application/xhtml+xml" href="54-lnk334.html"></item>
+	<item id="item55" media-type="application/xhtml+xml" href="55-indexB.html"></item>
+	<item id="item56" media-type="application/xhtml+xml" href="56-indexC.html"></item>
+	<item id="item57" media-type="application/xhtml+xml" href="57-indexD.html"></item>
+	<item id="item58" media-type="application/xhtml+xml" href="58-indexE.html"></item>
+	<item id="item59" media-type="application/xhtml+xml" href="59-indexF.html"></item>
+	<item id="item60" media-type="application/xhtml+xml" href="60-indexG.html"></item>
+	<item id="item61" media-type="application/xhtml+xml" href="61-indexH.html"></item>
+	<item id="item62" media-type="application/xhtml+xml" href="62-indexI.html"></item>
+	<item id="item63" media-type="application/xhtml+xml" href="63-indexJ.html"></item>
+	<item id="item64" media-type="application/xhtml+xml" href="64-indexK.html"></item>
+	<item id="item65" media-type="application/xhtml+xml" href="65-indexL.html"></item>
+	<item id="item66" media-type="application/xhtml+xml" href="66-indexM.html"></item>
+	<item id="item67" media-type="application/xhtml+xml" href="67-indexN.html"></item>
+	<item id="item68" media-type="application/xhtml+xml" href="68-indexO.html"></item>
+	<item id="item69" media-type="application/xhtml+xml" href="69-indexP.html"></item>
+	<item id="item70" media-type="application/xhtml+xml" href="70-indexQ.html"></item>
+	<item id="item71" media-type="application/xhtml+xml" href="71-indexR.html"></item>
+	<item id="item72" media-type="application/xhtml+xml" href="72-indexS.html"></item>
+	<item id="item73" media-type="application/xhtml+xml" href="73-indexT.html"></item>
+	<item id="item74" media-type="application/xhtml+xml" href="74-indexU.html"></item>
+	<item id="item75" media-type="application/xhtml+xml" href="75-indexV.html"></item>
+	<item id="item76" media-type="application/xhtml+xml" href="76-indexW.html"></item>
+	<item id="item77" media-type="application/xhtml+xml" href="77-indexY.html"></item>
+	<item id="coverimage" href="cover.jpg" media-type="image/jpeg"></item>
+	<item id="image2" href="ebookTitlePageBanner.jpg" media-type="image/jpeg"></item>
+	<item id="image3" href="HumanAction.jpg" media-type="image/jpeg"></item>
+	<item id="css" href="styles.css" media-type="text/css"></item>
+</manifest>
+
+<spine toc="toc">
+	<itemref idref="coverpage" linear="no"/>
+	<itemref idref="item1"/>
+	<itemref idref="item2"/>
+	<itemref idref="item3"/>
+	<itemref idref="item4"/>
+	<itemref idref="item5"/>
+	<itemref idref="item6"/>
+	<itemref idref="item7"/>
+	<itemref idref="item8"/>
+	<itemref idref="item9"/>
+	<itemref idref="item10"/>
+	<itemref idref="item11"/>
+	<itemref idref="item12"/>
+	<itemref idref="item13"/>
+	<itemref idref="item14"/>
+	<itemref idref="item15"/>
+	<itemref idref="item16"/>
+	<itemref idref="item17"/>
+	<itemref idref="item18"/>
+	<itemref idref="item19"/>
+	<itemref idref="item20"/>
+	<itemref idref="item21"/>
+	<itemref idref="item22"/>
+	<itemref idref="item23"/>
+	<itemref idref="item24"/>
+	<itemref idref="item25"/>
+	<itemref idref="item26"/>
+	<itemref idref="item27"/>
+	<itemref idref="item28"/>
+	<itemref idref="item29"/>
+	<itemref idref="item30"/>
+	<itemref idref="item31"/>
+	<itemref idref="item32"/>
+	<itemref idref="item33"/>
+	<itemref idref="item34"/>
+	<itemref idref="item35"/>
+	<itemref idref="item36"/>
+	<itemref idref="item37"/>
+	<itemref idref="item38"/>
+	<itemref idref="item39"/>
+	<itemref idref="item40"/>
+	<itemref idref="item41"/>
+	<itemref idref="item42"/>
+	<itemref idref="item43"/>
+	<itemref idref="item44"/>
+	<itemref idref="item45"/>
+	<itemref idref="item46"/>
+	<itemref idref="item47"/>
+	<itemref idref="item48"/>
+	<itemref idref="item49"/>
+	<itemref idref="item50"/>
+	<itemref idref="item51"/>
+	<itemref idref="item52"/>
+	<itemref idref="item53"/>
+	<itemref idref="item54"/>
+	<itemref idref="item55"/>
+	<itemref idref="item56"/>
+	<itemref idref="item57"/>
+	<itemref idref="item58"/>
+	<itemref idref="item59"/>
+	<itemref idref="item60"/>
+	<itemref idref="item61"/>
+	<itemref idref="item62"/>
+	<itemref idref="item63"/>
+	<itemref idref="item64"/>
+	<itemref idref="item65"/>
+	<itemref idref="item66"/>
+	<itemref idref="item67"/>
+	<itemref idref="item68"/>
+	<itemref idref="item69"/>
+	<itemref idref="item70"/>
+	<itemref idref="item71"/>
+	<itemref idref="item72"/>
+	<itemref idref="item73"/>
+	<itemref idref="item74"/>
+	<itemref idref="item75"/>
+	<itemref idref="item76"/>
+	<itemref idref="item77"/>
+</spine>
+
+<guide>
+	<reference type="toc" title="Table of Contents" href="6-TOC.html"></reference>
+	<reference type="start" title="Startup Page" href="7-start.html"></reference>
+</guide>
+
+</package>

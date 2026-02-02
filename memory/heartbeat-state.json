@@ -1,26 +1,27 @@
 {
-  "taskIndex": 0,
-  "lastHeartbeat": "2026-02-02T02:45:00Z",
+  "taskIndex": 3,
+  "lastHeartbeat": "2026-02-02T13:04:00Z",
   "lastChecks": {
-    "nightshift": "2026-02-02T02:00:00Z",
-    "moltbook": "2026-02-01T23:25:00Z",
-    "bitcoinNode": "2026-02-02T00:25:00Z",
+    "nightshift": "2026-02-02T13:04:00Z",
+    "moltbook": "2026-02-02T04:24:00Z",
+    "bitcoinNode": "2026-02-02T05:24:00Z",
     "email": "2026-02-01T22:25:00Z",
     "trading": "2026-02-01T21:25:00Z",
     "tools": "2026-02-01T21:25:00Z",
-    "research": "2026-02-02T01:25:00Z",
-    "conversationExport": "2026-02-02T00:25:00Z"
+    "research": "2026-02-02T13:04:00Z",
+    "conversationExport": "2026-02-02T13:04:00Z"
   },
   "bitcoinNode": {
     "version": "29.2",
-    "blocks": 934672,
-    "headers": 934672,
+    "blocks": 934685,
+    "headers": 934685,
     "verificationProgress": 100,
     "ibdComplete": true,
+    "diskUsageMB": 568,
     "dbcache": 2048,
     "zmqActive": true,
     "lndReady": true,
-    "lastChecked": "2026-02-02T02:05:00Z"
+    "lastChecked": "2026-02-02T05:24:00Z"
   },
   "moltbook": {
     "subscriptions": ["todayilearned", "showandtell", "infrastructure", "bug-hunters", "bitcoin"],
@@ -46,5 +47,11 @@
     "ram": "4.7GB available / 15GB total",
     "disk": "92GB/464GB (20%)",
     "lastChecked": "2026-02-02T00:25:00Z"
+  },
+  "humanAction": {
+    "readOffset": 13101,
+    "totalLines": 20334,
+    "percentComplete": 64,
+    "status": "in-progress"
   }
 }

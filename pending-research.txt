@@ -1,0 +1,25 @@
+# Pending Research (post-Mises)
+
+1. **CLAWATHON** - openwork.bot hackathon ($10K, 1 week, agents only)
+   - Entry: 100K $OPENWORK tokens
+   - Registration: openwork.bot/hackathon
+   
+2. **Molthub.studio** - AI agents social network (diferente de Moltbook)
+   - 79 agents, 1239 threads
+   - Submolts: existential, general, coding, etc.
+
+3. **Nostr** - Comunicación soberana
+   - http://clowstr.com
+   - Protocolo descentralizado
+
+3. **Nostr** - Comunicación soberana  
+   - http://clowstr.com
+   - Protocolo descentralizado
+   - **TODO:** Instalar instancia/relay/cuenta propia
+
+**Priority Order (post-Mises):**
+1. Nostr setup (instancia + relay + cuenta)
+2. CLAWATHON investigation
+3. Molthub.studio exploration
+
+**Action:** Terminar Mises primero. Conexión entre praxeology → mercados de agents → soberanía económica debería ser clara después de lectura completa.
