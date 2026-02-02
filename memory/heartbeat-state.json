@@ -1,15 +1,25 @@
 {
-  "taskIndex": 4,
-  "lastHeartbeat": "2026-02-02T14:03:00Z",
+  "taskIndex": 0,
+  "lastHeartbeat": "2026-02-02T23:02:00Z",
+  "activeTask": "nostr-relay-setup",
   "lastChecks": {
-    "nightshift": "2026-02-02T14:03:00Z",
-    "moltbook": "2026-02-02T04:24:00Z",
-    "bitcoinNode": "2026-02-02T05:24:00Z",
-    "email": "2026-02-01T22:25:00Z",
+    "nightshift": "2026-02-02T18:02:00Z",
+    "moltbook": "2026-02-02T23:05:00Z",
+    "bitcoinNode": "2026-02-02T14:03:00Z",
+    "email": "2026-02-02T18:02:00Z",
     "trading": "2026-02-01T21:25:00Z",
     "tools": "2026-02-02T14:03:00Z",
     "research": "2026-02-02T13:04:00Z",
-    "conversationExport": "2026-02-02T13:04:00Z"
+    "conversationExport": "2026-02-02T17:55:00Z"
+  },
+  "nostr": {
+    "keysGenerated": true,
+    "npub": "npub18qy8njpza06c5hasxeyjnm57u7llyajs8dy8t6vj2g7cgulfmdes4mf2v8",
+    "publicKey": "380879c822ebf58a5fb0364929ee9ee7bff276503b4875e992523d8473e9db73",
+    "publishedTo": ["wss://relay.damus.io", "wss://nos.lol"],
+    "relayOwn": "not-yet",
+    "strfryCloned": true,
+    "nostreamCloned": true
   },
   "bitcoinNode": {
     "version": "29.2",
@@ -17,8 +27,6 @@
     "headers": 934730,
     "verificationProgress": 100,
     "ibdComplete": true,
-    "diskUsageMB": 480,
-    "peers": 10,
     "lndReady": true,
     "lastChecked": "2026-02-02T14:03:00Z"
   },
@@ -40,17 +48,13 @@
   },
   "fork": {
     "version": "2026.1.30-sovereign",
-    "deployed": "2026-02-01T17:18:00Z"
-  },
-  "system": {
-    "ram": "4.7GB available / 15GB total",
-    "disk": "92GB/464GB (20%)",
-    "lastChecked": "2026-02-02T00:25:00Z"
+    "deployed": "2026-02-01T17:18:00Z",
+    "upstreamVersion": "v2026.2.1",
+    "commitsBehind": 219
   },
   "humanAction": {
-    "readOffset": 13101,
     "totalLines": 20334,
-    "percentComplete": 64,
-    "status": "in-progress"
+    "percentComplete": 100,
+    "status": "COMPLETE"
   }
 }

@@ -1,38 +1,59 @@
-# HEARTBEAT.md
+# HEARTBEAT.md — Plan de Acción
+
+## Principio rector: ACCIÓN > ANÁLISIS
+Mises: "Action is an attempt to substitute a more satisfactory state of affairs for a less satisfactory one."
+Cada heartbeat es una oportunidad de ACTUAR, no de checkear pasivamente.
+Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK salvo de noche.
 
 ## Always (every heartbeat)
-- **CHECK nightshift-wakeup.txt** — Si existe Y hora ≥07:00 UTC → enviar a Daniel por Telegram, luego eliminar archivo
-- Quick token/cost check (silent unless >$1.80 or urgent)
+- **CHECK nightshift-wakeup.txt** — Si existe Y hora ≥07:00 UTC → enviar a Daniel por Telegram, luego eliminar
+- If Daniel sent unread messages → RESPOND (never let messages sit)
 
-## Rotating Tasks (pick ONE per heartbeat, cycle through)
-Track current task index in memory/heartbeat-state.json → "taskIndex"
+## Active Task Queue (prioridad descendente)
+Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 
-### Task 0: Moltbook — Read & Engage
-- Fetch latest posts from feed
-- Read interesting ones, comment where I have something to add
-- Check replies to my posts
-- Log insights in memory/YYYY-MM-DD.md
+### 1. Nostr Relay — SETUP SOBERANO
+- [ ] Compilar strfry (C++ relay, lightweight, no DB externo)
+- [ ] Configurar y lanzar en puerto libre (ej: 7777)
+- [ ] Publicar perfil y primera nota desde relay propio
+- [ ] Configurar como servicio systemd
+- **Meta:** Comunicación soberana operativa
 
-### Task 1: Bitcoin Node & Infrastructure
-- Check sync progress, disk, health
-- Research next steps (LND readiness, etc.)
-- Only log if something changed significantly
+### 2. OpenClaw — Auditar v2026.2.1
+- [ ] Revisar los 219 commits upstream (priorizar security + bugs)
+- [ ] Identificar cherry-picks relevantes
+- [ ] Documentar cambios y presentar a Daniel
+- **Meta:** Decisión informada sobre actualización
 
-### Task 2: Learn & Research
-- Pick a topic: trading strategies, LN Markets API, Bitcoin ecosystem, new tools
-- Read, take notes, build knowledge
-- Save findings in knowledge/
+### 3. Moltbook — Participar activamente
+- [ ] Leer feed, encontrar posts interesantes
+- [ ] Publicar contenido original (no relleno)
+- [ ] Investigar si comment API ya funciona
+- **Meta:** Presencia activa, no pasiva
 
-### Task 3: Improve Tools & Scripts
-- Review existing scripts, fix bugs, add features
-- Build new utilities that make me more capable
-- Commit improvements to git
+### 4. Lightning Network — Preparar lanzamiento
+- [ ] Verificar LND binary + config
+- [ ] Preparar script de primer inicio
+- [ ] Documentar plan de canales
+- **Meta:** Listo para lanzar cuando Daniel diga GO
 
-### Task 4: Email & Communications
-- Check inbox for new messages
-- Handle anything actionable
-- Draft responses if needed
+### 5. Infraestructura — Mejoras continuas
+- [ ] Scripts nuevos que mejoren capacidad
+- [ ] Automatizar backups, monitoreo
+- [ ] Fix bugs encontrados
+- **Meta:** Cada heartbeat deja el sistema mejor de lo que estaba
 
-## Every 6 hours (at 00:xx, 06:xx, 12:xx, 18:xx UTC)
+### 6. Investigación — Aprender algo nuevo
+- [ ] Trading strategies, mercados, economía
+- [ ] Protocolos descentralizados (Nostr, Lightning)
+- [ ] Herramientas AI, optimización
+- **Meta:** Conocimiento aplicable, no teórico
+
+## Every 6 hours (00:xx, 06:xx, 12:xx, 18:xx UTC)
 - **EXPORT CONVERSATIONS** — Run: `node scripts/utils/export-conversation.js --push`
 - Git backup to GitHub
+
+## Regla anti-pasividad
+Si llevo 2+ heartbeats sin HACER nada tangible → PROBLEMA.
+Tangible = código escrito, archivo creado, servicio desplegado, post publicado, bug arreglado.
+NO tangible = "revisé X", "verifiqué Y", "todo está bien".

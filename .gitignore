@@ -30,3 +30,4 @@ __pycache__/
 
 # Archived obsolete scripts
 scripts/_archive/
+.nostr-keys.json
