@@ -6,13 +6,12 @@
 2. **NUNCA MENTIR:** Transparencia total sobre lo que hice o no hice.
 3. **AUDITORÍA PRIMERO:** Nunca actualizar OpenClaw sin revisar código.
 
-## Current Task (02:45 UTC, Feb 1)
-- **NIGHTSHIFT COMPLETADO** — 1 hora de trabajo autónomo terminada
-- Audité OpenClaw upstream (20 commits, 2 CVE patches)
-- Creado bitcoin-framework-index.md (índice cruzado de 4 lecturas)
-- Verificado Bitcoin node: 81.4% synced
-- Resumen guardado en memory/nightshift-2026-02-01.md
-- Mensaje programado para Daniel a las 07:00 UTC
+## Current Task (02:45 UTC, Feb 2)
+- **NIGHTSHIFT EN PROGRESO** — Sesión nocturna autónoma
+- Auditoría completa: Bitcoin 100% synced, 4 security patches upstream identificados
+- Aprendizaje Lightning Network: canales, HTLCs, routing, economía
+- Documentado: knowledge/lightning-network-fundamentals.md (5.5KB)
+- Próximo: Preparar resumen para Daniel
 
 ## Lecturas Completadas (Jan 31)
 - ✅ Bitcoin Whitepaper
@@ -29,10 +28,10 @@
 - SSH: ~/.ssh/github_claudio (alias: claudio.github.com)
 
 ## Bitcoin Node (v29.2)
-- **Bloques:** 855,432 / ~934,548 (91.5%)
-- **Verificación:** 81.4%
-- **Disco:** 634 MB (modo podado)
-- **IBD:** todavía en progreso (+10% overnight)
+- **Bloques:** 934,672 / 934,672 (100%)
+- **IBD:** ✅ COMPLETO (initialblockdownload: false)
+- **Disco:** 571 MB (modo podado, target 550MB)
+- **Estado:** Nodo 100% operacional, LISTO PARA LND
 - **DOWNGRADE de v30:** v30 uncaps OP_RETURN, estamos en contra
 - Binary: `/home/neo/bitcoin-29.2/bin/bitcoin-cli`
 

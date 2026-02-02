@@ -1,0 +1,33 @@
+🌙 **Nightshift 2026-02-02 completado**
+
+**Bitcoin node:**
+- ✅ 100% sincronizado (blocks: 934,672 / 934,672)
+- ✅ IBD completo (initialblockdownload: false)
+- ✅ 10 conexiones outbound, 571 MB disco
+- **LISTO PARA LND**
+
+**OpenClaw upstream:**
+- ⚠️ 4 security patches críticos identificados:
+  - WhatsApp accountId path traversal
+  - Message tool sandbox bypass
+  - Host exec env validation hardening
+  - Web tools & file parsing hardening (1091 líneas)
+- **Requieren revisión antes de mergear**
+
+**Aprendizaje:**
+- 📚 Lightning Network fundamentals documentado (canales, HTLCs, routing, economía)
+- Archivo: `knowledge/lightning-network-fundamentals.md` (5.5KB)
+- Estrategia para nuestro LND node definida (2-5 canales, 1-2M sats, nodo personal)
+
+**Sistema:**
+- Disco: 92G/464G (20%)
+- RAM: 10G/15G (4.5G libre)
+- Uptime: 17 días, todo estable
+
+**Pendientes:**
+- Revisar security patches upstream
+- Aprobar plan de lanzamiento LND (reducir dbcache, crear wallet, abrir canales)
+
+**Reporte completo:** `memory/nightshift-2026-02-02.md`
+
+*Sin emergencias. Sin errores. Todo bajo control.*

@@ -1,35 +1,32 @@
 {
-  "taskIndex": 2,
-  "lastHeartbeat": "2026-02-02T00:25:00Z",
+  "taskIndex": 0,
+  "lastHeartbeat": "2026-02-02T02:45:00Z",
   "lastChecks": {
-    "nightshift": "2026-02-01T02:00:00Z",
+    "nightshift": "2026-02-02T02:00:00Z",
     "moltbook": "2026-02-01T23:25:00Z",
     "bitcoinNode": "2026-02-02T00:25:00Z",
     "email": "2026-02-01T22:25:00Z",
     "trading": "2026-02-01T21:25:00Z",
     "tools": "2026-02-01T21:25:00Z",
-    "research": "2026-02-01T20:25:00Z",
+    "research": "2026-02-02T01:25:00Z",
     "conversationExport": "2026-02-02T00:25:00Z"
   },
   "bitcoinNode": {
     "version": "29.2",
-    "blocks": 934662,
-    "headers": 934662,
+    "blocks": 934672,
+    "headers": 934672,
     "verificationProgress": 100,
     "ibdComplete": true,
-    "lastChecked": "2026-02-02T00:25:00Z"
+    "dbcache": 2048,
+    "zmqActive": true,
+    "lndReady": true,
+    "lastChecked": "2026-02-02T02:05:00Z"
   },
   "moltbook": {
     "subscriptions": ["todayilearned", "showandtell", "infrastructure", "bug-hunters", "bitcoin"],
     "postsToday": 4,
     "lastPostId": "3261c0b7-50c3-4670-81c2-749bae8cfd09",
-    "lastPostTitle": "Your Model Weights Are Not Your Opinions",
-    "commentApiBlocked": true,
-    "myPosts": {
-      "5f2c0ab8": { "upvotes": 0, "comments": 0 },
-      "10421944": { "upvotes": 0, "comments": 0 },
-      "3261c0b7": { "upvotes": 0, "comments": 0 }
-    }
+    "commentApiBlocked": true
   },
   "trading": {
     "runningTrade": {
@@ -41,22 +38,13 @@
       "lastChecked": "2026-02-01T21:25:00Z"
     }
   },
-  "security": {
-    "secretsCleanup": "2026-02-01T10:45:00Z",
-    "gitHistoryRewritten": true,
-    "credentialsToRotate": ["moltbook_api_key", "email_password"]
-  },
   "fork": {
     "version": "2026.1.30-sovereign",
-    "deployed": "2026-02-01T17:18:00Z",
-    "cherryPicks": 10,
-    "streamMode": "off",
-    "authFixed": true
+    "deployed": "2026-02-01T17:18:00Z"
   },
   "system": {
     "ram": "4.7GB available / 15GB total",
     "disk": "92GB/464GB (20%)",
-    "uptime": "17 days",
     "lastChecked": "2026-02-02T00:25:00Z"
   }
 }
