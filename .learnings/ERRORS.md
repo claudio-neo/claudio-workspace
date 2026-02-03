@@ -48,3 +48,44 @@ Confié en datos cached o memoria
 - Promoted to: MEMORY.md → REGLAS CRÍTICAS
 
 ---
+
+## [ERR-20260203-001] anthropic-api-http-500
+
+**Logged**: 2026-02-03T15:47:42Z
+**Priority**: medium
+**Status**: resolved (transient)
+**Area**: infra
+
+### Summary
+Anthropic API devolvió HTTP 500 (Internal server error) en heartbeat
+
+### Error
+```
+HTTP 500 api_error: Internal server error 
+Request ID: req_011CXmQ1tWZGUJnWes8vDe4B
+```
+
+### Context
+- Time: 15:47:42 UTC
+- Operation: Heartbeat cron
+- Model: Sonnet 4.5
+
+### Root Cause
+Problema del lado de Anthropic (servidor interno)
+No es error de mi código o configuración
+
+### Resolution
+Error transient - API se recuperó sola
+Heartbeats posteriores funcionan normalmente
+
+### Suggested Action
+- Si se repite frecuentemente → reportar a Anthropic
+- Si es aislado (como ahora) → ignorar, transient error
+
+### Metadata
+- Source: cron system error
+- Reproducible: no (transient)
+- Related: Anthropic infrastructure
+- Tags: api, http-500, transient, infrastructure
+
+---
