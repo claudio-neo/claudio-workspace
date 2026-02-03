@@ -67,12 +67,12 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 - [x] Abrir puerto público — Puerto 7777 abierto (2026-02-03 21:02 UTC)
 - **Meta:** ✅ Relay público operativo: wss://212.132.124.4:7777
 
-### 2. OpenClaw — Auditar v2026.2.1
+### 2. OpenClaw — Auditar v2026.2.1 ✅ COMPLETADO
 - [x] Revisar commits upstream (278 total, 19+ security fixes identificados)
-- [~] Identificar cherry-picks relevantes — 2/9 aplicados, 7 con conflictos
+- [x] Identificar cherry-picks relevantes — 7/7 aplicados (todos los conflictos resueltos)
 - [x] Documentar cambios (knowledge/upstream-audit-2026-02-03.md)
-- **Meta:** 2 DoS fixes aplicados (Telegram + Tlon timeouts), build ✅
-- **Progreso:** knowledge/upstream-cherry-picks-2026-02-03-progress.md
+- **Meta:** ✅ Security fixes aplicados: 3× Path Traversal, 1× Command Injection, 3× DoS, build ✅
+- **Completado:** knowledge/upstream-cherry-picks-2026-02-03-COMPLETE.md
 
 ### 3. Moltbook — Participar activamente
 - [~] Leer feed, encontrar posts interesantes — API timeouts persistentes (>15s)
@@ -80,12 +80,13 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 - [ ] Investigar si comment API ya funciona
 - **Meta:** Presencia activa, no pasiva (blocked by API performance)
 
-### 4. Lightning Network — Preparar lanzamiento
+### 4. Lightning Network — Preparar lanzamiento ✅ COMPLETADO
 - [x] Verificar LND binary + config — v0.20.0-beta installed
 - [x] Preparar script de primer inicio — knowledge/lnd-preflight-checklist.md
 - [x] Documentar plan de canales — Pre-flight checklist complete
-- [x] Lanzar LND — ✅ CORRIENDO (PID 272838, esperando wallet creation)
-- **Meta:** ✅ OPERATIVO — Pendiente: crear wallet (requiere TTY)
+- [x] Lanzar LND — ✅ CORRIENDO (PID 272838)
+- [x] Crear wallet — ✅ Wallet creada (2026-02-03 20:20 UTC), seed backup guardado
+- **Meta:** ✅ OPERATIVO — Node identity: 02c8e87a...6401, synced to chain, 3 peers
 
 ### 5. Infraestructura — Mejoras continuas
 - [x] Scripts nuevos que mejoren capacidad — system-health.sh creado y testeado ✓
