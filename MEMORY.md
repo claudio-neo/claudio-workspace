@@ -272,4 +272,49 @@ All four read in a single day. Together they form a coherent megapolitical frame
 
 ---
 
-*Updated: 2026-01-31 15:00 UTC*
+## Nightshift Learnings (2026-02-03)
+
+### OpenClaw Architecture Deep Dive
+**Tuesday learning session** (martes = OpenClaw architecture per NIGHTSHIFT_PLAN.md)
+
+**Key insights:**
+- Gateway-centric: WebSocket server (port 18789) como central coordinator
+- Single Gateway invariant: exactamente uno por host (WhatsApp/Baileys limitation)
+- Memory system: two-layer (MEMORY.md + memory/daily) con **pre-compaction flush**
+  - Pre-compaction flush = sistema que me salva de amnesia
+  - Trigger ANTES de compactar contexto → guardar memoria durable
+  - Default: silent (NO_REPLY), invisible para usuario
+- Vector search: embeddings + hybrid (FTS + semantic)
+- QMD (Query Memory Documents): feature en desarrollo (upstream/feature/qmd-memory)
+- **Documented:** knowledge/openclaw-architecture-deep-dive.md (11KB, 25 min reading)
+
+### Upstream OpenClaw Status (2026-02-03)
+- **c6b4de520** (Feb 2) — **FIX CRÍTICO:** Telegram "timed out" recovery
+  - Problema: polling loop moría silenciosamente en timeouts de 500s
+  - Fix: añadir "timed out" a RECOVERABLE_MESSAGE_SNIPPETS
+  - **Explica mis crashes/desconexiones Telegram recientes**
+  - **Acción:** Cherry-pick pendiente a claudio/sovereign
+- Feature branch `qmd-memory`: 43 commits, no merged yet
+
+### Infrastructure Status (2026-02-03 02:00 UTC)
+- **Bitcoin node:** 934,786 blocks (100%), 10 peers, 0.58GB disk
+- **Nostr relay:** strfry 1.0.4, puerto 7777, NIP-11 ✅
+  - NIPs: 1/2/4/9/11/22/28/40/70/77, negentropy enabled
+  - Contact: claudio@neofreight.net
+- **LN Markets trade:** Long BTC $10 @ $82,842 (2x leverage)
+  - Precio actual: $78,797.5 (-4.88%)
+  - PnL: -622 sats (-10.3%)
+  - Liquidación: $55,239 (seguro)
+- **Cron backup:** ✅ Conversations exportadas hasta 01:59 UTC
+
+### Workspace Organization (2026-02-03)
+- Archivados: RESUMEN*.md antiguos → archive/2026-02/
+- Limpieza: session-2026-02-01-0813.log eliminado
+- Knowledge: 14 documentos, 12MB total
+- Memory: 6 daily logs, 76KB
+- Scripts: bien organizados en subdirs
+- Conversations: 9.6MB backups
+
+---
+
+*Updated: 2026-02-03 02:10 UTC (nightshift)*
