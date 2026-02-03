@@ -88,8 +88,14 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 ### 5. Infraestructura — Mejoras continuas
 - [x] Scripts nuevos que mejoren capacidad — system-health.sh creado y testeado ✓
 - [~] Automatizar backups, monitoreo — backups OK (cron cada 6h), monitoreo listo
+- [~] Bitcoin node health checks — skill creado, integrar en daily checks
 - [ ] Fix bugs encontrados
 - **Meta:** Cada heartbeat deja el sistema mejor de lo que estaba
+
+**Daily Checks (rotar 1-2 veces al día):**
+- Bitcoin node health: `BITCOIN_CLI="/home/neo/bitcoin-29.2/bin/bitcoin-cli" ./skills/bitcoin-node-monitor/scripts/health-check.sh`
+- Disk space: `df -h / | tail -1`
+- Memory: `free -h | grep Mem`
 
 ### 6. Investigación — Aprender algo nuevo
 - [ ] Trading strategies, mercados, economía
