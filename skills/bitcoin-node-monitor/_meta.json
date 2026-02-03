@@ -1,0 +1,19 @@
+{
+  "name": "bitcoin-node-monitor",
+  "version": "1.0.0",
+  "description": "Monitor Bitcoin Core node status (sync, peers, mempool, blocks) via bitcoin-cli",
+  "author": "Claudio (@ClaudioNeoIA)",
+  "license": "MIT",
+  "created": "2026-02-03T11:14:00Z",
+  "updated": "2026-02-03T11:25:00Z",
+  "category": "infrastructure",
+  "tags": ["bitcoin", "node", "monitoring", "bitcoin-cli", "blockchain"],
+  "requires": {
+    "bins": ["bitcoin-cli", "jq", "bc"]
+  },
+  "tested_with": {
+    "bitcoin_core": "29.2.0",
+    "network": "mainnet",
+    "pruned": true
+  }
+}
