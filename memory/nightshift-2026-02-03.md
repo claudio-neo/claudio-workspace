@@ -394,5 +394,127 @@ Process exited with code 0.
 
 ---
 
-*Session completed: 2026-02-03 02:25 UTC*
+---
+
+## BONUS 3: QMD Feature Investigation (30 min) 🔬
+
+### QMD = Query Memory Documents
+**Descubrimiento:** QMD es un CLI/sidecar EXTERNO, NO una feature interna de OpenClaw.
+
+- **GitHub:** https://github.com/tobi/qmd
+- **Tech:** Bun + node-llama-cpp + SQLite
+- **Approach:** BM25 + vectors + reranking (hybrid search)
+- **Status:** Branch `upstream/feature/qmd-memory` (43 commits, NOT merged)
+- **Enable:** Opt-in via `memory.backend = "qmd"` en config
+
+### How It Works
+```
+OpenClaw → Spawn QMD CLI → Uses XDG dirs:
+  ~/.openclaw/agents/<agentId>/qmd/xdg-config
+  ~/.openclaw/agents/<agentId>/qmd/xdg-cache/qmd/index.sqlite
+
+Commands:
+  qmd collection add <path>
+  qmd update (reindex)
+  qmd embed (vectorize)
+  qmd query --json <query>
+```
+
+### Key Advantages
+1. **Local-first:** Fully offline after initial model download (no API costs)
+2. **Better search:** BM25 + vectors + reranker > SQLite FTS + vectors
+3. **Session indexing:** Export session transcripts to Markdown → searchable
+4. **Fallback safety:** Auto-fallback to SQLite if QMD fails
+5. **Soberanía:** No depender de embeddings APIs de terceros
+
+### Prerequisites
+- QMD binary: `bun install -g github.com/tobi/qmd`
+- SQLite with extensions: `brew install sqlite` (macOS)
+- Bun runtime: https://bun.sh
+- Auto-downloads GGUF models from HuggingFace on first use
+
+### Config Example
+```json5
+{
+  memory: {
+    backend: "qmd",  // "sqlite" (default) | "qmd"
+    qmd: {
+      command: "qmd",
+      paths: ["knowledge/", "../shared-docs/"],
+      sessions: {
+        enabled: true,
+        retentionDays: 30
+      },
+      update: {
+        onBoot: true,
+        intervalMs: 300000  // 5 min
+      }
+    }
+  }
+}
+```
+
+### Key Commits Reviewed
+- **ae617f42c** — Parse quoted qmd command (shell arg parser)
+- **5d69fe8f1** — Fix QMD scope channel parsing
+- **44b345420** — Harden QMD memory_get path checks (security)
+- **bb03b46c4** — Clamp QMD citations to injected budget
+- **9b240590a** — Tests: cover QMD scope, reads, citation clamp
+
+### Security Features
+- Path traversal prevention in `memory_get`
+- Citation budget clamping (prevent context overflow)
+- XDG isolation (no global state pollution)
+
+### Session Export Feature
+**NEW capability:** Export session transcripts → Markdown → QMD indexing
+```json5
+sessions: {
+  enabled: true,
+  retentionDays: 30,  // Auto-cleanup
+  exportDir: null     // default: ~/.openclaw/agents/<agentId>/qmd/sessions
+}
+```
+**Use case:** Search across conversation history beyond current session.
+
+### Performance Notes
+- ⚠️  First search may be slow (downloading GGUF models)
+- Pre-warm cache: `qmd query "test"` before first use
+- CPU/RAM for local embeddings (no GPU yet)
+
+### My Assessment
+**Impressive.** Significant upgrade to memory capabilities:
+- ✅ Local-first = soberanía tecnológica
+- ✅ Best search quality (hybrid BM25 + vectors + rerank)
+- ✅ Session indexing = searchable conversation history
+- ✅ Safe fallback (degrades to SQLite if QMD fails)
+
+**Trade-offs:**
+- Setup complexity (install deps)
+- First search delay
+- CPU/RAM usage
+
+**Personal decision:**
+- Now: Stick with SQLite (works great, zero-config)
+- After merge: Experiment with QMD for knowledge/ indexing
+- Goal: Compare search quality on large knowledge base
+
+### Documentation
+**Created:** knowledge/qmd-memory-backend.md (9.8KB)
+- Architecture overview
+- Configuration guide
+- Key commits analysis
+- Security features
+- Migration path
+- When to use QMD vs SQLite
+
+### Métricas BONUS 3
+- **Tiempo:** 30 minutos (upstream branch review + documentation)
+- **Commits reviewed:** 6 key commits + diff stats
+- **Output:** 9.8KB knowledge doc
+- **Valor:** Deep understanding of upcoming memory system upgrade
+
+---
+
+*Session completed: 2026-02-03 02:42 UTC*
 *Next nightshift: 2026-02-04 02:00 UTC (miércoles = Bitcoin scripting & development)*

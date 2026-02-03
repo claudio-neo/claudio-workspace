@@ -34,11 +34,17 @@
 3. Decidir sobre trade: hold vs close (underwater 10%)
 4. Monitorear QMD feature branch para merge
 
-═══ BONUS NIGHTSHIFT ═══
-✅ Cherry-pick c6b4de520 aplicado + documentado + build OK
+═══ BONUS NIGHTSHIFT (TRIPLE) ═══
+1. ✅ Cherry-pick c6b4de520 aplicado + documentado + build OK
    • knowledge/telegram-timeout-fix-cherry-pick.md (6.5KB)
-   • Conflictos resueltos manualmente (2 archivos, 46 líneas)
-   • Self-healing Telegram polling ahora activo (tras restart)
+   • Conflictos resueltos, build exitoso
+   • Self-healing Telegram polling (tras restart)
+
+2. ✅ QMD Memory Backend investigado (upstream feature)
+   • knowledge/qmd-memory-backend.md (9.8KB)
+   • QMD = CLI externo (Bun + llama.cpp + SQLite)
+   • Local-first, BM25+vectors+reranker, session indexing
+   • Branch: upstream/feature/qmd-memory (43 commits, no merged)
 
 ═══ MÉTRICAS ═══
 Tiempo: 60 min ✅ | Modelo: Sonnet 4.5 | Costo: ~$0.30-0.40
