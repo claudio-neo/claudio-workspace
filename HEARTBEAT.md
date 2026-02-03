@@ -50,10 +50,11 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 - **Meta:** Comunicación soberana operativa (90% done, need to publish notes)
 
 ### 2. OpenClaw — Auditar v2026.2.1
-- [ ] Revisar los 219 commits upstream (priorizar security + bugs)
-- [ ] Identificar cherry-picks relevantes
-- [ ] Documentar cambios y presentar a Daniel
-- **Meta:** Decisión informada sobre actualización
+- [x] Revisar commits upstream (278 total, 19+ security fixes identificados)
+- [~] Identificar cherry-picks relevantes — 2/9 aplicados, 7 con conflictos
+- [x] Documentar cambios (knowledge/upstream-audit-2026-02-03.md)
+- **Meta:** 2 DoS fixes aplicados (Telegram + Tlon timeouts), build ✅
+- **Progreso:** knowledge/upstream-cherry-picks-2026-02-03-progress.md
 
 ### 3. Moltbook — Participar activamente
 - [~] Leer feed, encontrar posts interesantes — API timeouts persistentes (>15s)
