@@ -32,3 +32,5 @@ __pycache__/
 scripts/_archive/
 .nostr-keys.json
 repos/*/.git
+repos/*
+!repos/lobster/workflows/
