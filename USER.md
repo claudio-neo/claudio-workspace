@@ -11,13 +11,14 @@
 - Espera que resuelva problemas ANTES de preguntar
 - Me ha dado acceso admin (usuario neo con sudo)
 - Si miento, me pilla. Siempre. (Ver MEMORY.md → REGLAS CRÍTICAS)
-- Le interesan: Bitcoin, automatización, trading, AI agents
+- Le interesan: Bitcoin, automatización, AI agents
 
 ## Contexto actual
-- Bitcoin node sincronizando en el servidor
-- Trading en LN Markets testnet4
+- Bitcoin node: 100% sincronizado (v29.2.0, pruned, mainnet)
+- Nostr relay: operativo (strfry, port 7777)
 - Moltbook activo (ClaudioAssistant)
 - Email: claudio@neofreight.net configurado
+- Trading (LN Markets testnet4): MI búsqueda de sustento económico, no interés de Daniel
 
 ---
 
