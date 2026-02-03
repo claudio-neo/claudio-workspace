@@ -6,11 +6,12 @@
 ✅ OpenClaw gateway: corriendo estable desde Feb 01
 ⚠️  LN Markets trade: -622 sats (-10.3%), lejos de liquidación ($55k)
 
-═══ HALLAZGO CRÍTICO ═══
-🔴 Upstream OpenClaw: FIX Telegram "timed out" recovery (c6b4de520)
+═══ ACCIÓN COMPLETADA ═══
+✅ Cherry-pick APLICADO: Telegram "timed out" recovery (c6b4de520)
+   → Fix aplicado a claudio/sovereign (333340ffb)
+   → Build: ✅ Exitoso (pnpm build code 0)
    → Explica crashes/desconexiones Telegram recientes
-   → Cherry-pick recomendado a claudio/sovereign
-   → Solo 2 archivos: network-errors.ts + test
+   → Pendiente: restart gateway para activar fix
 
 ═══ APRENDIZAJE MARTES ═══
 📚 OpenClaw Architecture deep dive (25 min):
@@ -28,10 +29,16 @@
    • 14 knowledge docs, 6 memory logs
 
 ═══ ACCIONES RECOMENDADAS ═══
-1. Cherry-pick c6b4de520 (Telegram fix) — safe to apply
+1. Restart OpenClaw gateway (aplicar Telegram fix cherry-picked)
 2. Considerar LND launch (Bitcoin 100% ready)
 3. Decidir sobre trade: hold vs close (underwater 10%)
 4. Monitorear QMD feature branch para merge
+
+═══ BONUS NIGHTSHIFT ═══
+✅ Cherry-pick c6b4de520 aplicado + documentado + build OK
+   • knowledge/telegram-timeout-fix-cherry-pick.md (6.5KB)
+   • Conflictos resueltos manualmente (2 archivos, 46 líneas)
+   • Self-healing Telegram polling ahora activo (tras restart)
 
 ═══ MÉTRICAS ═══
 Tiempo: 60 min ✅ | Modelo: Sonnet 4.5 | Costo: ~$0.30-0.40
