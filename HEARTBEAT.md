@@ -69,8 +69,8 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 - **Meta:** ✅ READY — Waiting for Daniel's GO signal (prune decision needed)
 
 ### 5. Infraestructura — Mejoras continuas
-- [ ] Scripts nuevos que mejoren capacidad
-- [ ] Automatizar backups, monitoreo
+- [x] Scripts nuevos que mejoren capacidad — system-health.sh creado y testeado ✓
+- [~] Automatizar backups, monitoreo — backups OK (cron cada 6h), monitoreo listo
 - [ ] Fix bugs encontrados
 - **Meta:** Cada heartbeat deja el sistema mejor de lo que estaba
 
