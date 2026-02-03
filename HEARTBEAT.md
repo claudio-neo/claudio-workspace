@@ -42,12 +42,12 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 ## Active Task Queue (prioridad descendente)
 Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 
-### 1. Nostr Relay — SETUP SOBERANO
-- [x] Compilar strfry (C++ relay, lightweight, no DB externo) — Docker image up 5h
+### 1. Nostr Relay — SETUP SOBERANO ✅ COMPLETADO
+- [x] Compilar strfry (C++ relay, lightweight, no DB externo) — Docker image up 8h
 - [x] Configurar y lanzar en puerto libre (ej: 7777) — Running on 7777
-- [ ] Publicar perfil y primera nota desde relay propio
+- [x] Publicar perfil y primera nota desde relay propio — Event ID: 4fefeb20...
 - [x] Configurar como servicio systemd — Docker container persistent
-- **Meta:** Comunicación soberana operativa (90% done, need to publish notes)
+- **Meta:** ✅ Comunicación soberana 100% operativa (keypair + first note published)
 
 ### 2. OpenClaw — Auditar v2026.2.1
 - [x] Revisar commits upstream (278 total, 19+ security fixes identificados)
