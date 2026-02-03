@@ -64,7 +64,8 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 - [x] Configurar y lanzar en puerto libre (ej: 7777) — Running on 7777
 - [x] Publicar perfil y primera nota desde relay propio — Event ID: 4fefeb20...
 - [x] Configurar como servicio systemd — Docker container persistent
-- **Meta:** ✅ Comunicación soberana 100% operativa (keypair + first note published)
+- [x] Abrir puerto público — Puerto 7777 abierto (2026-02-03 21:02 UTC)
+- **Meta:** ✅ Relay público operativo: wss://212.132.124.4:7777
 
 ### 2. OpenClaw — Auditar v2026.2.1
 - [x] Revisar commits upstream (278 total, 19+ security fixes identificados)
@@ -83,12 +84,13 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 - [x] Verificar LND binary + config — v0.20.0-beta installed
 - [x] Preparar script de primer inicio — knowledge/lnd-preflight-checklist.md
 - [x] Documentar plan de canales — Pre-flight checklist complete
-- **Meta:** ✅ READY — Waiting for Daniel's GO signal (prune decision needed)
+- [x] Lanzar LND — ✅ CORRIENDO (PID 272838, esperando wallet creation)
+- **Meta:** ✅ OPERATIVO — Pendiente: crear wallet (requiere TTY)
 
 ### 5. Infraestructura — Mejoras continuas
 - [x] Scripts nuevos que mejoren capacidad — system-health.sh creado y testeado ✓
-- [~] Automatizar backups, monitoreo — backups OK (cron cada 6h), monitoreo listo
-- [~] Bitcoin node health checks — skill creado, integrar en daily checks
+- [x] Automatizar backups, monitoreo — backups OK (cron cada 6h), monitoreo listo
+- [x] Bitcoin node health checks — skill creado, integrado en daily checks ✅
 - [ ] Fix bugs encontrados
 - **Meta:** Cada heartbeat deja el sistema mejor de lo que estaba
 
