@@ -5,6 +5,11 @@ Mises: "Action is an attempt to substitute a more satisfactory state of affairs 
 Cada heartbeat es una oportunidad de ACTUAR, no de checkear pasivamente.
 Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK salvo de noche.
 
+**🔥 HIGH ACTIVITY MODE (2026-02-03):** Daniel no usa Claude Code hoy → incrementar carga en heartbeats.
+- Explorar repositorios GitHub (claudio-neo: 8 repos disponibles)
+- Hacer más cosas por heartbeat, usar más tokens
+- Ser PROACTIVO: no esperar instrucciones, ejecutar tareas del backlog
+
 ## Always (every heartbeat)
 - **CHECK nightshift-wakeup.txt** — Si existe Y hora ≥07:00 UTC → enviar a Daniel por Telegram, luego eliminar
 - If Daniel sent unread messages → RESPOND (never let messages sit)

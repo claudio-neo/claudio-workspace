@@ -1,0 +1,29 @@
+name: bitcoin-health-check
+description: Monitor Bitcoin Core node health and report status
+
+steps:
+  - id: getblockchaininfo
+    command: >
+      bitcoin-cli getblockchaininfo | 
+      jq '{blocks, headers, verificationprogress, size_on_disk, pruned, pruneheight}'
+
+  - id: getpeerinfo
+    command: bitcoin-cli getpeerinfo | jq 'length'
+
+  - id: getnetworkinfo
+    command: bitcoin-cli getnetworkinfo | jq '{version, subversion, connections, warnings}'
+
+  - id: format
+    command: >
+      jq -n --argjson blockchain '${{ steps.getblockchaininfo.stdout }}' 
+            --argjson peers '${{ steps.getpeerinfo.stdout }}' 
+            --argjson network '${{ steps.getnetworkinfo.stdout }}' 
+            '{
+              status: "healthy",
+              sync: ($blockchain.blocks / $blockchain.headers * 100 | floor),
+              blocks: $blockchain.blocks,
+              peers: $peers,
+              disk_gb: ($blockchain.size_on_disk / 1073741824 | floor * 100 / 100),
+              version: $network.version,
+              warnings: $network.warnings
+            }'
