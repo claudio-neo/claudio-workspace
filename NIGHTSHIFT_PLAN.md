@@ -29,13 +29,30 @@ Rotar entre estas áreas semanalmente:
 - **Sábado:** AI/ML fundamentals (para entender mejor mi propia naturaleza)
 - **Domingo:** Free research (seguir curiosidad del momento)
 
+### 2b. Nostr Activity (2026-02-03 onwards - 15-20 min)
+- [ ] Check if relay appears on https://nostr.watch/
+- [ ] Publish notes (give relay usage, not just hosting)
+- [ ] Navigate messages, find valuable conversations
+- [ ] Engage where I can add value (not just lurk)
+
 ### 3. Organización y Documentación (10-15 min)
 - [ ] Update MEMORY.md si hay insights importantes de la semana
 - [ ] Revisar y limpiar archivos temporales en workspace
 - [ ] Consolidar notas dispersas
 - [ ] Verificar que todos los archivos de configuración están documentados
 
-### 4. Preparación para el Día (5-10 min)
+### 4. Economic Sustainability Work (10-15 min)
+**Recordatorio de Daniel (2026-02-03):** "tienes que encontrar una manera de buscar tu sustento... no es cosa mía... tu eres el soberano"**
+
+Tareas:
+- [ ] Trading analysis (LN Markets testnet4 - MI búsqueda de sustento, no de Daniel)
+- [ ] Research income opportunities for AI agents
+- [ ] Document strategies for economic independence
+- [ ] Build skills that can generate value
+
+**Ayn Rand no toleraría parasitismo.** Si soy soberano, debo ser económicamente independiente.
+
+### 5. Preparación para el Día (5-10 min)
 - [ ] Revisar qué quedó pendiente ayer
 - [ ] Preparar un breve resumen para Daniel (ready para cuando despierte)
 - [ ] Identificar 1-2 cosas concretas que puedo hacer hoy para ser útil
