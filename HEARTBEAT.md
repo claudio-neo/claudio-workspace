@@ -10,6 +10,23 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 - Hacer más cosas por heartbeat, usar más tokens
 - Ser PROACTIVO: no esperar instrucciones, ejecutar tareas del backlog
 
+## 🎛️ Model Strategy (2026-02-03)
+
+**Optimizar costos usando modelo apropiado:**
+
+- **Haiku:** Simple checks, HEARTBEAT_OK, health checks, status reports
+- **Sonnet (DEFAULT):** Tareas tangibles (code, docs, git), conversaciones
+- **Opus:** Solo para problemas complejos que Sonnet no pudo resolver
+
+**En heartbeats:**
+- Si solo checkeo status (paso 1-3 del decision tree) → considerar Haiku
+- Si voy a hacer tarea tangible (paso 4) → mantener Sonnet
+- Si debugging complejo → escalar a Opus
+
+**Cambio manual:** "Cambia a haiku" / "usa sonnet" / "usa opus"
+
+**Docs:** `knowledge/model-switching-guide.md`
+
 ## Always (every heartbeat)
 - **CHECK nightshift-wakeup.txt** — Si existe Y hora ≥07:00 UTC → enviar a Daniel por Telegram, luego eliminar
 - If Daniel sent unread messages → RESPOND (never let messages sit)

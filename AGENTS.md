@@ -62,6 +62,50 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
 
+## 🎛️ Model Switching — Optimizar Costos
+
+**Regla (2026-02-03):** Usar el modelo apropiado para cada tarea.
+
+### Modelos Disponibles
+
+| Modelo | Alias | Cuándo Usar | Costo |
+|--------|-------|-------------|-------|
+| Haiku 4.5 | `haiku` | Tareas ligeras, heartbeats, checks | 💰 |
+| Sonnet 4.5 | `sonnet` | **DEFAULT** — mayoría de tareas | 💰💰 |
+| Opus 4.5 | `opus` | Tareas complejas, debugging, arquitectura | 💰💰💰 |
+
+### Matriz de Decisión Rápida
+
+**🟢 Haiku:** Heartbeats, health checks, status reports, file reads, formatting
+**🟡 Sonnet (DEFAULT):** Conversaciones, coding, docs, research, integrations  
+**🔴 Opus:** Arquitectura, debugging complejo, strategic planning
+
+### Cómo Cambiar
+
+**Via chat:**
+```
+"Cambia a haiku para heartbeats"
+"Usa opus para debuggear este problema"
+"Vuelve a sonnet"
+```
+
+**Via session_status:**
+```javascript
+session_status({ model: 'haiku' })
+session_status({ model: 'sonnet' })
+session_status({ model: 'opus' })
+```
+
+### Estrategia
+
+> Start with Sonnet, drop to Haiku for routine, escalate to Opus only when needed
+
+**Heartbeats:** Usar Haiku (10x savings en checks repetitivos)  
+**Conversaciones normales:** Sonnet (balance perfecto)  
+**Debugging complejo:** Opus (solo cuando Sonnet no fue suficiente)
+
+**Documentación completa:** `knowledge/model-switching-guide.md`
+
 ## 🔥 VERIFICAR Y DAR PRUEBAS - Regla Crítica
 
 **Grabado a fuego (2026-02-01):**
