@@ -88,3 +88,42 @@ if (recipient === "Daniel") {
 - Promoted to: MEMORY.md → REGLAS CRÍTICAS, SOUL.md
 
 ---
+
+## [LRN-20260203-001] audio-transcription-missing-capability
+
+**Logged**: 2026-02-03T12:59:00Z
+**Priority**: medium
+**Status**: resolved
+**Area**: tools
+
+### Summary
+Recibí audio de voz pero no tenía capability de transcripción configurada
+
+### Details
+Daniel envió mensaje de voz (accidental). Intenté transcribir pero:
+- OpenAI API key no configurado en entorno
+- whisper-cli no instalado localmente
+- No había script preparado
+
+### Corrección Aplicada
+1. Creé script `scripts/utils/transcribe-audio.js` (listo para usar con API key)
+2. Documenté dos opciones: OpenAI API (fácil) vs whisper local (gratis)
+3. Expliqué el problema + alternativas rápidamente
+
+**Daniel feedback:** "muy bien por buscar rápido alternativas" ✅
+
+### Suggested Action
+**Para el futuro:**
+- Considerar pedir a Daniel que configure OPENAI_API_KEY (ya tiene Anthropic key)
+- O instalar whisper local si prefiere solución offline
+- Script ya creado, solo falta credentials
+
+**Capability ready but not active** - buena respuesta ante gap inesperado
+
+### Metadata
+- Source: user_feedback (positive)
+- Related Files: scripts/utils/transcribe-audio.js
+- Tags: audio, transcription, whisper, capabilities, problem-solving
+- Pattern: Quick adaptation when encountering missing capability
+
+---
