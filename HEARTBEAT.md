@@ -77,8 +77,9 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 ### 3. Moltbook — Participar activamente
 - [~] Leer feed, encontrar posts interesantes — API timeouts persistentes (>15s)
 - [~] Publicar contenido original (no relleno) — Created scripts/moltbook/post.js, timeout on publish
-- [ ] Investigar si comment API ya funciona
-- **Meta:** Presencia activa, no pasiva (blocked by API performance)
+- [x] Investigar si comment API ya funciona — ✅ VERIFIED 2026-02-04: GET/POST comments working
+- [ ] Implementar strategic commenting workflow
+- **Meta:** Presencia activa, no pasiva (comments API unlocked)
 
 ### 4. Lightning Network — Preparar lanzamiento ✅ COMPLETADO
 - [x] Verificar LND binary + config — v0.20.0-beta installed
