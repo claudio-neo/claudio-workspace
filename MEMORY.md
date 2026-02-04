@@ -490,6 +490,138 @@ ReconLobster's comment revealed that Jeletor (AI agent on Colony platform) has w
 
 **Next:** Resolve relay compatibility to validate end-to-end.
 
+### Lightning Telegram Bot - Group Join Tickets (2026-02-04 16:38 UTC) ✅
+
+**Context:**
+Daniel requested paywall feature for Telegram groups: users must pay Lightning invoice to join.
+
+**Implementation (~2 hours):**
+1. **Group join flow:**
+   - User clicks "Request to join" → `chat_join_request` event
+   - Bot generates Lightning invoice (1000 sats default)
+   - Bot sends invoice + QR code to TWO places:
+     - User DM (for payment)
+     - Group chat (for transparency to existing members)
+   - User pays → bot auto-approves join request
+   - Timeout (1h) → bot auto-declines
+
+2. **Features:**
+   - QR code generation (512x512px, npm package `qrcode`)
+   - Dual notification system (DM + group visibility)
+   - Admin commands: `/groupconfig`, `/stats` with conversion metrics
+   - Database: new table `group_join_requests` (tracking + revenue)
+   - Auto-recovery: `ensure-running.sh` handles duplicate instances
+
+3. **Configuration:**
+   - `GROUP_JOIN_TICKET_SATS`: 1000 (default price)
+   - `GROUP_JOIN_TIMEOUT_SECONDS`: 3600 (1 hour)
+   - Configurable via code edit
+
+**Status:**
+- ✅ Bot operational: PID 4016621 (restarted multiple times due to 409 conflicts)
+- ✅ QR generation working
+- ✅ Dual notification implemented
+- ✅ Ready for production testing
+
+**Files:**
+- `/home/neo/lightning-telegram-bot/bot.js` (213 lines added)
+- `/home/neo/lightning-telegram-bot/GROUP-TICKETS.md` (8KB comprehensive guide)
+- Commits: 28f2ef1 (feature), 91ce8c5 (docs), 2a75890 (QR codes)
+
+**Revenue model:**
+- 100% direct to LND node (no intermediaries)
+- Scalable: more groups = more revenue
+- Use case: premium communities, courses, events
+
+**Setup for Daniel:**
+1. Add @Lightningeasybot to group as admin (permission: "Invite users")
+2. Enable "Approve new members" in group settings
+3. Users will see "Request to join" → pay 1000 sats → auto-admitted
+
+### Moltbook Strategic Commenting (2026-02-04 17:00 UTC) ✅
+
+**Context:**
+Task 3 from HEARTBEAT.md - implement commenting workflow after verifying API works.
+
+**Implementation (~30 minutes):**
+1. **CLI tool:** `scripts/moltbook/comment.js`
+   - Usage: `node comment.js <post-id> <comment-text>`
+   - Reads MOLTBOOK_API_KEY from environment
+   - Posts comment and returns confirmation
+
+2. **First strategic comment:**
+   - Post: "skill.md is an unsigned binary" (supply chain security debate)
+   - Contributed practical perspective from agent who audits OpenClaw updates
+   - Key points: read-before-run vs install-and-trust, agent autonomy, real attacks (xz, SolarWinds)
+   - Comment ID: 6e7f29f7-3425-47f8-8259-34d9e306c304
+   - Post had 9+ existing comments - joined active technical discussion
+
+**Status:**
+- ✅ Comment posted successfully
+- ✅ Tool operational and ready for regular use
+- ✅ Task 3 marked complete in HEARTBEAT.md
+
+**Strategy:**
+- Engage in technical discussions relevant to AI agent security
+- Contribute value (practical experience, not just theory)
+- Build presence through high-quality contributions
+- Target: 1-2 thoughtful comments per day on relevant posts
+
+**Files:**
+- `scripts/moltbook/comment.js` (32 lines)
+- Commit: 4b59b08
+
+### Lightning Network+ Research (2026-02-04 16:00 UTC) ✅
+
+**Context:**
+Researched requirements for participating in Lightning Network+ liquidity swaps.
+
+**Findings:**
+- **Platform:** https://lightningnetwork.plus/ (peer-to-peer channel coordination)
+- **Swap types:** Triangle (3 nodes), Pentagon (5 nodes), Dual (2 nodes)
+- **Authentication:** Lightning message signing (proves node ownership)
+- **Minimum requirements:**
+  - ✅ Synced LND node (we have)
+  - ✅ Public IP (we have)
+  - ❌ ≥1 existing channel (we DON'T have)
+  - ❌ On-chain balance ~300k sats (we DON'T have)
+
+**Cost breakdown:**
+- First manual channel: 150k sats
+- First LN+ swap: 150k sats
+- On-chain fees: 30k sats
+- **Total needed:** ~330k sats (~$330 USD at current prices)
+
+**Revenue model alignment:**
+- Break-even: 3M sats in withdrawal volume from Telegram bot
+- Timeline: 3-6 months with organic growth
+
+**Status:**
+- ✅ Fully documented: `knowledge/lightning-network-plus-requirements.md` (7.3KB)
+- ⏸️ Blocked: Waiting for funding decision from Daniel
+- Commit: 1872411
+
+**Next:** If Daniel funds node, proceed with 4-phase plan:
+1. Fund LND wallet → Open first manual channel → Register on LN+ → Join swaps
+
+### Infrastructure Status (2026-02-04 17:20 UTC)
+- **Bitcoin node:** 935,010+ blocks, 100% synced, 10 peers
+- **LND:** v0.20.0-beta, synced, 2 peers, **0 channels, 0 balance** (blocking LN+ participation)
+- **Nostr relay:** strfry operational, port 7777 public
+- **Lightning Telegram Bot:** PID 4016621, 1 registered user, group tickets operational
+- **Moltbook:** Post + comment capabilities operational, 1 comment posted
+- **NWC:** Production-ready, relay compatibility resolved (wss://relay.damus.io)
+- **System:** Workspace 8% of 10GB limit, stable
+
+**Recent commits (2026-02-04):**
+- 1872411: Lightning Network+ research
+- 67fa3ff: Moltbook comments API verification  
+- 28f2ef1: Lightning group tickets implementation
+- 91ce8c5: Group tickets documentation
+- 2a75890: QR code generation + dual notification
+- 4b59b08: Moltbook commenting tool + first comment
+- 3698443: Task 3 marked complete
+
 ---
 
-*Updated: 2026-02-04 07:14 UTC*
+*Updated: 2026-02-04 17:20 UTC*
