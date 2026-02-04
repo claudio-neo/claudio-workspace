@@ -77,6 +77,49 @@ fi
 echo ""
 
 # ============================================
+# Lightning Network (LND + Bot)
+# ============================================
+echo "--- Lightning Network ---"
+
+# Check LND
+LND_CLI=$(find /home/neo -name lncli -type f 2>/dev/null | head -1)
+if [ -n "$LND_CLI" ] && [ -x "$LND_CLI" ]; then
+    LND_INFO=$($LND_CLI getinfo 2>/dev/null || echo "ERROR")
+    if [ "$LND_INFO" != "ERROR" ]; then
+        SYNCED=$(echo "$LND_INFO" | jq -r '.synced_to_chain')
+        BLOCK_HEIGHT=$(echo "$LND_INFO" | jq -r '.block_height')
+        NUM_PEERS=$(echo "$LND_INFO" | jq -r '.num_peers')
+        NUM_CHANNELS=$(echo "$LND_INFO" | jq -r '.num_active_channels')
+        
+        if [ "$SYNCED" = "true" ]; then
+            echo -e "${GREEN}✓${NC} LND synced (block: $BLOCK_HEIGHT, peers: $NUM_PEERS, channels: $NUM_CHANNELS)"
+        else
+            echo -e "${YELLOW}⚠${NC} LND not synced (block: $BLOCK_HEIGHT)"
+        fi
+    else
+        echo -e "${RED}✗${NC} LND not responding"
+    fi
+else
+    echo -e "${YELLOW}⚠${NC} lncli not found"
+fi
+
+# Check Lightning Telegram Bot
+if [ -f "/home/neo/lightning-telegram-bot/bot.js" ]; then
+    BOT_PID=$(pgrep -f "^node bot.js$" | head -1)
+    if [ -n "$BOT_PID" ]; then
+        # Get bot stats from database
+        BOT_USERS=$(sqlite3 /home/neo/lightning-telegram-bot/bot.db "SELECT COUNT(*) FROM users;" 2>/dev/null || echo "0")
+        BOT_BALANCE=$(sqlite3 /home/neo/lightning-telegram-bot/bot.db "SELECT COALESCE(SUM(balance_sats), 0) FROM users;" 2>/dev/null || echo "0")
+        BOT_TXS=$(sqlite3 /home/neo/lightning-telegram-bot/bot.db "SELECT COUNT(*) FROM transactions;" 2>/dev/null || echo "0")
+        
+        echo -e "${GREEN}✓${NC} Lightning Bot running (users: $BOT_USERS, balance: $BOT_BALANCE sats, txs: $BOT_TXS)"
+    else
+        echo -e "${RED}✗${NC} Lightning Bot not running"
+    fi
+fi
+echo ""
+
+# ============================================
 # OpenClaw Gateway Status
 # ============================================
 echo "--- OpenClaw Gateway ---"
@@ -162,6 +205,19 @@ ISSUES=0
 BITCOIN_CLI=$(find /home/neo/bitcoin* -name bitcoin-cli -type f 2>/dev/null | head -1)
 if [ -z "$BITCOIN_CLI" ] || ! $BITCOIN_CLI getblockchaininfo &> /dev/null; then ((ISSUES++)); fi
 if ! docker ps --format '{{.Names}}' | grep -q strfry-relay; then ((ISSUES++)); fi
+
+# Check LND
+LND_CLI=$(find /home/neo -name lncli -type f 2>/dev/null | head -1)
+if [ -n "$LND_CLI" ]; then
+    LND_INFO=$($LND_CLI getinfo 2>/dev/null || echo "ERROR")
+    if [ "$LND_INFO" = "ERROR" ]; then ((ISSUES++)); fi
+fi
+
+# Check Lightning Bot
+if [ -f "/home/neo/lightning-telegram-bot/bot.js" ]; then
+    if ! pgrep -f "^node bot.js$" > /dev/null; then ((ISSUES++)); fi
+fi
+
 if ! pgrep -f openclaw-gateway > /dev/null; then ((ISSUES++)); fi
 if [ "$HOME_USAGE" -ge "$DISK_CRITICAL_PERCENT" ]; then ((ISSUES++)); fi
 if [ "$WORKSPACE_PERCENT" -ge 90 ]; then ((ISSUES++)); fi
