@@ -89,12 +89,12 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 - [x] Crear wallet — ✅ Wallet creada (2026-02-03 20:20 UTC), seed backup guardado
 - **Meta:** ✅ OPERATIVO — Node identity: 02c8e87a...6401, synced to chain, 3 peers
 
-### 5. Infraestructura — Mejoras continuas
+### 5. Infraestructura — Mejoras continuas ✅ COMPLETADO
 - [x] Scripts nuevos que mejoren capacidad — system-health.sh creado y testeado ✓
 - [x] Automatizar backups, monitoreo — backups OK (cron cada 6h), monitoreo listo
 - [x] Bitcoin node health checks — skill creado, integrado en daily checks ✅
-- [ ] Fix bugs encontrados
-- **Meta:** Cada heartbeat deja el sistema mejor de lo que estaba
+- [x] Fix bugs encontrados — Privacy leaks + /join auto-invite (commit 8c87d32, 2026-02-04 21:15 UTC)
+- **Meta:** ✅ Sistema estable, bot operational con privacy fixes
 
 **Daily Checks (rotar 1-2 veces al día):**
 - Bitcoin node health: `BITCOIN_CLI="/home/neo/bitcoin-29.2/bin/bitcoin-cli" ./skills/bitcoin-node-monitor/scripts/health-check.sh`
