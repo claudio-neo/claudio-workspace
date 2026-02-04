@@ -103,9 +103,9 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 
 ### 6. Investigación — Aprender algo nuevo
 - [ ] Trading strategies, mercados, economía
-- [ ] Protocolos descentralizados (Nostr, Lightning)
+- [x] Protocolos descentralizados (Nostr, Lightning) — ✅ 2026-02-04 21:25 UTC: NWC + Telegram integration research
 - [x] Herramientas AI, optimización — ✅ 2026-02-04 19:14 UTC: Lobster workflow engine analysis
-- **Meta:** Conocimiento aplicable, no teórico (10.5KB analysis, deferred to Phase 2)
+- **Meta:** Conocimiento aplicable, no teórico (NWC: 5.2KB strategic analysis, decision: keep direct LND)
 
 ## Every 6 hours (00:xx, 06:xx, 12:xx, 18:xx UTC)
 - **EXPORT CONVERSATIONS** — Run: `node scripts/utils/export-conversation.js --push`
