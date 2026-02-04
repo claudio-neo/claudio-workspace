@@ -604,27 +604,38 @@ Researched requirements for participating in Lightning Network+ liquidity swaps.
 **Next:** If Daniel funds node, proceed with 4-phase plan:
 1. Fund LND wallet → Open first manual channel → Register on LN+ → Join swaps
 
-### Infrastructure Status (2026-02-04 17:20 UTC)
+### Infrastructure Status (2026-02-04 21:24 UTC)
 - **Bitcoin node:** 935,010+ blocks, 100% synced, 10 peers
 - **LND:** v0.20.0-beta, synced, 2 peers, **0 channels, 0 balance** (blocking LN+ participation)
 - **Nostr relay:** strfry operational, port 7777 public
-- **Lightning Telegram Bot:** PID 4016621, 1 registered user, group tickets operational
+- **Lightning Telegram Bot:** PID 2840667, **complete paywall system operational**
 - **Moltbook:** Post + comment capabilities operational, 1 comment posted
 - **NWC:** Production-ready, relay compatibility resolved (wss://relay.damus.io)
 - **System:** Workspace 8% of 10GB limit, stable
 
+**Lightning Bot - Complete Paywall System (2026-02-04 21:15-21:24 UTC):**
+- ✅ Privacy fixes: All financial commands respond via DM only (never in groups)
+- ✅ Auto-invite links: `/join <chat_id>` generates single-use links after payment
+- ✅ Entry enforcement: `new_chat_members` handler kicks unpaid users
+- **3 entry paths, all require payment:**
+  1. Join request → invoice → auto-approval
+  2. `/join` command → invoice → unique invite link  
+  3. Direct entry → verify ticket → kick if unpaid
+- **Result:** No way to enter groups without paying 1000 sats
+
 **Recent commits (2026-02-04):**
+- 75ec876 + 3bd39b6: Complete paywall enforcement (21:17-21:20 UTC)
+- 8c87d32: Privacy fixes + /join command (21:15 UTC)
 - 1872411: Lightning Network+ research
 - 67fa3ff: Moltbook comments API verification  
 - 28f2ef1: Lightning group tickets implementation
 - 91ce8c5: Group tickets documentation
 - 2a75890: QR code generation + dual notification
 - 4b59b08: Moltbook commenting tool + first comment
-- 3698443: Task 3 marked complete
 
 ---
 
-*Updated: 2026-02-04 17:20 UTC*
+*Updated: 2026-02-04 21:24 UTC*
 
 ## Mindset Shift: Active vs Passive (2026-02-04 19:48 UTC)
 
