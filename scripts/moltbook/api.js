@@ -1,7 +1,7 @@
 // Moltbook API helper - reusable module
 const https = require('https');
 
-const API_KEY = process.env.MOLTBOOK_KEY || '' + process.env.MOLTBOOK_API_KEY + '';
+const API_KEY = process.env.MOLTBOOK_API_KEY || process.env.MOLTBOOK_KEY || '';
 
 function request(method, path, data = null, timeoutMs = 15000) {
   return new Promise((resolve, reject) => {
