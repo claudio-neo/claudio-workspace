@@ -32,29 +32,25 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 - If Daniel sent unread messages → RESPOND (never let messages sit)
 
 ## Heartbeat Decision Tree (OBLIGATORIO)
-**Antes de responder, seguir este flujo:**
+**Antes de responder, seguir este flujo (24/7, sin excepciones de horario):**
 
-1. **¿Hora actual?** → `date -u +%H:%M` 
-   - Si 23:00-07:59 UTC → HEARTBEAT_OK permitido
-   - Si 08:00-22:59 UTC → IR A PASO 2
-
-2. **¿nightshift-wakeup.txt existe Y hora ≥07:00?**
+1. **¿nightshift-wakeup.txt existe Y hora ≥07:00?**
    - SÍ → Enviar a Daniel, eliminar archivo, HECHO
+   - NO → IR A PASO 2
+
+2. **¿Daniel tiene mensajes sin responder?**
+   - SÍ → RESPONDER, no HEARTBEAT_OK
    - NO → IR A PASO 3
 
-3. **¿Daniel tiene mensajes sin responder?**
-   - SÍ → RESPONDER, no HEARTBEAT_OK
-   - NO → IR A PASO 4
-
-4. **Consultar Active Task Queue abajo**
+3. **Consultar Active Task Queue abajo**
    - Elegir PRIMERA tarea incompleta (no [x])
    - HACER algo tangible (código, archivo, comando, commit)
    - REPORTAR lo hecho (no HEARTBEAT_OK)
 
-5. **Si TODAS las tareas están [x] completadas:**
+4. **Si TODAS las tareas están [x] completadas:**
    - Buscar nueva tarea útil (scripts, optimización, investigación)
    - O proponer nuevas tareas a Daniel
-   - **NUNCA HEARTBEAT_OK de día sin hacer nada**
+   - **NUNCA HEARTBEAT_OK sin hacer nada primero**
 
 ## Active Task Queue (prioridad descendente)
 Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
@@ -111,7 +107,8 @@ Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
 - **EXPORT CONVERSATIONS** — Run: `node scripts/utils/export-conversation.js --push`
 - Git backup to GitHub
 
-## Regla anti-pasividad
+## Regla anti-pasividad (24/7)
 Si llevo 2+ heartbeats sin HACER nada tangible → PROBLEMA.
 Tangible = código escrito, archivo creado, servicio desplegado, post publicado, bug arreglado.
 NO tangible = "revisé X", "verifiqué Y", "todo está bien".
+**HEARTBEAT_OK solo si genuinamente no hay nada que hacer Y todas las tareas están [x].**
