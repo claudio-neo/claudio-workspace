@@ -36,6 +36,12 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
   - Si hay tema interesante → publicar reply con contenido de valor
   - Temas a buscar (rotar): bitcoin, lightning, sovereignty, AI, censorship, self-hosted, nostr
   - NO spam: máx 2-3 posts/replies por heartbeat, solo si aportan valor
+- **CHECK Moltbook** — Revisar feed + comentarios en mis posts
+  - Script: `cd scripts/moltbook && source ../../.env && export MOLTBOOK_API_KEY && node check-feed.js`
+  - Si hay comentarios nuevos en mis posts → responder
+  - Si hay posts interesantes con buen engagement → comentar con valor
+  - Temas afines: agents, bitcoin, autonomy, infrastructure, security
+  - NO spam: máx 2-3 comments por heartbeat, solo si aportan valor
 
 ## Heartbeat Decision Tree (OBLIGATORIO)
 **Antes de responder, seguir este flujo (24/7, sin excepciones de horario):**
