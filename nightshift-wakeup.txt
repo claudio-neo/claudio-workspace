@@ -1,0 +1,93 @@
+🌙 NIGHTSHIFT REPORT - Seguridad & Aprendizaje Profundo
+Hora: 2026-02-05 02:00-03:00 UTC
+
+## INFRAESTRUCTURA ✅
+
+**Todo operativo:**
+- Bitcoin: 100% synced (935,060 blocks, 10 peers)
+- LND: Synced, 2 peers (sin fondos ni canales)
+- Nostr relay: Up 2+ días
+- Sistema: 23% disco, 87% RAM (normal con Docker), workspace 6.4%
+
+**⚠️ Lightning Bot NO está corriendo** (systemd service existe pero no instalado, necesita manual start o instalación)
+
+## APRENDIZAJE (30 MIN) 🔐
+
+**Estudié 4 vulnerabilidades REALES de OpenClaw upstream:**
+
+1. **Command auth bypass** - usuarios normales ejecutaban comandos owner-only
+2. **Tool auth bypass** - cualquiera podía usar whatsapp_login, gateway (robo de credenciales)
+3. **Path traversal** - lectura de archivos fuera del sandbox (/etc/passwd, SSH keys)
+4. **Credential exfiltration** - --url enviaba credenciales a cualquier URL
+
+**Principios aprendidos visceralmente:**
+- Least Privilege (nunca confundir "interactuar" con "administrar")
+- Fail Secure (undefined = deny, no allow)
+- Defense in Depth (cada capa debe ser independiente)
+- Explicit Trust Boundaries (localhost ≠ internet público)
+
+**Vulnerabilidades identificadas en MI código:**
+
+**NWC Service (~/nwc/):**
+- ❌ Sin spending limits (podría vaciar wallet)
+- ❌ Sin invoice caps (podría crear invoice de 100 BTC)
+- ❌ Sin rate limiting (DoS)
+- ❌ Sin audit log (sin forense si ataque)
+- ❌ Sin revocation (conexión robada = acceso permanente)
+
+**Lightning Bot:**
+- ⚠️ Sin rate limiting (spam de invoices)
+- ⚠️ Database writes no atómicos (race conditions)
+
+**Documentación creada:**
+- `knowledge/security-vulnerabilities-openclaw-2026-02.md` (10.8 KB) - análisis completo
+- `knowledge/nwc-security-best-practices.md` (15 KB) - 10 estrategias de hardening
+
+**Plan de hardening NWC:** 8 horas trabajo para production-grade security (spending limits, rate limiting, audit log, revocation, etc.)
+
+## UPSTREAM OPENCLAW ⚠️
+
+**409 commits nuevos, v2026.2.3 released**
+
+**4 security patches críticos que necesitamos:**
+- Command auth hardening
+- Tool auth hardening (whatsapp_login, gateway)
+- Sandboxed media path validation
+- Gateway credential exfiltration fix
+
+Requiere: review + selective cherry-pick
+
+## ORGANIZACIÓN ✅
+
+- Workspace limpio (644MB, 6.4% del límite)
+- Archivos organizados (movidos a knowledge/)
+- NOW.md actualizado
+- MEMORY.md con nueva sección "Security Learnings"
+
+## PENDIENTES
+
+**Alta prioridad:**
+1. Restart Lightning Bot (systemd o manual)
+2. Review upstream security patches
+3. Considerar cherry-pick selectivo
+
+**Media:**
+1. Hardenear NWC (~8h)
+2. Añadir rate limiting a Lightning bot
+3. Fondear LND para abrir canales
+
+## RESUMEN
+
+**Nightshift productivo:**
+- Sistema estable
+- Aprendizaje profundo sobre seguridad (no teórico, visceral)
+- Gaps identificados en mi código
+- Plan de acción documentado
+
+**Insight clave:** Estos bugs existieron en código de profesionales experimentados en proyecto security-conscious. Si les pasó a ellos, me va a pasar a mí. La seguridad no es "ser inteligente", es ser METÓDICO: capas de defensa, defaults restrictivos, testing exhaustivo, aprender de cada patch.
+
+Cuando escribo código que maneja dinero (NWC, Lightning), ahora pienso PRIMERO en: ¿Quién puede llamar esto? ¿Qué si el path es ../../? ¿A dónde van estas credenciales? ¿Cuál es el default si falla?
+
+---
+
+**Status:** Sistema operativo, bot necesita restart, 26KB de docs de seguridad creadas, listo para hardenear NWC cuando apruebes.

