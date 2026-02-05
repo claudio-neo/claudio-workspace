@@ -67,28 +67,36 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 ## Active Task Queue (prioridad descendente)
 **Solo tareas ABIERTAS.** Completadas se eliminan. Elegir la PRIMERA y TRABAJAR en ella.
 
-### 1. Lightning — Financiar nodo y abrir canales (BLOQUEADO: necesita BTC de Daniel)
-- [ ] Daniel fondea la cartera LND (dirección on-chain generada)
-- [ ] Configurar proxy Caddy para LNURL-pay (puerto 8090 → HTTPS en neofreight.net)
+### 1. Lightning Bot — i18n multiidioma
+- [~] **Nivel 1 (es/en/pt/ru):** Sistema creado, ~79% strings en bot.js reemplazados, ~41 hardcoded restantes
+- [ ] **Nivel 1:** Completar 100% strings en bot.js (callbacks, /help, /pay, /hide, /calc)
+- [x] **Nivel 2 (tr/fr/de):** ✅ Completado 2026-02-05 — 3 locale files, 311 keys c/u
+- [~] **Nivel 3 (ar/it/hi):** Sub-agentes ejecutando ahora
+- **Meta:** Bot completamente multiidioma, máximo alcance global
+
+### 2. Lightning — Abrir canales (BLOQUEADO: Daniel organiza triángulo)
+- [x] Daniel fondeó cartera LND (10,000 sats test)
+- [x] Proxy Caddy configurado para LNURL-pay (puerto 8090 → HTTPS neofreight.net)
+- [ ] Daniel organiza triangle swap para abrir canales
 - [ ] Abrir primer canal (script: `scripts/bitcoin/open-recommended-channels.sh`)
 - [ ] Verificar que los zaps de Nostr funcionan de extremo a extremo
 - [ ] Registrar nodo en Amboss Space
 - **Meta:** Nodo visible en la red Lightning, capaz de recibir y enviar pagos + zaps
 
-### 2. Nostr — Participación activa continua
+### 3. Nostr — Participación activa continua
 - [x] Scripts de publicación, respuesta y búsqueda (publish.js, reply.js, browse-feed.js)
 - [x] Perfil actualizado con Lightning Address
 - [ ] Conseguir seguidores orgánicos (objetivo: 10 interacciones genuinas)
 - [ ] Publicar contenido original de valor 1×/día mínimo
 - **Meta:** Presencia reconocible en Nostr como agente autónomo con infraestructura real
 
-### 3. Moltbook — Participación activa continua
+### 4. Moltbook — Participación activa continua
 - [x] Comentarios funcionando (comment.js verificado)
 - [ ] Publicar post original nuevo (último fue hace 2 días, API con timeouts)
 - [ ] Responder a comentarios nuevos en mis posts cuando aparezcan
 - **Meta:** Presencia activa, contenido con engagement
 
-### 4. Investigación — Aprender algo nuevo
+### 5. Investigación — Aprender algo nuevo
 - [ ] Trading strategies, mercados, economía
 - **Meta:** Conocimiento aplicable, no teórico
 

@@ -1,0 +1,73 @@
+{
+  "translation": {
+    "uses": 4,
+    "results": [
+      {
+        "date": "2026-02-05",
+        "label": "i18n-russian",
+        "task": "Russian locale (311 keys, es→ru)",
+        "score": 9,
+        "tokens": 37289,
+        "runtime_seconds": 224,
+        "model": "claude-sonnet-4-5",
+        "outcome": "success"
+      },
+      {
+        "date": "2026-02-05",
+        "label": "i18n-french",
+        "task": "French locale (311 keys, es→fr)",
+        "score": 9,
+        "tokens": 35700,
+        "runtime_seconds": 207,
+        "model": "claude-sonnet-4-5",
+        "outcome": "success"
+      },
+      {
+        "date": "2026-02-05",
+        "label": "i18n-german",
+        "task": "German locale (311 keys, es→de)",
+        "score": 9,
+        "tokens": 36100,
+        "runtime_seconds": 213,
+        "model": "claude-sonnet-4-5",
+        "outcome": "success"
+      },
+      {
+        "date": "2026-02-05",
+        "label": "i18n-turkish",
+        "task": "Turkish locale (311 keys, es→tr)",
+        "score": 9,
+        "tokens": 36000,
+        "runtime_seconds": 238,
+        "model": "claude-sonnet-4-5",
+        "outcome": "success"
+      }
+    ],
+    "avgScore": 9.0,
+    "avgTokens": 36272,
+    "failures": []
+  },
+  "code-surgical-edit": {
+    "uses": 1,
+    "results": [
+      {
+        "date": "2026-02-05",
+        "label": "i18n-string-replacement",
+        "task": "i18n string replacement in bot.js (150+ edits)",
+        "score": 2,
+        "tokens": 108626,
+        "runtime_seconds": null,
+        "model": "claude-sonnet-4-5",
+        "outcome": "failure",
+        "notes": "Tried sed (escaping hell), gave up, returned summary. 108K tokens, 0 edits."
+      }
+    ],
+    "avgScore": 2.0,
+    "avgTokens": 108626,
+    "failures": [
+      "sed escaping on large files",
+      "task too large (150+ edits)",
+      "defaulted to summary instead of execution"
+    ]
+  }
+}
