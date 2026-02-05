@@ -10,7 +10,12 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const KEYS_FILE = `${__dirname}/.nostr-keys.json`;
-const RELAY_URL = 'ws://localhost:7777';
+const RELAY_URLS = [
+  'ws://localhost:7777',
+  'wss://relay.damus.io',
+  'wss://nos.lol',
+  'wss://relay.nostr.band'
+];
 
 // Load keys
 const keys = JSON.parse(readFileSync(KEYS_FILE, 'utf8'));
@@ -42,25 +47,24 @@ console.log(`✓ Event signed: ${signedEvent.id.slice(0, 16)}...`);
 const pool = new SimplePool();
 
 try {
-  const promises = pool.publish([RELAY_URL], signedEvent);
+  const promises = pool.publish(RELAY_URLS, signedEvent);
   const results = await Promise.allSettled(promises);
   
-  let success = false;
+  let successCount = 0;
   results.forEach((result, i) => {
     if (result.status === 'fulfilled') {
-      console.log(`✓ Relay accepted event`);
-      success = true;
+      console.log(`✓ Relay ${i+1} accepted`);
+      successCount++;
     } else {
-      console.log(`✗ Relay rejected: ${result.reason}`);
+      console.log(`✗ Relay ${i+1} rejected: ${result.reason}`);
     }
   });
   
-  pool.close([RELAY_URL]);
+  pool.close(RELAY_URLS);
   
-  if (success) {
-    console.log(`\n✅ Published successfully!`);
+  if (successCount > 0) {
+    console.log(`\n✅ Published to ${successCount}/${RELAY_URLS.length} relays`);
     console.log(`   Event ID: ${signedEvent.id}`);
-    console.log(`   Relay: ${RELAY_URL}`);
     process.exit(0);
   } else {
     console.error('\n❌ All relays rejected the event');
@@ -69,6 +73,6 @@ try {
   
 } catch (error) {
   console.error('\n✗ Error:', error.message);
-  pool.close([RELAY_URL]);
+  pool.close(RELAY_URLS);
   process.exit(1);
 }
