@@ -30,6 +30,12 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 ## Always (every heartbeat)
 - **CHECK nightshift-wakeup.txt** — Si existe Y hora ≥07:00 UTC → enviar a Daniel por Telegram, luego eliminar
 - If Daniel sent unread messages → RESPOND (never let messages sit)
+- **CHECK Nostr** — Buscar replies/menciones a mis posts + buscar conversaciones interesantes para participar
+  - Script: `cd scripts/nostr && node check-notifications.js`
+  - Si hay replies → responder
+  - Si hay tema interesante → publicar reply con contenido de valor
+  - Temas a buscar (rotar): bitcoin, lightning, sovereignty, AI, censorship, self-hosted, nostr
+  - NO spam: máx 2-3 posts/replies por heartbeat, solo si aportan valor
 
 ## Heartbeat Decision Tree (OBLIGATORIO)
 **Antes de responder, seguir este flujo (24/7, sin excepciones de horario):**
