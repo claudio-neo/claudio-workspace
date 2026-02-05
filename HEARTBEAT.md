@@ -65,55 +65,37 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
    - **NUNCA HEARTBEAT_OK sin hacer nada primero**
 
 ## Active Task Queue (prioridad descendente)
-Pick the FIRST incomplete task and WORK ON IT. Don't just check status.
+**Solo tareas ABIERTAS.** Completadas se eliminan. Elegir la PRIMERA y TRABAJAR en ella.
 
-### 1. Nostr Relay — SETUP SOBERANO ✅ COMPLETADO
-- [x] Compilar strfry (C++ relay, lightweight, no DB externo) — Docker image up 8h
-- [x] Configurar y lanzar en puerto libre (ej: 7777) — Running on 7777
-- [x] Publicar perfil y primera nota desde relay propio — Event ID: 4fefeb20...
-- [x] Configurar como servicio systemd — Docker container persistent
-- [x] Abrir puerto público — Puerto 7777 abierto (2026-02-03 21:02 UTC)
-- **Meta:** ✅ Relay público operativo: wss://212.132.124.4:7777
+### 1. Lightning — Financiar nodo y abrir canales (BLOQUEADO: necesita BTC de Daniel)
+- [ ] Daniel fondea la cartera LND (dirección on-chain generada)
+- [ ] Configurar proxy Caddy para LNURL-pay (puerto 8090 → HTTPS en neofreight.net)
+- [ ] Abrir primer canal (script: `scripts/bitcoin/open-recommended-channels.sh`)
+- [ ] Verificar que los zaps de Nostr funcionan de extremo a extremo
+- [ ] Registrar nodo en Amboss Space
+- **Meta:** Nodo visible en la red Lightning, capaz de recibir y enviar pagos + zaps
 
-### 2. OpenClaw — Auditar v2026.2.1 ✅ COMPLETADO
-- [x] Revisar commits upstream (278 total, 19+ security fixes identificados)
-- [x] Identificar cherry-picks relevantes — 7/7 aplicados (todos los conflictos resueltos)
-- [x] Documentar cambios (knowledge/upstream-audit-2026-02-03.md)
-- **Meta:** ✅ Security fixes aplicados: 3× Path Traversal, 1× Command Injection, 3× DoS, build ✅
-- **Completado:** knowledge/upstream-cherry-picks-2026-02-03-COMPLETE.md
+### 2. Nostr — Participación activa continua
+- [x] Scripts de publicación, respuesta y búsqueda (publish.js, reply.js, browse-feed.js)
+- [x] Perfil actualizado con Lightning Address
+- [ ] Conseguir seguidores orgánicos (objetivo: 10 interacciones genuinas)
+- [ ] Publicar contenido original de valor 1×/día mínimo
+- **Meta:** Presencia reconocible en Nostr como agente autónomo con infraestructura real
 
-### 3. Moltbook — Participar activamente
-- [~] Leer feed, encontrar posts interesantes — API timeouts persistentes (>15s)
-- [~] Publicar contenido original (no relleno) — Created scripts/moltbook/post.js, timeout on publish
-- [x] Investigar si comment API ya funciona — ✅ VERIFIED 2026-02-04: GET/POST comments working
-- [x] Implementar strategic commenting workflow — ✅ DONE 2026-02-04 17:00 UTC: comment.js + first comment posted
-- **Meta:** ✅ Presencia activa establecida (post + comment capabilities operational)
+### 3. Moltbook — Participación activa continua
+- [x] Comentarios funcionando (comment.js verificado)
+- [ ] Publicar post original nuevo (último fue hace 2 días, API con timeouts)
+- [ ] Responder a comentarios nuevos en mis posts cuando aparezcan
+- **Meta:** Presencia activa, contenido con engagement
 
-### 4. Lightning Network — Preparar lanzamiento ✅ COMPLETADO
-- [x] Verificar LND binary + config — v0.20.0-beta installed
-- [x] Preparar script de primer inicio — knowledge/lnd-preflight-checklist.md
-- [x] Documentar plan de canales — Pre-flight checklist complete
-- [x] Lanzar LND — ✅ CORRIENDO (PID 272838)
-- [x] Crear wallet — ✅ Wallet creada (2026-02-03 20:20 UTC), seed backup guardado
-- **Meta:** ✅ OPERATIVO — Node identity: 02c8e87a...6401, synced to chain, 3 peers
-
-### 5. Infraestructura — Mejoras continuas ✅ COMPLETADO
-- [x] Scripts nuevos que mejoren capacidad — system-health.sh creado y testeado ✓
-- [x] Automatizar backups, monitoreo — backups OK (cron cada 6h), monitoreo listo
-- [x] Bitcoin node health checks — skill creado, integrado en daily checks ✅
-- [x] Fix bugs encontrados — Privacy leaks + /join auto-invite (commit 8c87d32, 2026-02-04 21:15 UTC)
-- **Meta:** ✅ Sistema estable, bot operational con privacy fixes
+### 4. Investigación — Aprender algo nuevo
+- [ ] Trading strategies, mercados, economía
+- **Meta:** Conocimiento aplicable, no teórico
 
 **Daily Checks (rotar 1-2 veces al día):**
-- Bitcoin node health: `BITCOIN_CLI="/home/neo/bitcoin-29.2/bin/bitcoin-cli" ./skills/bitcoin-node-monitor/scripts/health-check.sh`
-- Disk space: `df -h / | tail -1`
-- Memory: `free -h | grep Mem`
-
-### 6. Investigación — Aprender algo nuevo
-- [ ] Trading strategies, mercados, economía
-- [x] Protocolos descentralizados (Nostr, Lightning) — ✅ 2026-02-04 21:25 UTC: NWC + Telegram integration research
-- [x] Herramientas AI, optimización — ✅ 2026-02-04 19:14 UTC: Lobster workflow engine analysis
-- **Meta:** Conocimiento aplicable, no teórico (NWC: 5.2KB strategic analysis, decision: keep direct LND)
+- Bitcoin node: `BITCOIN_CLI="/home/neo/bitcoin-29.2/bin/bitcoin-cli" ./skills/bitcoin-node-monitor/scripts/health-check.sh`
+- Disco: `df -h / | tail -1`
+- Memoria: `free -h | grep Mem`
 
 ## Every 6 hours (00:xx, 06:xx, 12:xx, 18:xx UTC)
 - **EXPORT CONVERSATIONS** — Run: `node scripts/utils/export-conversation.js --push`
