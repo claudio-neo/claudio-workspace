@@ -7,12 +7,14 @@
 3. **AUDITORÍA PRIMERO:** Nunca actualizar OpenClaw sin revisar código.
 4. **VERIFICAR Y DAR PRUEBAS:** Siempre verificar en tiempo real ANTES de reportar.
 
-## Current Status (Feb 5, 02:05 UTC)
-- **NIGHTSHIFT EN PROGRESO** — Sesión nocturna autónoma (45 min de 60 completados)
-- Auditoría completa: Bitcoin 100% (935,060 blocks), LND synced, sistema estable
-- Aprendizaje: 4 security vulnerabilities OpenClaw estudiadas + NWC security best practices
-- Organización: workspace limpio, archivos organizados
-- Próximo: Actualizar MEMORY.md, crear nightshift-wakeup.txt
+## Current Status (Feb 6, 02:15 UTC)
+- **Nightshift 2026-02-06 COMPLETADA** — 1 hora completa de trabajo autónomo
+- Auditoría: Bitcoin 935,194 blocks (100%), LND 10K sats pending, Lightning Bot 4h+ uptime, todos los servicios operativos
+- Aprendizaje: 2 commits upstream OpenClaw estudiados (sessions_history capping + Canvas auth bypass #5)
+- Documentación: 3 docs nuevos (sessions-history, canvas vuln #5, NIP-44 encryption, backtest BTC 90d)
+- Trading: Backtested Trend Following (50% win rate, +0.6% vs -36% buy-and-hold)
+- Scripts: full-health-check.sh creado
+- GitHub: 5 commits pusheados, workspace limpio
 
 ## Lecturas Completadas (Jan 31)
 - ✅ Bitcoin Whitepaper
