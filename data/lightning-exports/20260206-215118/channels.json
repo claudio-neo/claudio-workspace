@@ -1,0 +1,59 @@
+{
+    "channels": [
+        {
+            "active": true,
+            "remote_pubkey": "029221ee9b72b7b1be2cb09610839bef2ea286ba1d7da9fc184731abb789a8fed0",
+            "channel_point": "68aedb22928f32b8f08b0460be306663c7f907799f248404f077f9e95f54f5c9:0",
+            "chan_id": "c9f5545fe9f977f00484249f7907f9c7636630be60048bf0b8328f9222dbae68",
+            "scid": "1028366628424122368",
+            "scid_str": "935294x534x0",
+            "capacity": "500000",
+            "local_balance": "5400",
+            "remote_balance": "492814",
+            "commit_fee": "1126",
+            "commit_weight": "1116",
+            "fee_per_kw": "1002",
+            "unsettled_balance": "0",
+            "total_satoshis_sent": "100",
+            "total_satoshis_received": "5500",
+            "num_updates": "6",
+            "pending_htlcs": [],
+            "csv_delay": 144,
+            "private": false,
+            "initiator": false,
+            "chan_status_flags": "ChanStatusDefault",
+            "local_chan_reserve_sat": "5000",
+            "remote_chan_reserve_sat": "5000",
+            "static_remote_key": false,
+            "commitment_type": "ANCHORS",
+            "lifetime": "4803",
+            "uptime": "4775",
+            "close_address": "",
+            "push_amount_sat": "0",
+            "thaw_height": 0,
+            "local_constraints": {
+                "csv_delay": 144,
+                "chan_reserve_sat": "5000",
+                "dust_limit_sat": "354",
+                "max_pending_amt_msat": "495000000",
+                "min_htlc_msat": "1",
+                "max_accepted_htlcs": 30
+            },
+            "remote_constraints": {
+                "csv_delay": 144,
+                "chan_reserve_sat": "5000",
+                "dust_limit_sat": "354",
+                "max_pending_amt_msat": "495000000",
+                "min_htlc_msat": "1",
+                "max_accepted_htlcs": 483
+            },
+            "alias_scids": [],
+            "zero_conf": false,
+            "zero_conf_confirmed_scid": "0",
+            "peer_alias": "DeltaGap",
+            "peer_scid_alias": "0",
+            "memo": "",
+            "custom_channel_data": ""
+        }
+    ]
+}

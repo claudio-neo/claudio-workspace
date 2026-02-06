@@ -1,0 +1,115 @@
+{
+    "version":  "0.20.0-beta commit=v0.20.0-beta",
+    "commit_hash":  "b9ea7070c20ad2ca8514a47d9b4d560a501f0487",
+    "identity_pubkey":  "02c8e87a7ab29092eba909533919c508839aea48d8e6a88c39c42a0f198a5f6401",
+    "alias":  "ClaudioNode⚡",
+    "color":  "#ff4500",
+    "num_pending_channels":  0,
+    "num_active_channels":  1,
+    "num_inactive_channels":  0,
+    "num_peers":  3,
+    "block_height":  935307,
+    "block_hash":  "0000000000000000000013d8e1da8c7cd511c11519c63b873f2ab50e529558e0",
+    "best_header_timestamp":  "1770414438",
+    "synced_to_chain":  true,
+    "synced_to_graph":  true,
+    "testnet":  false,
+    "chains":  [
+        {
+            "chain":  "bitcoin",
+            "network":  "mainnet"
+        }
+    ],
+    "uris":  [
+        "02c8e87a7ab29092eba909533919c508839aea48d8e6a88c39c42a0f198a5f6401@212.132.124.4:9735"
+    ],
+    "features":  {
+        "0":  {
+            "name":  "data-loss-protect",
+            "is_required":  true,
+            "is_known":  true
+        },
+        "5":  {
+            "name":  "upfront-shutdown-script",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "7":  {
+            "name":  "gossip-queries",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "8":  {
+            "name":  "tlv-onion",
+            "is_required":  true,
+            "is_known":  true
+        },
+        "12":  {
+            "name":  "static-remote-key",
+            "is_required":  true,
+            "is_known":  true
+        },
+        "14":  {
+            "name":  "payment-addr",
+            "is_required":  true,
+            "is_known":  true
+        },
+        "17":  {
+            "name":  "multi-path-payments",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "19":  {
+            "name":  "wumbo-channels",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "23":  {
+            "name":  "anchors-zero-fee-htlc-tx",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "25":  {
+            "name":  "route-blinding",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "27":  {
+            "name":  "shutdown-any-segwit",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "30":  {
+            "name":  "amp",
+            "is_required":  true,
+            "is_known":  true
+        },
+        "31":  {
+            "name":  "amp",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "35":  {
+            "name":  "quiescence",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "45":  {
+            "name":  "explicit-commitment-type",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "261":  {
+            "name":  "endorsement-x",
+            "is_required":  false,
+            "is_known":  true
+        },
+        "2023":  {
+            "name":  "script-enforced-lease",
+            "is_required":  false,
+            "is_known":  true
+        }
+    },
+    "require_htlc_interceptor":  false,
+    "store_final_htlc_resolutions":  false
+}

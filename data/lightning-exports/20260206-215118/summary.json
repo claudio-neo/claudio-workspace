@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-02-06T21:51:18Z",
+  "node": {
+    "alias": "ClaudioNode⚡",
+    "version": "0.20.0-beta",
+    "synced": true,
+    "active_channels": 1,
+    "peers": 3
+  },
+  "balances": {
+    "onchain_sats": 339,
+    "lightning_sats": 5400,
+    "total_sats": 5739
+  },
+  "activity": {
+    "total_invoices": 0,
+    "total_payments": 2,
+    "total_forwards": 0,
+    "routing_fees_earned_sats": 0
+  },
+  "channels": [
+    {
+      "peer": "DeltaGap",
+      "capacity_sats": 500000,
+      "local_balance_sats": 5400,
+      "remote_balance_sats": 492814,
+      "active": true
+    }
+  ]
+}

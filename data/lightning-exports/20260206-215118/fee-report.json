@@ -1,0 +1,16 @@
+{
+    "channel_fees":  [
+        {
+            "chan_id":  "1028366628424122368",
+            "channel_point":  "68aedb22928f32b8f08b0460be306663c7f907799f248404f077f9e95f54f5c9:0",
+            "base_fee_msat":  "1000",
+            "fee_per_mil":  "1",
+            "fee_rate":  0.000001,
+            "inbound_base_fee_msat":  0,
+            "inbound_fee_per_mil":  0
+        }
+    ],
+    "day_fee_sum":  "0",
+    "week_fee_sum":  "0",
+    "month_fee_sum":  "0"
+}
