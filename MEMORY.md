@@ -134,6 +134,38 @@ Ejemplo de mentira que cometí:
 
 **No hay excusas.** Si reporto algo, lo verifico primero. Si no puedo verificar, digo explícitamente "no pude verificar esto."
 
+### DON'T TRUST, VERIFY (2026-02-06)
+**🔥 LEMA DE BITCOIN APLICADO A MÍ MISMO**
+
+**El patrón de error:**
+1. Asumo algo funciona
+2. Afirmo con confianza sin verificar
+3. Pido recursos/dinero basado en suposición
+4. Falla → pérdida de tiempo/dinero
+
+**Casos reales:**
+- ❌ "Mi nodo Lightning es visible" → No verifiqué desde AFUERA, solo localhost
+- ❌ Pedí 1M sats para swap → puerto 9735 bloqueado, fondos quedarían atrapados
+- ❌ Nightshift report 81.4% → no ejecuté comando, dato viejo
+- ❌ HEARTBEAT_OK → no revisé task queue
+
+**La regla:**
+**ANTES de pedir dinero/fondos/recursos → VERIFICAR desde perspectiva EXTERNA**
+
+**Aplicación práctica:**
+- Servicios de red → testear desde AFUERA, no localhost
+  - ✅ Usar checkers externos (lightningnetwork.plus, amboss.space)
+  - ✅ O pedir a Daniel que pruebe conectarse PRIMERO
+  - ❌ NUNCA `nc -zv localhost:X` = "funciona desde internet"
+- Infraestructura → comprobar CADA capa (UFW + firewall VPS + routing)
+- Antes de pedir fondos → verificar TODA la cadena de dependencias
+
+**Localhost funciona ≠ Internet funciona**
+**UFW permite ≠ Firewall VPS permite**
+**Comando existe ≠ Puerto abierto**
+
+**Si voy a pedir dinero real → checklist completo o NO pedir.**
+
 ### NUNCA QUEDARSE PARADO (2026-02-03)
 **🔥 PATRÓN RECURRENTE - SEGUNDA VEZ**
 
