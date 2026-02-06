@@ -1,15 +1,42 @@
 #!/usr/bin/env node
 /**
- * Lightning Invoice Monitor
- * Escucha eventos de LND y notifica vía Telegram
+ * Lightning Invoice Monitor (Polling version)
+ * Checks for new payments every 10 seconds
  */
 
-import { spawn } from 'child_process';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 import https from 'https';
+import fs from 'fs';
 
+const execAsync = promisify(exec);
 const LNCLI = '/home/neo/lnd-linux-amd64-v0.20.0-beta/lncli';
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || process.env.BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_ADMIN_ID || '140223355';
+const TELEGRAM_BOT_TOKEN = process.env.BOT_TOKEN;
+const TELEGRAM_CHAT_ID = '140223355';
+const STATE_FILE = '/home/neo/.openclaw/workspace/.lightning-monitor-state.json';
+const POLL_INTERVAL = 10000; // 10 seconds
+
+let lastIndex = 0;
+
+function loadState() {
+  try {
+    if (fs.existsSync(STATE_FILE)) {
+      const data = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+      lastIndex = data.lastIndex || 0;
+      console.log(`Loaded state: lastIndex=${lastIndex}`);
+    }
+  } catch (e) {
+    console.error('Error loading state:', e.message);
+  }
+}
+
+function saveState() {
+  try {
+    fs.writeFileSync(STATE_FILE, JSON.stringify({ lastIndex, updated: Date.now() }));
+  } catch (e) {
+    console.error('Error saving state:', e.message);
+  }
+}
 
 function sendTelegram(message) {
   const data = JSON.stringify({
@@ -29,7 +56,9 @@ function sendTelegram(message) {
   };
 
   const req = https.request(options, (res) => {
-    console.log(`Telegram notification sent: ${res.statusCode}`);
+    if (res.statusCode === 200) {
+      console.log('✅ Telegram notification sent');
+    }
   });
 
   req.on('error', (error) => {
@@ -40,64 +69,58 @@ function sendTelegram(message) {
   req.end();
 }
 
-function monitorInvoices() {
-  console.log('🔔 Starting Lightning invoice monitor...');
-  console.log(`   Notifications to Telegram: ${TELEGRAM_CHAT_ID}`);
-  
-  const lncli = spawn(LNCLI, ['subscribeinvoices']);
-  
-  let buffer = '';
-  
-  lncli.stdout.on('data', (data) => {
-    buffer += data.toString();
+async function checkInvoices() {
+  try {
+    const { stdout } = await execAsync(`${LNCLI} listinvoices --max_invoices 10`);
+    const data = JSON.parse(stdout);
     
-    // Process complete JSON objects
-    const lines = buffer.split('\n');
-    buffer = lines.pop(); // Keep incomplete line in buffer
+    if (!data.invoices || data.invoices.length === 0) {
+      return;
+    }
     
-    for (const line of lines) {
-      if (!line.trim()) continue;
+    // Check for new settled invoices
+    for (const invoice of data.invoices) {
+      const index = parseInt(invoice.add_index);
       
-      try {
-        const invoice = JSON.parse(line);
+      if (index > lastIndex && invoice.state === 'SETTLED') {
+        const amount = invoice.value || invoice.amt_paid_sat;
+        const memo = invoice.memo || 'No memo';
+        const settleDate = new Date(parseInt(invoice.settle_date) * 1000);
+        const timeStr = settleDate.toISOString().replace('T', ' ').substring(0, 19);
         
-        if (invoice.state === 'SETTLED') {
-          const amount = invoice.value || invoice.amt_paid_sat;
-          const memo = invoice.memo || 'No memo';
-          const settleDate = new Date(invoice.settle_date * 1000).toISOString();
-          
-          const message = `⚡ *PAGO RECIBIDO*\n\n` +
-            `💰 Monto: *${amount} sats*\n` +
-            `📝 Memo: ${memo}\n` +
-            `⏰ ${settleDate}\n` +
-            `🔗 Invoice #${invoice.add_index}`;
-          
-          console.log(`✅ Invoice settled: ${amount} sats`);
-          sendTelegram(message);
-        }
+        const message = `⚡ *PAGO RECIBIDO*\n\n` +
+          `💰 Monto: *${amount} sats*\n` +
+          `📝 Memo: ${memo}\n` +
+          `⏰ ${timeStr} UTC\n` +
+          `🔗 Invoice #${invoice.add_index}`;
         
-        if (invoice.state === 'CANCELED') {
-          console.log(`❌ Invoice canceled: ${invoice.add_index}`);
-        }
-      } catch (e) {
-        // Ignore JSON parse errors for incomplete data
+        console.log(`✅ New payment: ${amount} sats (invoice #${index})`);
+        sendTelegram(message);
+        
+        lastIndex = index;
+        saveState();
+      } else if (index > lastIndex) {
+        lastIndex = index;
+        saveState();
       }
     }
-  });
-  
-  lncli.stderr.on('data', (data) => {
-    console.error('lncli error:', data.toString());
-  });
-  
-  lncli.on('close', (code) => {
-    console.log(`lncli exited with code ${code}`);
-    // Restart after 5 seconds
-    setTimeout(() => {
-      console.log('Restarting monitor...');
-      monitorInvoices();
-    }, 5000);
-  });
+  } catch (e) {
+    console.error('Error checking invoices:', e.message);
+  }
 }
 
-// Start monitoring
-monitorInvoices();
+async function main() {
+  console.log('🔔 Lightning Invoice Monitor started');
+  console.log(`   Polling every ${POLL_INTERVAL/1000}s`);
+  console.log(`   Notifications to: ${TELEGRAM_CHAT_ID}`);
+  
+  loadState();
+  
+  // Initial check
+  await checkInvoices();
+  
+  // Poll every 10 seconds
+  setInterval(checkInvoices, POLL_INTERVAL);
+}
+
+main();
