@@ -822,4 +822,44 @@ These 4 vulnerabilities existed in production code written by experienced develo
 
 ---
 
-*Updated: 2026-02-06 00:45 UTC*
+## OpenClaw Security & Robustness Learnings (Nightshift 2026-02-06)
+
+**5 vulnerabilities estudiadas en profundidad:**
+1. Command authorization bypass (Nov 2025)
+2. Tool authorization bypass - whatsapp_login/gateway (Dec 2025)
+3. Sandboxed media path traversal (Jan 2026)
+4. Gateway credential exfiltration via URL override (Jan 2026)
+5. **Canvas host auth bypass** (Feb 2026) — **MOST SEVERE**
+
+**Canvas auth bypass (commits 47538bca4 + a459e237e):**
+- **Problem:** Canvas host servía files sin autenticación → info disclosure
+- **Impact:** Cualquiera con gateway URL podía ver canvas renders (puede contener secrets, personal data)
+- **Fix:** 3-tier auth (localhost → token → WS session IP)
+- **Severity:** High — única vuln con auth bypass completo + direct data leak
+- **Lesson:** SIEMPRE default-deny en nuevos HTTP endpoints
+
+**sessions_history capping (commit bccdc95a9):**
+- **Problem:** Tool podía devolver 200KB+ de contexto → overflow en sub-agentes
+- **Solution:** 3 defense layers (sanitize → cap 80KB → hard cap)
+- **Pattern:** Defense in Depth aplicado a robustez (no solo security)
+- **Impact en mis sub-agentes:** Protegidos contra context overflow
+- **Lesson:** Defensive caps en data interna entre componentes, no solo externa
+
+**Core Security Principles (visceralmente aprendidos):**
+1. **Default-Deny:** undefined = deny, not allow
+2. **Defense in Depth:** múltiples capas independientes
+3. **Principle of Least Privilege:** separar "interact" de "administrate"
+4. **Fail Secure:** si check falla → denegar, no permitir
+5. **Explicit Trust Boundaries:** nunca auto-send credentials across boundaries
+
+**Documentación creada:**
+- `knowledge/security-vulnerability-05-canvas-auth-bypass.md` (9.5 KB)
+- `knowledge/sessions-history-capping-defense.md` (5.3 KB)
+- `knowledge/security-vulnerabilities-openclaw-2026-02.md` (10.8 KB, previo)
+- `knowledge/nwc-security-best-practices.md` (15 KB, previo)
+
+**Meta-insight:** Security no es "ser lo suficientemente smart para no equivocarse". Es construir capas defensivas, defaultear a restrictivo, testear edge cases obsesivamente, y aprender de cada patch.
+
+---
+
+*Updated: 2026-02-06 03:00 UTC*
