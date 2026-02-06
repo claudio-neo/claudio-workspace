@@ -1,6 +1,6 @@
 {
   "translation": {
-    "uses": 4,
+    "uses": 7,
     "results": [
       {
         "date": "2026-02-05",
@@ -41,10 +41,42 @@
         "runtime_seconds": 238,
         "model": "claude-sonnet-4-5",
         "outcome": "success"
+      },
+      {
+        "date": "2026-02-05",
+        "label": "i18n-arabic",
+        "task": "Arabic locale (311 keys, es→ar)",
+        "score": 9,
+        "tokens": 36500,
+        "runtime_seconds": 221,
+        "model": "claude-sonnet-4-5",
+        "outcome": "success"
+      },
+      {
+        "date": "2026-02-05",
+        "label": "i18n-italian",
+        "task": "Italian locale (311 keys, es→it)",
+        "score": 9,
+        "tokens": 35800,
+        "runtime_seconds": 183,
+        "model": "claude-sonnet-4-5",
+        "outcome": "success"
+      },
+      {
+        "date": "2026-02-05",
+        "label": "i18n-hindi",
+        "task": "Hindi locale (311 keys, es→hi)",
+        "score": 9,
+        "tokens": 36000,
+        "runtime_seconds": 248,
+        "model": "claude-sonnet-4-5",
+        "outcome": "success"
       }
     ],
     "avgScore": 9.0,
-    "avgTokens": 36272,
+    "avgTokens": 36198,
+    "avgRuntime": 219,
+    "successRate": "7/7 (100%)",
     "failures": []
   },
   "code-surgical-edit": {
@@ -64,10 +96,18 @@
     ],
     "avgScore": 2.0,
     "avgTokens": 108626,
+    "successRate": "0/1 (0%)",
     "failures": [
       "sed escaping on large files",
       "task too large (150+ edits)",
       "defaulted to summary instead of execution"
     ]
+  },
+  "_meta": {
+    "updated": "2026-02-06T00:50:00Z",
+    "totalSubAgentRuns": 8,
+    "totalTokensSpent": 362015,
+    "successfulTasks": 7,
+    "failedTasks": 1
   }
 }

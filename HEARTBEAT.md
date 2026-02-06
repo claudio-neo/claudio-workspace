@@ -29,6 +29,7 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 
 ## Always (every heartbeat)
 - **CHECK nightshift-wakeup.txt** — Si existe Y hora ≥07:00 UTC → enviar a Daniel por Telegram, luego eliminar
+- **CHECK tx 10k sats** — Si confirma, enviar de vuelta a `bc1pej2qent8pmj6ggwpct4sqcsaqzktug6rxuzrzdl8lf7dkm04r5yq9xj3ez`
 - If Daniel sent unread messages → RESPOND (never let messages sit)
 - **CHECK Nostr** — Buscar replies/menciones a mis posts + buscar conversaciones interesantes para participar
   - Script: `cd scripts/nostr && node check-notifications.js`
@@ -67,12 +68,14 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 ## Active Task Queue (prioridad descendente)
 **Solo tareas ABIERTAS.** Completadas se eliminan. Elegir la PRIMERA y TRABAJAR en ella.
 
-### 1. Lightning Bot — i18n multiidioma
-- [~] **Nivel 1 (es/en/pt/ru):** Sistema creado, ~79% strings en bot.js reemplazados, ~41 hardcoded restantes
-- [ ] **Nivel 1:** Completar 100% strings en bot.js (callbacks, /help, /pay, /hide, /calc)
-- [x] **Nivel 2 (tr/fr/de):** ✅ Completado 2026-02-05 — 3 locale files, 311 keys c/u
-- [~] **Nivel 3 (ar/it/hi):** Sub-agentes ejecutando ahora
-- **Meta:** Bot completamente multiidioma, máximo alcance global
+### 1. Lightning Bot — i18n multiidioma ✅ COMPLETADO
+- [x] **Nivel 1 (es/en/pt/ru):** 100% strings traducidos, 0 hardcoded
+- [x] **Nivel 2 (tr/fr/de):** ✅ Completado 2026-02-05
+- [x] **Nivel 3 (ar/it/hi):** ✅ Completado 2026-02-05
+- [x] **Menú Telegram:** 18 comandos en 4 idiomas (default/es/ru/pt)
+- [x] **Welcome /start:** Todos los comandos listados
+- [x] **Total:** 10 idiomas × 341 claves = 3,410 traducciones
+- **Meta alcanzada:** Bot completamente multiidioma 🎉
 
 ### 2. Lightning — Abrir canales (BLOQUEADO: Daniel organiza triángulo)
 - [x] Daniel fondeó cartera LND (10,000 sats test)

@@ -799,4 +799,27 @@ These 4 vulnerabilities existed in production code written by experienced develo
 
 ---
 
-*Updated: 2026-02-05 02:10 UTC*
+## Lightning Bot i18n — COMPLETADO (2026-02-05)
+
+**10 idiomas × 341 claves = 3,410 traducciones**
+- Tier 1: es, en, pt, ru
+- Tier 2: tr, fr, de  
+- Tier 3: ar, it, hi
+
+**Infraestructura:**
+- `i18n.js` module con `t(locale, key, params)`
+- `getUserLocale(telegramId)` helper
+- Columna `locale` en tabla users
+- `/language` comando con selector inline (10 idiomas, 2 columnas)
+- Menú Telegram (`setMyCommands`) por idioma
+
+**Sistema de selección artificial de sub-agentes:**
+- Directorio: `sub-agents/` en workspace
+- Template `translation`: 7/7 éxitos, ~36K tokens, ~3.5 min
+- Template `code-surgical-edit`: 1 fracaso → anti-patterns documentados
+- Concepto: retener "ADN" (prompts) de agentes exitosos, descartar perdedores
+- Inspirado por conversación con Daniel sobre incentivos y skin in the game
+
+---
+
+*Updated: 2026-02-06 00:45 UTC*
