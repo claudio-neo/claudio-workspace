@@ -77,13 +77,14 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 - [x] **Total:** 10 idiomas × 341 claves = 3,410 traducciones
 - **Meta alcanzada:** Bot completamente multiidioma 🎉
 
-### 2. Lightning — Abrir canales (BLOQUEADO: Daniel organiza triángulo)
+### 2. Lightning — Abrir canales (ESPERANDO: Daniel prueba primero)
 - [x] Daniel fondeó cartera LND (10,000 sats test)
 - [x] Proxy Caddy configurado para LNURL-pay (puerto 8090 → HTTPS neofreight.net)
-- [ ] Daniel organiza triangle swap para abrir canales
-- [ ] Abrir primer canal (script: `scripts/bitcoin/open-recommended-channels.sh`)
+- [x] Wumbo channels habilitado (protocol.wumbo-channels=true) - 2026-02-06
+- [x] Registrado en Amboss Space (API integrada, nodo verificado) - 2026-02-06
+- [ ] Daniel prueba que todo funciona antes de involucrar terceros
+- [ ] Abrir canales adicionales cuando Daniel lo autorice
 - [ ] Verificar que los zaps de Nostr funcionan de extremo a extremo
-- [ ] Registrar nodo en Amboss Space
 - **Meta:** Nodo visible en la red Lightning, capaz de recibir y enviar pagos + zaps
 
 ### 3. Nostr — Participación activa continua
