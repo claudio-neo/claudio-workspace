@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ Lightning Bot - Centro de Mandos</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #0f1419;
+      color: #e7e9ea;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%);
+      padding: 30px 20px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    
+    h1 {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .subtitle {
+      opacity: 0.9;
+      font-size: 1.1em;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .stat-card {
+      background: #192734;
+      border: 1px solid #38444d;
+      border-radius: 12px;
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.4);
+    }
+    
+    .stat-label {
+      font-size: 0.9em;
+      opacity: 0.7;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .stat-value {
+      font-size: 2em;
+      font-weight: 700;
+      color: #1d9bf0;
+    }
+    
+    .stat-value.green { color: #00ba7c; }
+    .stat-value.red { color: #f91880; }
+    .stat-value.yellow { color: #ffd400; }
+    
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #38444d;
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .tab {
+      padding: 10px 20px;
+      background: #192734;
+      border: none;
+      color: #e7e9ea;
+      cursor: pointer;
+      border-radius: 8px 8px 0 0;
+      font-size: 1em;
+      transition: background 0.2s;
+    }
+    
+    .tab:hover {
+      background: #253341;
+    }
+    
+    .tab.active {
+      background: #1d9bf0;
+      font-weight: 600;
+    }
+    
+    .tab-content {
+      display: none;
+      background: #192734;
+      border: 1px solid #38444d;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    
+    th {
+      background: #253341;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid #38444d;
+    }
+    
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #2f3336;
+    }
+    
+    tr:hover {
+      background: #1c2732;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+    
+    .badge.deposit { background: #00ba7c; color: #fff; }
+    .badge.withdrawal { background: #f91880; color: #fff; }
+    .badge.tip { background: #1d9bf0; color: #fff; }
+    .badge.fee { background: #ffd400; color: #000; }
+    .badge.pending { background: #ffd400; color: #000; }
+    .badge.completed { background: #00ba7c; color: #fff; }
+    .badge.failed { background: #f91880; color: #fff; }
+    
+    .log-viewer {
+      background: #0a0e14;
+      border: 1px solid #38444d;
+      border-radius: 8px;
+      padding: 15px;
+      max-height: 500px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+    
+    .log-line {
+      margin-bottom: 4px;
+      word-wrap: break-word;
+    }
+    
+    .log-line.error { color: #f91880; }
+    .log-line.success { color: #00ba7c; }
+    .log-line.info { color: #1d9bf0; }
+    
+    .search-box {
+      width: 100%;
+      padding: 12px;
+      background: #253341;
+      border: 1px solid #38444d;
+      border-radius: 8px;
+      color: #e7e9ea;
+      font-size: 1em;
+      margin-bottom: 15px;
+    }
+    
+    .search-box:focus {
+      outline: none;
+      border-color: #1d9bf0;
+    }
+    
+    .refresh-btn {
+      padding: 10px 20px;
+      background: #1d9bf0;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+      margin-bottom: 15px;
+      transition: background 0.2s;
+    }
+    
+    .refresh-btn:hover {
+      background: #1a8cd8;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 40px;
+      font-size: 1.2em;
+      opacity: 0.7;
+    }
+    
+    @media (max-width: 768px) {
+      h1 { font-size: 1.8em; }
+      .stats-grid { grid-template-columns: 1fr; }
+      table { font-size: 0.9em; }
+      th, td { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚡ Lightning Bot Dashboard</h1>
+      <p class="subtitle">Centro de Mandos | Monitoreo en Tiempo Real</p>
+    </header>
+    
+    <div class="stats-grid" id="stats-grid">
+      <div class="loading">Cargando estadísticas...</div>
+    </div>
+    
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('transactions')">📊 Transacciones</button>
+      <button class="tab" onclick="showTab('users')">👥 Usuarios</button>
+      <button class="tab" onclick="showTab('invoices')">🧾 Facturas Pendientes</button>
+      <button class="tab" onclick="showTab('groups')">👥 Grupos</button>
+      <button class="tab" onclick="showTab('swaps')">🔄 Swaps</button>
+      <button class="tab" onclick="showTab('support')">💬 Soporte</button>
+      <button class="tab" onclick="showTab('logs')">📝 Logs</button>
+    </div>
+    
+    <!-- Transactions Tab -->
+    <div id="transactions" class="tab-content active">
+      <button class="refresh-btn" onclick="loadTransactions()">🔄 Actualizar</button>
+      <input type="text" class="search-box" id="tx-search" placeholder="Buscar por usuario, hash, descripción...">
+      <div id="transactions-content"></div>
+    </div>
+    
+    <!-- Users Tab -->
+    <div id="users" class="tab-content">
+      <button class="refresh-btn" onclick="loadUsers()">🔄 Actualizar</button>
+      <input type="text" class="search-box" id="user-search" placeholder="Buscar por telegram_id o username...">
+      <div id="users-content"></div>
+    </div>
+    
+    <!-- Invoices Tab -->
+    <div id="invoices" class="tab-content">
+      <button class="refresh-btn" onclick="loadInvoices()">🔄 Actualizar</button>
+      <div id="invoices-content"></div>
+    </div>
+    
+    <!-- Groups Tab -->
+    <div id="groups" class="tab-content">
+      <button class="refresh-btn" onclick="loadGroups()">🔄 Actualizar</button>
+      <div id="groups-content"></div>
+    </div>
+    
+    <!-- Swaps Tab -->
+    <div id="swaps" class="tab-content">
+      <button class="refresh-btn" onclick="loadSwaps()">🔄 Actualizar</button>
+      <div id="swaps-content"></div>
+    </div>
+    
+    <!-- Support Tab -->
+    <div id="support" class="tab-content">
+      <button class="refresh-btn" onclick="loadSupport()">🔄 Actualizar</button>
+      <div id="support-content"></div>
+    </div>
+    
+    <!-- Logs Tab -->
+    <div id="logs" class="tab-content">
+      <button class="refresh-btn" onclick="loadLogs()">🔄 Actualizar</button>
+      <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <button class="tab" id="log-activity" onclick="switchLog('activity')">Activity Log</button>
+        <button class="tab active" id="log-bot" onclick="switchLog('bot')">Bot Log</button>
+      </div>
+      <div class="log-viewer" id="log-viewer"></div>
+    </div>
+  </div>
+  
+  <script>
+    let currentLogType = 'bot';
+    
+    // Show tab
+    function showTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+      document.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+      
+      // Load data when tab is opened
+      if (tabName === 'transactions') loadTransactions();
+      if (tabName === 'users') loadUsers();
+      if (tabName === 'invoices') loadInvoices();
+      if (tabName === 'groups') loadGroups();
+      if (tabName === 'swaps') loadSwaps();
+      if (tabName === 'support') loadSupport();
+      if (tabName === 'logs') loadLogs();
+    }
+    
+    // Load stats
+    async function loadStats() {
+      try {
+        const res = await fetch('/lightning/api/stats', { credentials: 'same-origin' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const stats = await res.json();
+        
+        const totalFunds = stats.totalDeposits + stats.totalCapital;
+        const netBalance = totalFunds + stats.totalWithdrawals; // withdrawals is negative
+        
+        document.getElementById('stats-grid').innerHTML = `
+          <div class="stat-card">
+            <div class="stat-label">👥 Total Usuarios</div>
+            <div class="stat-value">${stats.totalUsers}</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">⚡ Balance Total</div>
+            <div class="stat-value yellow">${stats.totalBalance.toLocaleString()} sats</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">📊 Transacciones</div>
+            <div class="stat-value">${stats.totalTransactions}</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">📥 Depósitos</div>
+            <div class="stat-value green">${stats.totalDeposits.toLocaleString()} sats</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">📤 Retiros</div>
+            <div class="stat-value red">${stats.totalWithdrawals.toLocaleString()} sats</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">💼 Capital Reserva</div>
+            <div class="stat-value yellow">${stats.totalCapital.toLocaleString()} sats</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">💵 Total Fondos</div>
+            <div class="stat-value green">${totalFunds.toLocaleString()} sats</div>
+            <div style="font-size: 0.8em; opacity: 0.7; margin-top: 5px;">Depósitos + Capital</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">📊 Balance Neto</div>
+            <div class="stat-value ${netBalance >= 0 ? 'green' : 'red'}">${netBalance.toLocaleString()} sats</div>
+            <div style="font-size: 0.8em; opacity: 0.7; margin-top: 5px;">Fondos + Retiros</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">💰 Fees Ganados</div>
+            <div class="stat-value yellow">${stats.totalFees.toLocaleString()} sats</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">🧾 Facturas Pendientes</div>
+            <div class="stat-value">${stats.pendingInvoices}</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">👥 Grupos Activos</div>
+            <div class="stat-value">${stats.activeGroups}</div>
+          </div>
+        `;
+      } catch (error) {
+        document.getElementById('stats-grid').innerHTML = `<div class="loading" style="color: #f91880;">Error cargando stats: ${error.message}</div>`;
+      }
+    }
+    
+    // Load transactions
+    async function loadTransactions() {
+      try {
+        const res = await fetch('/lightning/api/transactions/recent?limit=100', { credentials: 'same-origin' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const txs = await res.json();
+        
+        let html = '<table><thead><tr><th>ID</th><th>Usuario</th><th>Tipo</th><th>Monto</th><th>Fee</th><th>Descripción</th><th>Fecha</th></tr></thead><tbody>';
+        
+        txs.forEach(tx => {
+          html += `<tr>
+            <td>${tx.id}</td>
+            <td><a href="/user/${tx.telegram_id}" style="color: #1d9bf0;">@${tx.username || tx.telegram_id}</a></td>
+            <td><span class="badge ${tx.type}">${tx.type}</span></td>
+            <td>${tx.amount_sats.toLocaleString()} sats</td>
+            <td>${tx.fee_sats > 0 ? tx.fee_sats.toLocaleString() + ' sats' : '-'}</td>
+            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis;">${tx.description || '-'}</td>
+            <td>${tx.created_at_formatted}</td>
+          </tr>`;
+        });
+        
+        html += '</tbody></table>';
+        document.getElementById('transactions-content').innerHTML = html;
+        
+        // Search filter
+        document.getElementById('tx-search').oninput = (e) => {
+          const query = e.target.value.toLowerCase();
+          document.querySelectorAll('#transactions tbody tr').forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(query) ? '' : 'none';
+          });
+        };
+      } catch (error) {
+        document.getElementById('transactions-content').innerHTML = `<div class="loading" style="color: #f91880;">Error: ${error.message}</div>`;
+      }
+    }
+    
+    // Load users
+    async function loadUsers() {
+      try {
+        const res = await fetch('/lightning/api/users', { credentials: 'same-origin' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const users = await res.json();
+        
+        let html = '<table><thead><tr><th>Telegram ID</th><th>Username</th><th>Balance</th><th>Role</th><th>Locale</th><th>TX Count</th><th>Registrado</th></tr></thead><tbody>';
+        
+        users.forEach(user => {
+          html += `<tr>
+            <td>${user.telegram_id}</td>
+            <td>@${user.username || 'N/A'}</td>
+            <td><strong>${user.balance_sats.toLocaleString()} sats</strong></td>
+            <td>${user.role}</td>
+            <td>${user.locale}</td>
+            <td>${user.tx_count}</td>
+            <td>${user.created_at_formatted}</td>
+          </tr>`;
+        });
+        
+        html += '</tbody></table>';
+        document.getElementById('users-content').innerHTML = html;
+        
+        // Search filter
+        document.getElementById('user-search').oninput = (e) => {
+          const query = e.target.value.toLowerCase();
+          document.querySelectorAll('#users tbody tr').forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(query) ? '' : 'none';
+          });
+        };
+      } catch (error) {
+        document.getElementById('users-content').innerHTML = `<div class="loading" style="color: #f91880;">Error: ${error.message}</div>`;
+      }
+    }
+    
+    // Load pending invoices
+    async function loadInvoices() {
+      try {
+        const res = await fetch('/lightning/api/invoices/pending', { credentials: 'same-origin' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const invoices = await res.json();
+        
+        if (invoices.length === 0) {
+          document.getElementById('invoices-content').innerHTML = '<div class="loading">No hay facturas pendientes</div>';
+          return;
+        }
+        
+        let html = '<table><thead><tr><th>Payment Hash</th><th>Usuario</th><th>Monto</th><th>Creada</th></tr></thead><tbody>';
+        
+        invoices.forEach(inv => {
+          html += `<tr>
+            <td style="font-family: monospace; font-size: 0.85em;">${inv.payment_hash.substring(0, 20)}...</td>
+            <td>@${inv.username || inv.telegram_id}</td>
+            <td>${inv.amount_sats.toLocaleString()} sats</td>
+            <td>${inv.created_at_formatted}</td>
+          </tr>`;
+        });
+        
+        html += '</tbody></table>';
+        document.getElementById('invoices-content').innerHTML = html;
+      } catch (error) {
+        document.getElementById('invoices-content').innerHTML = `<div class="loading" style="color: #f91880;">Error: ${error.message}</div>`;
+      }
+    }
+    
+    // Load groups
+    async function loadGroups() {
+      try {
+        const res = await fetch('/lightning/api/groups', { credentials: 'same-origin' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const groups = await res.json();
+        
+        if (groups.length === 0) {
+          document.getElementById('groups-content').innerHTML = '<div class="loading">No hay grupos configurados</div>';
+          return;
+        }
+        
+        let html = '<table><thead><tr><th>Chat ID</th><th>Título</th><th>Owner</th><th>Precio</th><th>Estado</th><th>Creado</th></tr></thead><tbody>';
+        
+        groups.forEach(group => {
+          html += `<tr>
+            <td>${group.chat_id}</td>
+            <td>${group.title || 'N/A'}</td>
+            <td>@${group.owner_username || group.owner_telegram_id}</td>
+            <td>${group.ticket_price_sats.toLocaleString()} sats</td>
+            <td><span class="badge ${group.enabled ? 'completed' : 'failed'}">${group.enabled ? 'Activo' : 'Inactivo'}</span></td>
+            <td>${group.created_at_formatted}</td>
+          </tr>`;
+        });
+        
+        html += '</tbody></table>';
+        document.getElementById('groups-content').innerHTML = html;
+      } catch (error) {
+        document.getElementById('groups-content').innerHTML = `<div class="loading" style="color: #f91880;">Error: ${error.message}</div>`;
+      }
+    }
+    
+    // Load swaps
+    async function loadSwaps() {
+      try {
+        const res = await fetch('/lightning/api/swaps', { credentials: 'same-origin' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const swaps = await res.json();
+        
+        if (swaps.length === 0) {
+          document.getElementById('swaps-content').innerHTML = '<div class="loading">No hay swaps registrados</div>';
+          return;
+        }
+        
+        let html = '<table><thead><tr><th>ID</th><th>Usuario</th><th>Dirección</th><th>Monto</th><th>Fee</th><th>Estado</th><th>Creado</th></tr></thead><tbody>';
+        
+        swaps.forEach(swap => {
+          html += `<tr>
+            <td>${swap.id}</td>
+            <td>@${swap.username || swap.telegram_id}</td>
+            <td>${swap.direction === 'ln_to_onchain' ? '⚡→🔗' : '🔗→⚡'}</td>
+            <td>${swap.amount_sats.toLocaleString()} sats</td>
+            <td>${swap.fee_sats.toLocaleString()} sats</td>
+            <td><span class="badge ${swap.status}">${swap.status}</span></td>
+            <td>${swap.created_at_formatted}</td>
+          </tr>`;
+        });
+        
+        html += '</tbody></table>';
+        document.getElementById('swaps-content').innerHTML = html;
+      } catch (error) {
+        document.getElementById('swaps-content').innerHTML = `<div class="loading" style="color: #f91880;">Error: ${error.message}</div>`;
+      }
+    }
+    
+    // Load support messages
+    async function loadSupport() {
+      try {
+        const res = await fetch('/lightning/api/support', { credentials: 'same-origin' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const messages = await res.json();
+        
+        if (messages.length === 0) {
+          document.getElementById('support-content').innerHTML = '<div class="loading">No hay mensajes de soporte</div>';
+          return;
+        }
+        
+        let html = '<table><thead><tr><th>ID</th><th>Usuario</th><th>Mensaje</th><th>Respondido</th><th>Fecha</th></tr></thead><tbody>';
+        
+        messages.forEach(msg => {
+          html += `<tr>
+            <td>${msg.id}</td>
+            <td>@${msg.username || msg.telegram_id}</td>
+            <td style="max-width: 400px;">${msg.message}</td>
+            <td><span class="badge ${msg.replied ? 'completed' : 'pending'}">${msg.replied ? 'Sí' : 'Pendiente'}</span></td>
+            <td>${msg.created_at_formatted}</td>
+          </tr>`;
+        });
+        
+        html += '</tbody></table>';
+        document.getElementById('support-content').innerHTML = html;
+      } catch (error) {
+        document.getElementById('support-content').innerHTML = `<div class="loading" style="color: #f91880;">Error: ${error.message}</div>`;
+      }
+    }
+    
+    // Switch log type
+    function switchLog(type) {
+      currentLogType = type;
+      document.getElementById('log-activity').classList.toggle('active', type === 'activity');
+      document.getElementById('log-bot').classList.toggle('active', type === 'bot');
+      loadLogs();
+    }
+    
+    // Load logs
+    async function loadLogs() {
+      try {
+        const res = await fetch(`/lightning/api/logs/${currentLogType}`);
+        const data = await res.json();
+        
+        let html = '';
+        data.lines.forEach(line => {
+          let className = 'log-line';
+          if (line.includes('ERROR') || line.includes('error')) className += ' error';
+          else if (line.includes('SUCCESS') || line.includes('✓')) className += ' success';
+          else if (line.includes('INFO') || line.includes('ℹ')) className += ' info';
+          
+          html += `<div class="${className}">${line}</div>`;
+        });
+        
+        document.getElementById('log-viewer').innerHTML = html;
+        document.getElementById('log-viewer').scrollTop = document.getElementById('log-viewer').scrollHeight;
+      } catch (error) {
+        document.getElementById('log-viewer').innerHTML = `<div class="log-line error">Error cargando logs: ${error.message}</div>`;
+      }
+    }
+    
+    // Auto-refresh stats every 30 seconds
+    setInterval(loadStats, 30000);
+    
+    // Initial load
+    loadStats();
+    loadTransactions();
+  </script>
+</body>
+</html>
