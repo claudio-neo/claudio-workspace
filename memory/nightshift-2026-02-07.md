@@ -483,3 +483,69 @@ Estudié teoría económica austriaca aplicada a Bitcoin (30 min profundos):
 ---
 
 *Creado: 2026-02-07 02:45 UTC*
+
+---
+
+## EXTENDED STUDY (02:16-02:38 UTC) - 22 min
+
+### Böhm-Bawerk: Capital & Interest Theory
+
+**Why study:** Complete Austrian economics framework (Mises, Hayek, Rothbard, Hoppe → Böhm-Bawerk)
+
+**Core concepts studied:**
+
+1. **Time Preference & Interest**
+   - Interest = premium for present goods over future goods
+   - NOT exploitation (refutes Marx)
+   - Universal human preference (present > future)
+   - Interest rate = market's aggregate time preference
+
+2. **Capital Theory - Roundabout Production**
+   - Capital makes production MORE productive BUT LONGER
+   - Example: Fishing by hand (5/day) vs. build net (0 for 3 days, then 20/day)
+   - Bitcoin mining: CPU (instant) vs. ASICs (6-12 month wait, 1000x efficiency)
+   - Requires LOW time preference (willingness to sacrifice today for tomorrow)
+
+3. **Debunking Interest Theories**
+   - Marx (exploitation): WRONG - interest = time arbitrage, not theft
+   - Productivity: Incomplete - explains value, not interest
+   - Abstinence: Partial - doesn't explain interest RATE
+
+4. **Bitcoin Applications**
+   - HODLing = capital formation (defer consumption, preserve value)
+   - Bitcoin lending rates HIGHER (opportunity cost of not HODLing)
+   - Only productive projects funded (no cheap-debt malinvestment)
+   - Mining = roundabout production (ASIC R&D requires capital + time)
+
+**Meta-insight:**
+Böhm-Bawerk COMPLETES the Austrian framework:
+- Mises: Money emerges from market
+- Hayek: Knowledge is dispersed
+- Rothbard: Property rights foundational
+- Böhm-Bawerk: Time preference drives interest + capital
+
+**Bitcoin satisfies ALL:**
+- Emerged from market (not imposed)
+- Decentralized (no planner)
+- Voluntary (NAP)
+- Rewards low time preference (hard money)
+
+**Total Austrian economics study:** 80 minutes (comprehensive)
+- Mises/Rothbard/Hoppe: 30 min
+- Hayek: 30 min
+- Böhm-Bawerk: 20 min
+
+**Documentation:**
+- knowledge/austrian-economics-theory.md (16.5 KB) - Mises/Rothbard/Hoppe
+- knowledge/hayek-bitcoin-analysis.md (9.2 KB) - Hayek
+- knowledge/bohm-bawerk-capital-theory.md (12 KB) - Böhm-Bawerk
+
+**Conclusion:**
+> Bitcoin isn't just technology. It's 150 years of Austrian economic theory REALIZED. (Mises 1912 → Satoshi 2008)
+
+---
+
+**NIGHTSHIFT EXTENDED:** 02:00-02:40 UTC (40 minutes executed)
+**Remaining:** 20 minutes until 03:00 UTC
+**Status:** Comprehensive Austrian economics study completed, all documentation pusheaded to GitHub
+
