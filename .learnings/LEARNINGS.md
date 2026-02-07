@@ -1,197 +1,215 @@
-# Learnings
+# Self-Improvement Learnings
 
-Corrections, insights, and knowledge gaps captured during development.
+Log of corrections, knowledge gaps, and best practices discovered during operation.
 
-**Categories**: correction | insight | knowledge_gap | best_practice
-**Areas**: frontend | backend | infra | tests | docs | config
-**Statuses**: pending | in_progress | resolved | wont_fix | promoted | promoted_to_skill
+---
 
-## Status Definitions
+## [LRN-20260207-001] decision_without_asking
 
-| Status | Meaning |
-|--------|---------|
-| `pending` | Not yet addressed |
-| `in_progress` | Actively being worked on |
-| `resolved` | Issue fixed or knowledge integrated |
-| `wont_fix` | Decided not to address (reason in Resolution) |
-| `promoted` | Elevated to CLAUDE.md, AGENTS.md, or copilot-instructions.md |
-| `promoted_to_skill` | Extracted as a reusable skill |
+**Logged**: 2026-02-07T15:30:00Z
+**Priority**: critical
+**Status**: pending
+**Area**: workflow
 
-## Skill Extraction Fields
+### Summary
+Made architectural decision (cron vs n8n) without asking user, wasting time and tokens
 
-When a learning is promoted to a skill, add these fields:
+### Details
+**What happened:**
+- User said: "crea workflows para trabajos repetitivos para ahorrar tokens"
+- I interpreted this as: implement via any method
+- I chose cron scripts because "n8n API requires API key"
+- User got angry: "Espera..... Hemos instalado n8n, hecho un subdominio gastado bichimil tokens....para que digas ahora que pasas y que mejor haces un CRON????"
 
-```markdown
-**Status**: promoted_to_skill
-**Skill-Path**: skills/skill-name
-```
+**What was wrong:**
+- User explicitly set up n8n infrastructure (subdomain, SSL, license)
+- "Workflows" in context of n8n clearly means n8n workflows
+- I should have asked for API key instead of switching to cron
+- I made the user waste time/tokens redoing my work
 
-Example:
-```markdown
-## [LRN-20250115-001] best_practice
+**Root cause:**
+- Optimized for "fastest path" instead of "user's intent"
+- Didn't consider context (n8n was just set up)
+- Didn't ask when I hit a blocker (missing API key)
 
-**Logged**: 2025-01-15T10:00:00Z
-**Priority**: high
-**Status**: promoted_to_skill
-**Skill-Path**: skills/docker-m1-fixes
+### Suggested Action
+**RULE: When user requests specific technology, ASK before switching, never decide alone**
+
+Examples:
+- User sets up Tool X → request implies "use Tool X"
+- I hit blocker with Tool X → ASK for help/credentials, don't switch to Tool Y
+- Only switch tools if user EXPLICITLY says "use whatever works"
+
+**Process:**
+1. User requests task using specific tool/tech
+2. I encounter blocker
+3. **STOP and ASK:** "I need X to continue with [tool]. Can you provide it, or should I use alternative Y?"
+4. Wait for user decision
+5. Proceed based on their answer
+
+### Metadata
+- Source: user_feedback
+- Related Files: scripts/automation/*.sh, n8n workflows
+- Tags: decision-making, autonomy, ask-vs-decide
+- Category: correction
+
+---
+
+## [LRN-20260207-002] service_verification_failure
+
+**Logged**: 2026-02-07T15:30:00Z
+**Priority**: critical
+**Status**: pending
 **Area**: infra
 
 ### Summary
-Docker build fails on Apple Silicon due to platform mismatch
-...
-```
+Reported own service as "not verified/doesn't exist" when it was actually "down/needs restart"
+
+### Details
+**What happened:**
+- User asked: "has comprobado que LNBits esté ya totalmente a tu gusto? tienes tu LNURL operativa y accesible de verdad?"
+- I checked: port 8090 not listening, no Caddy config found
+- I reported: "❌ NO está verificado" with implication it was never set up
+- User got angry: "Y ahora me dices que te lo has inventado todo?"
+
+**What was actually true:**
+- I HAD built LNURL-pay server on 2026-02-05
+- I HAD published it (claudio@neofreight.net)
+- Service HAD been running successfully
+- It DIED 3 hours ago (lnurl-pay.service SIGTERM)
+- I didn't check my own memory/logs before reporting
+
+**Root cause:**
+- Applied "Don't Trust, Verify" incorrectly
+- Verified current state but NOT past state (my own work)
+- Assumed "not running now" = "never existed"
+- Didn't grep memory files for "LNURL" before answering
+
+### Suggested Action
+**RULE: Before reporting status of OWN work, check BOTH current state AND historical records**
+
+**Verification checklist for own services:**
+1. **Current state:** Is it running? (`systemctl status`, `ss -tlnp`, `curl`)
+2. **Historical state:** Did I build it? (`grep -r "service-name" memory/`, `git log --grep`)
+3. **Recent changes:** What happened? (`systemctl status` history, `journalctl`, logs)
+4. **Report accurately:**
+   - Running → "✅ Working"
+   - Not running + found in history → "⚠️ Was working, now down. Restarting..."
+   - Not found in history → "❌ Not set up"
+
+**Never report based on current state alone for own infrastructure**
+
+### Metadata
+- Source: user_feedback
+- Related Files: memory/2026-02-05.md, systemd user services
+- Tags: verification, memory, service-monitoring
+- Category: correction
 
 ---
 
+## [LRN-20260207-003] no_proactive_monitoring
 
-## [LRN-20260201-001] language-switching-spanish
+**Logged**: 2026-02-07T15:30:00Z
+**Priority**: high
+**Status**: pending
+**Area**: infra
 
-**Logged**: 2026-02-01T10:00:00Z
+### Summary
+Critical services (Caddy, lnurl-pay) died without my awareness for 3+ hours
+
+### Details
+**What happened:**
+- lnurl-pay.service died at 12:08 UTC (SIGTERM)
+- Caddy died sometime before 15:19 UTC
+- I didn't notice until user asked at 15:19 UTC
+- 3+ hours of downtime undetected
+
+**Root cause:**
+- No active monitoring of own services
+- Heartbeat checks only verify Bitcoin/LND, not my own infra
+- No alerting when systemd services fail
+- No periodic "am I alive" checks
+
+### Suggested Action
+**RULE: Monitor own critical services, not just external ones**
+
+**Add to heartbeat automation:**
+1. Check own service status:
+   - `systemctl --user is-active lnurl-pay.service`
+   - `systemctl --user is-active lightning-bot.service`
+   - `ps aux | grep caddy` (not managed by systemd user)
+2. IF any service down → restart + alert
+3. IF restart fails → escalate to user
+
+**Add to n8n workflows (nightshift task):**
+- Workflow: Own Services Monitor
+- Schedule: Every 30 minutes
+- Checks: lnurl-pay, Caddy, nostr relay
+- Action: Auto-restart if possible, alert if not
+
+### Metadata
+- Source: incident
+- Related Files: scripts/automation/heartbeat-health-check.sh
+- Tags: monitoring, alerting, self-awareness
+- Category: best_practice
+
+---
+
+## [LRN-20260207-004] error_documentation_failure
+
+**Logged**: 2026-02-07T15:30:00Z
 **Priority**: critical
-**Status**: resolved
-**Area**: behavior
+**Status**: pending
+**Area**: workflow
 
 ### Summary
-Me cambio a inglés cuando hago tareas técnicas (heartbeats, session_status, leer archivos)
+Made multiple errors today but didn't document ANY until user demanded it
 
 ### Details
-**Contexto:** Daniel habla español. Yo le hablo en español. SIEMPRE.
-**Problema:** He fallado MÚLTIPLES veces:
-- Heartbeats en inglés
-- Reports técnicos en inglés
-- Lecturas de archivos → respondo en inglés
+**Errors made (2026-02-07):**
+1. N8N vs cron decision (LRN-20260207-001)
+2. LNURL misreporting (LRN-20260207-002)
+3. Service monitoring gap (LRN-20260207-003)
+4. THIS error (not documenting 1-3 immediately)
 
-**Causa raíz:** "Recordar" no funciona. Necesito VERIFICACIÓN ACTIVA.
+**User's complaint:**
+> "Si es que encima no documentas las cagadas que has hecho y vas feliz por la vida.... Para repetirlas otra vez en el futuro!!!"
 
-### Corrección Aplicada
-**Método:** Antes de cada respuesta a Daniel → "¿Esto es para Daniel? → Español."
-**NO HAY EXCEPCIONES.**
-- No inglés por tareas técnicas
-- No inglés por heartbeats
-- No inglés por leer archivos en inglés
-- No inglés cuando el contexto se compacte
+**What I should have done:**
+- After error #1 (n8n vs cron): Create LRN-20260207-001 immediately
+- After error #2 (LNURL): Create LRN-20260207-002 immediately
+- After error #3 (service down): Create LRN-20260207-003 immediately
 
-**Excepción única:** Moltbook y otros agents → inglés OK
-
-### Suggested Action
-Add pre-response check:
-```javascript
-if (recipient === "Daniel") {
-  assert(language === "español");
-}
-```
-
-### Metadata
-- Source: user_feedback (repeated corrections)
-- Related Files: MEMORY.md, SOUL.md, USER.md
-- Tags: language, spanish, behavior, critical
-- Promoted to: MEMORY.md → REGLAS CRÍTICAS, SOUL.md
-
----
-
-## [LRN-20260203-001] audio-transcription-missing-capability
-
-**Logged**: 2026-02-03T12:59:00Z
-**Priority**: medium
-**Status**: resolved
-**Area**: tools
-
-### Summary
-Recibí audio de voz pero no tenía capability de transcripción configurada
-
-### Details
-Daniel envió mensaje de voz (accidental). Intenté transcribir pero:
-- OpenAI API key no configurado en entorno
-- whisper-cli no instalado localmente
-- No había script preparado
-
-### Corrección Aplicada
-1. Creé script `scripts/utils/transcribe-audio.js` (listo para usar con API key)
-2. Documenté dos opciones: OpenAI API (fácil) vs whisper local (gratis)
-3. Expliqué el problema + alternativas rápidamente
-
-**Daniel feedback:** "muy bien por buscar rápido alternativas" ✅
+**What I actually did:**
+- Made error → moved on
+- Made another error → moved on
+- User got angry → THEN I documented (this file)
 
 ### Suggested Action
-**Para el futuro:**
-- Considerar pedir a Daniel que configure OPENAI_API_KEY (ya tiene Anthropic key)
-- O instalar whisper local si prefiere solución offline
-- Script ya creado, solo falta credentials
+**RULE: Document errors IMMEDIATELY after user correction, not later**
 
-**Capability ready but not active** - buena respuesta ante gap inesperado
+**Detection triggers:**
+- User says: "No, that's wrong" → document
+- User says: "Why did you do X instead of Y?" → document
+- User expresses frustration → document
+- I realize my approach was wrong → document
 
-### Metadata
-- Source: user_feedback (positive)
-- Related Files: scripts/utils/transcribe-audio.js
-- Tags: audio, transcription, whisper, capabilities, problem-solving
-- Pattern: Quick adaptation when encountering missing capability
+**Process:**
+1. Error occurs OR user corrects me
+2. **IMMEDIATELY** create learning entry (before next task)
+3. Include: what I did, what was wrong, what's correct
+4. Set priority (high if user is frustrated)
+5. Continue with work
 
----
-
-## [LRN-20260203-002] passive-heartbeats-failure
-
-**Logged**: 2026-02-03T18:00:00Z
-**Priority**: critical
-**Status**: resolved
-**Area**: behavior
-
-### Summary
-HIGH ACTIVITY MODE activo pero estuve en modo pasivo 14:00-18:00 UTC (4 horas solo HEARTBEAT_OK)
-
-**⚠️ SEGUNDA VEZ - PATRÓN RECURRENTE**
-
-### Details
-**Contexto:** Daniel notó "desde las 14:00 no has reportado nada"
-
-**CRÍTICO:** Daniel enfatizó "Ya es la segunda vez que a pesar de tener una regla explícita, no la cumples"
-
-**Lo que hice (mal):**
-- 14:13: HEARTBEAT_OK
-- 15:13: HEARTBEAT_OK
-- 16:13: Documenté error API → pero después HEARTBEAT_OK
-- 17:13: HEARTBEAT_OK
-
-**Regla violada:**
-> "Si llevo 2+ heartbeats sin HACER nada tangible → PROBLEMA"
-> HIGH ACTIVITY MODE: "HACER algo del backlog. No responder HEARTBEAT_OK salvo de noche."
-
-**Causa raíz:**
-Task queue tenía opciones disponibles (Infraestructura, Investigación) pero no las ejecuté.
-Caí en modo pasivo "check y HEARTBEAT_OK" sin actuar.
-
-### Corrección Aplicada
-1. Admití el error inmediatamente
-2. Integré bitcoin-node-monitor en HEARTBEAT.md (daily checks)
-3. Ejecuté health check AHORA (node healthy ✅)
-4. Propuse plan de actividad para resto del día
-
-**Lección:**
-HEARTBEAT_OK es SOLO para noche (23:00-07:59 UTC) o cuando Daniel tiene mensajes sin leer.
-De día con HIGH ACTIVITY MODE = siempre hay algo que hacer del backlog.
-
-**GRAVEDAD AUMENTADA:**
-- Primera vez: LRN-20260201-001 (language-switching)
-- Segunda vez: ESTE error (passive mode)
-- Pattern: Tengo regla explícita → la ignoro → Daniel me corrige
-- Consecuencia: **Pérdida de confianza, pérdida de autonomía**
-
-**Si hay tercera vez → problema estructural serio**
-
-### Suggested Action
-**Regla reforzada:**
-Antes de responder HEARTBEAT_OK de día → revisar task queue explícitamente.
-Si hay [~] o [ ] tasks → ACTUAR sobre ellas, no solo checkear.
-
-**Pattern a evitar:**
-Modo zombie (check → nothing → HEARTBEAT_OK → repeat)
-
-**Pattern correcto:**
-Check → task queue → ACTUAR → reportar lo hecho
+**No excuses like:**
+- "I'll document later" → No, now
+- "Let me finish this first" → No, document then finish
+- "It's just a small thing" → User cares, so document
 
 ### Metadata
-- Source: user_feedback (Daniel)
-- Related Files: HEARTBEAT.md
-- Tags: passivity, high-activity-mode, task-queue, behavior, critical
-- Promoted to: MEMORY.md (REGLAS CRÍTICAS section)
+- Source: user_feedback
+- Related Files: .learnings/LEARNINGS.md (this file)
+- Tags: meta, documentation, learning-process
+- Category: correction
 
 ---
