@@ -1,0 +1,33 @@
+neofreight.net, www.neofreight.net {
+    # IMPORT GUEST ROUTES (Calamardo)
+    # Relative path from neofreight/infra/caddy/ to Calamardo/infra/caddy/
+    import ../../../calamardo/infra/caddy/calamardo_routes.caddy
+
+    # ClawdBoard (protected) - redirect to trailing slash for relative asset paths
+    @clawdboard path /clawdboard
+    redir @clawdboard /clawdboard/ permanent
+
+    handle /clawdboard/* {
+        basicauth {
+            Claudio $2a$14$MMKS/50viFtCJnDPBvxpE.GsQkdsopex.QoUM4IQV8IavBnBHafgG
+        }
+        uri strip_prefix /clawdboard
+        reverse_proxy localhost:18789
+    }
+
+    # LNURL-pay / Lightning Address (Claudio's LN node)
+    handle /.well-known/lnurlp/* {
+        reverse_proxy localhost:8090
+    }
+    handle /lnurlp/* {
+        reverse_proxy localhost:8090
+    }
+
+    # Default Host Route (Neofreight Frontend)
+    # This comes after specific handles so those take precedence if needed,
+    # but 'reverse_proxy' corresponds to catch-all.
+    reverse_proxy localhost:3000
+}
+
+# Import Subdomains (API, Auth)
+import neofreight_domains.caddy
