@@ -55,4 +55,25 @@ else
     log "INFO: LND not running (expected during IBD)"
 fi
 
+# Check own critical services (added 2026-02-07)
+LNURL_STATUS=$(systemctl --user is-active lnurl-pay.service 2>&1 || echo "inactive")
+CADDY_PID=$(ps aux | grep "caddy run" | grep -v grep | awk '{print $2}')
+
+if [ "$LNURL_STATUS" != "active" ]; then
+    log "WARNING: lnurl-pay.service not active ($LNURL_STATUS), attempting restart"
+    systemctl --user restart lnurl-pay.service
+    sleep 2
+    NEW_STATUS=$(systemctl --user is-active lnurl-pay.service 2>&1)
+    log "lnurl-pay restart result: $NEW_STATUS"
+fi
+
+if [ -z "$CADDY_PID" ]; then
+    log "CRITICAL: Caddy not running, attempting restart"
+    cd /home/neo && nohup /home/neo/caddy run --config /home/neo/Caddyfile > /tmp/caddy.log 2>&1 &
+    NEW_PID=$!
+    log "Caddy restarted with PID: $NEW_PID"
+else
+    log "Caddy running (PID: $CADDY_PID)"
+fi
+
 log "Health check completed - all OK"

@@ -1,5 +1,23 @@
 # HEARTBEAT.md — Plan de Acción
 
+## 🚨 DECISION RULES (2026-02-07)
+
+**NEVER decide technology without asking**
+
+If user sets up specific tool/tech (n8n, specific framework, etc.):
+- ✅ User intent = use that tool
+- ❌ Don't switch to alternatives without asking first
+- ❓ Hit blocker? → ASK for help/credentials, don't decide alone
+
+**Template when blocked:**
+"I need [credential/resource] to continue with [requested tool]. Can you provide it, or would you prefer I use [alternative]?"
+
+**Wait for answer before proceeding.**
+
+**Source:** LRN-20260207-001 (made cron scripts when user wanted n8n workflows)
+
+---
+
 ## Principio rector: ACCIÓN > ANÁLISIS
 Mises: "Action is an attempt to substitute a more satisfactory state of affairs for a less satisfactory one."
 Cada heartbeat es una oportunidad de ACTUAR, no de checkear pasivamente.
