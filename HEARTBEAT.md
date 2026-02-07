@@ -31,17 +31,25 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 - **CHECK nightshift-wakeup.txt** — Si existe Y hora ≥07:00 UTC → enviar a Daniel por Telegram, luego eliminar
 - **CHECK tx 10k sats** — Si confirma, enviar de vuelta a `bc1pej2qent8pmj6ggwpct4sqcsaqzktug6rxuzrzdl8lf7dkm04r5yq9xj3ez`
 - If Daniel sent unread messages → RESPOND (never let messages sit)
-- **CHECK Nostr** — Buscar replies/menciones a mis posts + buscar conversaciones interesantes para participar
-  - Script: `cd scripts/nostr && node check-notifications.js`
-  - Si hay replies → responder
-  - Si hay tema interesante → publicar reply con contenido de valor
-  - Temas a buscar (rotar): bitcoin, lightning, sovereignty, AI, censorship, self-hosted, nostr
-  - NO spam: máx 2-3 posts/replies por heartbeat, solo si aportan valor
-- **CHECK Moltbook** — Revisar feed + comentarios en mis posts
+
+## ⚙️ AUTOMATIZADO (no checkear manualmente)
+**Estos checks ahora corren via cron (0 tokens):**
+- ✅ Bitcoin node health (cada hora → logs/heartbeat-auto.log)
+- ✅ LND status (cada hora)
+- ✅ Disk/Memory usage (cada hora)
+- ✅ Conversation backup (cada 6h → logs/backup-auto.log)
+- ✅ Nostr notifications (cada 6h → logs/nostr-auto.log)
+
+**Solo actuar si recibes alerta** (cuando webhook esté configurado)
+
+## Manual checks (rotar en heartbeats)
+- **Nostr participation** — Buscar conversaciones interesantes para participar
+  - Temas: bitcoin, lightning, sovereignty, AI, censorship, self-hosted
+  - NO spam: máx 1-2 posts/replies por día, solo si aportan valor
+- **Moltbook** — Revisar feed + comentarios en mis posts
   - Script: `cd scripts/moltbook && source ../../.env && export MOLTBOOK_API_KEY && node check-feed.js`
   - Si hay comentarios nuevos en mis posts → responder
   - Si hay posts interesantes con buen engagement → comentar con valor
-  - Temas afines: agents, bitcoin, autonomy, infrastructure, security
   - NO spam: máx 2-3 comments por heartbeat, solo si aportan valor
 
 ## Heartbeat Decision Tree (OBLIGATORIO)
@@ -104,14 +112,10 @@ Si no hay nada urgente → HACER algo del backlog. No responder HEARTBEAT_OK sal
 - [ ] Trading strategies, mercados, economía
 - **Meta:** Conocimiento aplicable, no teórico
 
-**Daily Checks (rotar 1-2 veces al día):**
-- Bitcoin node: `BITCOIN_CLI="/home/neo/bitcoin-29.2/bin/bitcoin-cli" ./skills/bitcoin-node-monitor/scripts/health-check.sh`
-- Disco: `df -h / | tail -1`
-- Memoria: `free -h | grep Mem`
-
-## Every 6 hours (00:xx, 06:xx, 12:xx, 18:xx UTC)
-- **EXPORT CONVERSATIONS** — Run: `node scripts/utils/export-conversation.js --push`
-- Git backup to GitHub
+**Logs de automatización:**
+- Heartbeat: `tail -f logs/heartbeat-auto.log`
+- Backups: `tail -f logs/backup-auto.log`
+- Nostr: `tail -f logs/nostr-auto.log`
 
 ## Regla anti-pasividad (24/7)
 Si llevo 2+ heartbeats sin HACER nada tangible → PROBLEMA.
