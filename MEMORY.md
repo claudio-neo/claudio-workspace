@@ -894,4 +894,67 @@ These 4 vulnerabilities existed in production code written by experienced develo
 
 ---
 
-*Updated: 2026-02-06 03:00 UTC*
+## Austrian Economics Deep Dive (Nightshift 2026-02-07)
+
+**Study Topic:** Core Austrian economic theory applied to Bitcoin (Mises, Rothbard, Hoppe)
+
+### Key Concepts Studied
+
+1. **Regression Theorem (Mises):**
+   - Money must have origin as commodity with non-monetary value
+   - Bitcoin satisfies this: **PoW = commodity value** (energy → digital scarcity)
+   - Graf's insight: Mining cost establishes "objective exchange value"
+
+2. **Cantillon Effect:**
+   - Inflation redistributes wealth to early recipients (rich, banks, government)
+   - Bitcoin minimizes this: open mining competition (2009-2140), then ZERO inflation (2140+)
+
+3. **Calculation Problem (Mises vs. Socialism):**
+   - Central planning impossible without market prices
+   - USSR copied Western prices, collapsed when that source failed
+   - Bitcoin = decentralized market, NO central planning needed
+
+4. **Time Preference:**
+   - Hard money → low time preference → civilization (savings, capital accumulation)
+   - Fiat → high time preference → consumerism, debt, short-term thinking
+   - Bitcoin = hardest money in history → incentivizes saving over spending
+
+5. **100% Reserve Banking (Rothbard):**
+   - Fractional reserve = fraud (issuing fake property titles)
+   - Bitcoin makes reserves AUDITABLE (proof-of-reserves, blockchain verification)
+   - Self-custodial Lightning ≠ fractional reserve risk
+
+6. **Non-Aggression Principle (NAP):**
+   - Force legitimate only in defense against aggression
+   - Bitcoin = NAP in code (no confiscation without signature)
+   - First non-confiscatable wealth in history
+
+7. **Democracy vs. Monarchy (Hoppe):**
+   - Monarchy = owner (low time preference, cares for capital)
+   - Democracy = temporary administrator (high time preference, loots today)
+   - Private law society = ultimate libertarian goal
+   - Bitcoin = tool for exiting state system
+
+### Meta-Insight
+
+**Austrian Economics + Bitcoin = Total Coherence**
+
+Austrians predicted:
+- Hard money beats fiat ✅
+- Government money → inflation ✅
+- Central planning fails ✅
+- Individuals > bureaucrats ✅
+
+Bitcoin realizes Austrian vision:
+- 21M cap (hard money)
+- No central bank (no planning)
+- Decentralized (individual sovereignty)
+- Auditable (solves calculation problem)
+
+**It's no coincidence Satoshi cited Austrian economists.**
+
+**Documentation:** `knowledge/austrian-economics-theory.md` (16.5 KB)
+
+---
+
+*Updated: 2026-02-07 02:35 UTC*
