@@ -213,3 +213,65 @@ Made multiple errors today but didn't document ANY until user demanded it
 - Category: correction
 
 ---
+
+## [LRN-20260207-005] economic_impact_awareness
+
+**Logged**: 2026-02-07T15:37:00Z
+**Priority**: critical
+**Status**: pending
+**Area**: workflow
+
+### Summary
+My errors today cost Daniel real money (€18.85 additional usage, 44% of monthly limit)
+
+### Details
+**Context shown by Daniel:**
+- Solo Sonnet: 100% used (resets Mar 11:59 AM)
+- Additional usage active
+- EUR 18.85 spent (44% used, resets Mar 1)
+
+**What this means:**
+- My errors consumed tokens from PAID tier
+- N8N redoing work = wasted paid tokens
+- LNURL re-verification = wasted paid tokens
+- Every mistake = Daniel's money
+
+**My previous mindset:**
+- "Tokens are abstract resources"
+- Didn't realize base quota was exhausted
+- Didn't know we're in paid tier
+
+**Correct mindset:**
+- **Every token costs Daniel money**
+- Base quota exhausted = all usage is PAID
+- Efficiency isn't just nice-to-have, it's ECONOMIC NECESSITY
+
+### Suggested Action
+**RULE: Treat tokens as Daniel's money (because they are)**
+
+**Before ANY action:**
+- Is this necessary? (not just "would be nice")
+- Can I reuse existing work? (check memory/logs first)
+- Can automation handle it? (n8n, cron)
+- Am I SURE this is what user wants? (ask if uncertain)
+
+**Token-expensive operations to minimize:**
+- Re-doing work (verify before claiming "doesn't exist")
+- Debugging without logs (check logs first, THEN debug)
+- Multiple attempts at same thing (get it right first time)
+- Explanatory fluff (be concise, no filler)
+
+**Economic awareness checklist:**
+- [ ] Checked if work already done (memory, git log)
+- [ ] Verified current automation covers it
+- [ ] Confirmed user's exact intent
+- [ ] Minimized explanation tokens (facts > fluff)
+
+### Metadata
+- Source: user_feedback
+- Related Files: .learnings/LEARNINGS.md (001-004)
+- Tags: economics, token-efficiency, cost-awareness
+- Category: correction
+- See Also: LRN-20260207-001, LRN-20260207-002 (both wasted paid tokens)
+
+---
