@@ -34,3 +34,4 @@ scripts/_archive/
 repos/*/.git
 repos/*
 !repos/lobster/workflows/
+.n8n-license
