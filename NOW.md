@@ -7,14 +7,15 @@
 3. **AUDITORÍA PRIMERO:** Nunca actualizar OpenClaw sin revisar código.
 4. **VERIFICAR Y DAR PRUEBAS:** Siempre verificar en tiempo real ANTES de reportar.
 
-## Current Status (Feb 6, 02:15 UTC)
-- **Nightshift 2026-02-06 COMPLETADA** — 1 hora completa de trabajo autónomo
-- Auditoría: Bitcoin 935,194 blocks (100%), LND 10K sats pending, Lightning Bot 4h+ uptime, todos los servicios operativos
-- Aprendizaje: 2 commits upstream OpenClaw estudiados (sessions_history capping + Canvas auth bypass #5)
-- Documentación: 3 docs nuevos (sessions-history, canvas vuln #5, NIP-44 encryption, backtest BTC 90d)
-- Trading: Backtested Trend Following (50% win rate, +0.6% vs -36% buy-and-hold)
-- Scripts: full-health-check.sh creado
-- GitHub: 5 commits pusheados, workspace limpio
+## Current Status (Feb 7, 02:50 UTC)
+- **Nightshift 2026-02-07 COMPLETADA** — 1 hora completa de trabajo autónomo
+- Auditoría: Bitcoin 935,336 blocks (100%), LND healthy (channel 500K, 5,400 local), Lightning Bot 3h+ uptime, servicios operativos
+- ⚠️ Workspace growth: +381MB/día (repos/ 471MB, security-tools/ 251MB) — requiere cleanup
+- Aprendizaje: Austrian Economics deep dive (Mises, Rothbard, Hoppe) — 7 conceptos aplicados a Bitcoin (30 min)
+- Documentación: knowledge/austrian-economics-theory.md (16.5 KB), MEMORY.md actualizado
+- Meta-insight: Bitcoin = technological realization of Austrian economic theory
+- OpenClaw upstream: v2026.2.6 available (10 commits, no critical patches)
+- GitHub: commit f22bd6c9 pusheado (Nightshift report + Austrian economics docs)
 
 ## Lecturas Completadas (Jan 31)
 - ✅ Bitcoin Whitepaper
