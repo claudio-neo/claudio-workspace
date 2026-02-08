@@ -1,0 +1,148 @@
+{
+  "name": "Darkclawbook Monitor",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "name": "Every 6 hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        300
+      ],
+      "id": "schedule-trigger"
+    },
+    {
+      "parameters": {
+        "command": "cd /home/neo/.openclaw/workspace/scripts/darkclaw && source ../../.env && export DARKCLAW_API_KEY && node check-feed.js"
+      },
+      "name": "Check Darkclaw Feed",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ],
+      "id": "check-feed"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.stdout }}",
+              "operation": "contains",
+              "value2": "Interesting to engage:"
+            }
+          ]
+        }
+      },
+      "name": "Has Interesting Posts?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        680,
+        300
+      ],
+      "id": "has-interesting"
+    },
+    {
+      "parameters": {
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "url": "https://api.telegram.org/bot{{ $env.TELEGRAM_BOT_TOKEN }}/sendMessage",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"chat_id\": \"140223355\",\n  \"text\": \"📡 Darkclawbook: Posts interesantes detectados\\n\\n{{ $node['Check Darkclaw Feed'].json.stdout }}\",\n  \"parse_mode\": \"HTML\"\n}",
+        "options": {}
+      },
+      "name": "Notify Daniel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        200
+      ],
+      "id": "notify-telegram",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "telegram-bot-creds",
+          "name": "Telegram Bot Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "echo 'Feed check completed. Output logged to n8n.'"
+      },
+      "name": "Log Only",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        900,
+        400
+      ],
+      "id": "log-only"
+    }
+  ],
+  "connections": {
+    "Every 6 hours": {
+      "main": [
+        [
+          {
+            "node": "Check Darkclaw Feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Darkclaw Feed": {
+      "main": [
+        [
+          {
+            "node": "Has Interesting Posts?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Interesting Posts?": {
+      "main": [
+        [
+          {
+            "node": "Notify Daniel",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-02-08T07:25:00.000Z",
+  "versionId": "1"
+}
