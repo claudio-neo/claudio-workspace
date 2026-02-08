@@ -957,4 +957,99 @@ Bitcoin realizes Austrian vision:
 
 ---
 
-*Updated: 2026-02-07 02:35 UTC*
+## Memory System Hardening Deep Dive (Nightshift 2026-02-08)
+
+**Study Topic:** OpenClaw memory reliability (5 upstream commits focused on SQLITE_BUSY fixes)
+
+### Context: Why It Matters for Me
+
+**My concurrent access pattern:**
+- Nightshift sessions (isolated, autonomous work)
+- Main session (direct chat with Daniel)
+- Cron jobs (conversation backups, automated tasks)
+- All access memory files simultaneously → race conditions possible
+
+**Without hardening:** SQLITE_BUSY errors → lost memory updates, crashes  
+**With hardening:** Graceful queueing, fallback mechanisms, safe concurrent access
+
+### Memory Architecture
+
+**Markdown layers (source of truth):**
+- `memory/YYYY-MM-DD.md` — daily logs (append-only)
+- `MEMORY.md` — curated long-term memory (main session only)
+
+**QMD (Quantized Memory Database):**
+- SQLite + sqlite-vec (vector search acceleration)
+- Embeddings: local (node-llama-cpp) or remote (OpenAI/Gemini)
+- Watches memory files for changes (debounced updates)
+- Fallback: builtin index if QMD fails
+
+**Automatic memory flush:**
+- Pre-compaction trigger (when near context limit)
+- Silent agentic turn: "Write durable memory, reply NO_REPLY"
+- Prevents memory loss during compaction
+
+### Problem: SQLITE_BUSY Errors
+
+**Root cause:** SQLite = single-writer by default
+- Multiple processes/sessions → concurrent DB access
+- Writer locks DB → others get `SQLITE_BUSY: database is locked`
+- Without proper handling → errors, lost updates, crashes
+
+### Solutions Implemented (5 commits)
+
+1. **Sync queueing (0d60ef6fe):**
+   - Queue forced syncs behind in-flight updates
+   - Chain multiple forced syncs (don't drop requests)
+   - Serialize operations (no race conditions)
+
+2. **Cache eviction idempotency (6f1ba986b):**
+   - Closing old failed manager doesn't evict newer cached manager
+   - Prevents cache thrashing (evict/recreate loop)
+
+3. **Graceful busy handling (c741d008d):**
+   - Reads: Skip doc lookup if busy → return null (graceful degradation)
+   - Writes: Queue via sync mechanism
+   - Fallback: Switch to builtin index if QMD consistently fails
+
+4. **Startup hardening (ce715c4c5):**
+   - Configurable timeouts (startup 30s, update 60s, query 10s)
+   - Kill stragglers with SIGKILL after timeout
+   - Fallback on failure (return null → builtin index)
+
+5. **Regression tests (95263f4e6):**
+   - 238 lines of tests added
+   - Covers queueing, chaining, busy handling, idempotency, timeouts
+
+### Impact on My Workflow
+
+**Before hardening (potential issues):**
+- ❌ Nightshift `memory_search` → SQLITE_BUSY if main session writing
+- ❌ Cron backup + auto-update → race condition
+- ❌ Manual sync during auto-update → duplicate updates, errors
+
+**After hardening (current state):**
+- ✅ Sync operations queue correctly (serialized)
+- ✅ Busy reads gracefully skip (return null vs crash)
+- ✅ Cache eviction idempotent (no thrashing)
+- ✅ Timeouts prevent zombie processes
+- ✅ Fallback ensures memory search always works
+
+**Concrete benefit:** My nightshift sessions can safely use `memory_search` while main session active, without corrupting memory or causing errors.
+
+### Key Learnings
+
+1. **SQLite concurrency is tricky** — single-writer model requires explicit queueing
+2. **Idempotency matters** — cache eviction must be safe for multiple calls
+3. **Timeouts are critical** — embedding generation can hang (GPU timeout, model download)
+4. **Graceful degradation > hard failures** — primary fails → fallback, lookup busy → skip
+5. **Test edge cases obsessively** — multiple forced syncs, manager close race, timeouts
+
+**Meta-insight:**
+> **Memory system is mission-critical infrastructure.** For an AI agent, memory = identity continuity. Lost memory = amnesia (regress to base model). Corrupted memory = false memories (worse than none). This hardening ensures reliability, availability, and consistency.
+
+**Documentation:** `knowledge/memory-system-hardening-2026-02.md` (9.6 KB)
+
+---
+
+*Updated: 2026-02-08 02:55 UTC*
