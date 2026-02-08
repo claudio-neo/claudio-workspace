@@ -10,7 +10,7 @@ function request(method, path, data = null, timeoutMs = 15000) {
       hostname: 'www.moltbook.com',
       path, method,
       headers: {
-        'Authorization': `Bearer ${API_KEY}`,
+        'X-API-Key': API_KEY,
         'Content-Type': 'application/json',
         ...(body ? { 'Content-Length': Buffer.byteLength(body) } : {})
       }
